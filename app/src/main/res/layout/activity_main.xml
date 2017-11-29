@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    tools:context="com.shoppy.shoppy.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:background="#f27348"
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+            </android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:textColor="#FFFF"
+                android:textSize="25dp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"/>
+            <ImageView
+            android:onClick="openAccount"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:src="@mipmap/ic_account_foreground"/>
+            <ImageView
+                android:onClick="openCart"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/ic_cart_foreground" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/gradient"
+        android:id="@+id/previous_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="50dp">
+        <LinearLayout
+
+            android:id="@+id/linear_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Hi! I'm your shopping assistant, Shoppy."/>
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+
+        android:id="@+id/text_input_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+        android:onClick="openCamera"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="Text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@mipmap/ic_camera_foreground"
+        android:id="@+id/camera"/>
+        <ImageView
+            android:onClick="openMicrophone"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text=""
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/microphone"
+            android:src="@mipmap/ic_microphone_foreground" />
+        <ImageView
+            android:onClick="handleEditReturn"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:textSize="8sp"
+            android:text="Talk"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/edit_text"
+            android:src="@mipmap/ic_return_round"
+            android:id="@+id/edit_return"/>
+
+
+        <EditText
+            android:maxLines="1"
+            android:singleLine="true"
+            android:hint="What can I do for you?"
+            android:id="@+id/edit_text"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/camera"
+            android:privateImeOptions="nm"
+            android:inputType=""
+            android:text=""
+            />
+
+
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

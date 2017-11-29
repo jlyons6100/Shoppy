@@ -3,30 +3,43 @@ package com.shoppy.shoppy;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static float convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
+    }
     private static final int SPEECH_REQUEST_CODE = 0;
     //private String mEmail = getIntent().getStringExtra("mEmail");
     EditText text_edit;
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         item1.setPrice(4.73);
         item1.setDescription("Tucson Dairy Whole Vitman D Milk Gallon");
         item1.setItemID(1);
+        item1.setAmount(-1);
+        item1.setDaysSinceLastBought(2);
         database.add(item1);
 
         Shopping_Item item2 = new Shopping_Item();
@@ -65,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         item2.setPrice(3.50);
         item2.setDescription("Family size Assorted Cream Sandwich Cookies");
         item2.setItemID(2);
+        item2.setAmount(-1);
+        item2.setDaysSinceLastBought(5);
         database.add(item2);
 
         Shopping_Item item3 = new Shopping_Item();
@@ -73,8 +90,120 @@ public class MainActivity extends AppCompatActivity {
         item3.setPrice(5.00);
         item3.setDescription("Five star Mead Notebook");
         item3.setItemID(3);
+        item3.setAmount(-1);
+        item3.setDaysSinceLastBought(10);
         database.add(item3);
+        recommended.add(item3);
+        remind.add(item3);
     }
+
+    public void handleRemind( LinearLayout ll ){
+        for (int i = 0; i < remind.size(); i++) {
+            LinearLayout card = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = (int) convertDpToPixel(5, getApplicationContext());
+            layoutParams.setMargins(0, margin, 0, 0);
+            card.setLayoutParams(layoutParams);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            ImageView image = new ImageView(getApplicationContext());
+            int width = (int) convertDpToPixel(50, getApplicationContext());
+            int height = (int) convertDpToPixel(50, getApplicationContext());
+            LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+            image.setLayoutParams(parmsImage);
+
+            Context c = getApplicationContext();
+            int id = c.getResources().getIdentifier("drawable/" + remind.get(i).getImage(), null, c.getPackageName());
+            image.setImageResource(id);
+            card.addView(image);
+
+            TextView text1 = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+            parmsText.setMargins(margin, 0, 0, 0);
+            text1.setLayoutParams(parmsText);
+            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+            text1.setText(remind.get(i).getName() + "-" + remind.get(i).getDescription() + "\n$" + remind.get(i).getPrice());
+            card.addView(text1);
+
+            ll.addView(card);
+        }
+    }
+
+    public void handleRecommend( LinearLayout ll ){
+        for (int i = 0; i < recommended.size(); i++) {
+            LinearLayout card = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = (int) convertDpToPixel(5, getApplicationContext());
+            layoutParams.setMargins(0, margin, 0, 0);
+            card.setLayoutParams(layoutParams);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            ImageView image = new ImageView(getApplicationContext());
+            int width = (int) convertDpToPixel(50, getApplicationContext());
+            int height = (int) convertDpToPixel(50, getApplicationContext());
+            LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+            image.setLayoutParams(parmsImage);
+
+            Context c = getApplicationContext();
+            int id = c.getResources().getIdentifier("drawable/" + recommended.get(i).getImage(), null, c.getPackageName());
+            image.setImageResource(id);
+            card.addView(image);
+
+            TextView text1 = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+            parmsText.setMargins(margin, 0, 0, 0);
+            text1.setLayoutParams(parmsText);
+            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+            text1.setText(recommended.get(i).getName() + "-" + recommended.get(i).getDescription() + "\n$" + recommended.get(i).getPrice());
+            card.addView(text1);
+
+            ll.addView(card);
+        }
+    }
+
+    public void handleBuying( LinearLayout ll, String buy_item ){
+        for (int i = 0; i < database.size(); i++) {
+            LinearLayout card = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = (int) convertDpToPixel(5, getApplicationContext());
+            layoutParams.setMargins(0, margin, 0, 0);
+            card.setLayoutParams(layoutParams);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            ImageView image = new ImageView(getApplicationContext());
+            int width = (int) convertDpToPixel(50, getApplicationContext());
+            int height = (int) convertDpToPixel(50, getApplicationContext());
+            LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+            image.setLayoutParams(parmsImage);
+
+            Context c = getApplicationContext();
+            int id = c.getResources().getIdentifier("drawable/" + database.get(i).getImage(), null, c.getPackageName());
+            image.setImageResource(id);
+            card.addView(image);
+
+            TextView text1 = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+            parmsText.setMargins(margin, 0, 0, 0);
+            text1.setLayoutParams(parmsText);
+            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+            text1.setText(database.get(i).getName() + "-" + database.get(i).getDescription() + "\n$" + database.get(i).getPrice());
+            card.addView(text1);
+
+            if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
+                ll.addView(card);
+            }
+        }
+    }
+
     public void handleEditReturn(View v) {
         EditText edit = (EditText) findViewById(R.id.edit_text);
 
@@ -89,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(edit.getText());
         ll.addView(tv);
 
-        String[] keywords = {"Routine", "Recommend", "Remind"};
+        String[] keywords = {"Buy", "Recommend", "Remind"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
@@ -99,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 index = i;
             }
         }
-        if (matches >1 ){
+        if (matches > 1 ){
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
@@ -110,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setText("You cannot ask for multiple things at once");
             ll.addView(tv1);
         }
-        else if (matches ==1){
+        else if (matches == 1){
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
@@ -118,8 +247,34 @@ public class MainActivity extends AppCompatActivity {
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
-            tv1.setText("Here are your "+keywords[index]);
+            String bought_item = "";
+
+            if (index > 0) {
+                tv1.setText(keywords[index] + ":");
+            }
+            else{
+                String[] strings  = text.split(" ", 2);
+                for (int j = 1; j <strings.length; j++){
+                    if (j != strings.length-1) {
+                        bought_item = bought_item + strings[j] + " ";
+                    }else{
+                        bought_item = bought_item + strings[j];
+                    }
+                }
+                tv1.setText("Buying " + bought_item);
+            }
             ll.addView(tv1);
+
+            if(index == 0) {
+                handleBuying(ll, bought_item);
+            }
+            else if(index == 1) {
+                handleRecommend(ll);
+            }
+            else if(index == 2){
+                handleRemind(ll);
+            }
+
         }
         else {
             TextView tv1 = new TextView(this);

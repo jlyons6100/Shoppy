@@ -12,6 +12,8 @@ public class Shopping_Item implements Serializable {
     private double price;
     private String description;
     private int itemID;
+    private  int amount;
+    private int daysSinceLastBought;
 
     public String getName(){
         return name;
@@ -28,6 +30,10 @@ public class Shopping_Item implements Serializable {
     public String getDescription(){
         return description;
     }
+
+    public int getAmount(){return amount;}
+
+    public int getDaysSinceLastBought(){return daysSinceLastBought;}
 
     public void setName(String name){
         this.name = name;
@@ -48,8 +54,14 @@ public class Shopping_Item implements Serializable {
     public void setDescription(String description){
         this.description = description;
     }
+
     public void setItemID(int itemID){
         this.itemID = itemID;
     }
+
+    public void setAmount(int amount){this.amount = amount;}
+
+    public void setDaysSinceLastBought(int daysSinceLastBought){this.daysSinceLastBought = daysSinceLastBought;}
+
 
 }

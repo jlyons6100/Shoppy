@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE = 0;
     //private String mEmail = getIntent().getStringExtra("mEmail");
+    EditText text_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,17 @@ public class MainActivity extends AppCompatActivity {
         tv.setText("your text");
         ll.addView(tv);*/
 
+        text_edit = (EditText) findViewById(R.id.edit_text);
+        text_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    handleEditReturn(text_edit);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void handleEditReturn(View v) {

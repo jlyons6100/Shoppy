@@ -43,10 +43,80 @@
     </android.support.design.widget.AppBarLayout>
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_marginTop="55dp"
-        android:background="@drawable/gradient"
+
         android:id="@+id/previous_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/linear_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:id="@+id/linear_scrollview_horizontal1"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textSize="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Account Settings" />
+                <ImageView
+                    android:onClick="openAccountSettings"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="Text"
+                    android:src="@mipmap/ic_right_arrow_foreground"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_scrollview_horizontal2"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:textSize="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Manage Addresses"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="openManageAddresses"
+                    android:src="@mipmap/ic_right_arrow_foreground"
+                    android:text="Text" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_scrollview_horizontal3"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:textSize="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Link with Stores"/>
+                <ImageView
+                    android:onClick="openLinkWithStores"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="Text"
+
+                    android:src="@mipmap/ic_right_arrow_foreground"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -18,12 +18,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE = 0;
     //private String mEmail = getIntent().getStringExtra("mEmail");
     EditText text_edit;
+    ArrayList database = new ArrayList();
+    ArrayList cart = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("");
 
-        /*LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-        TextView tv = new TextView(this);
-        tv.setGravity(Gravity.LEFT);
-        tv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT
-                , RelativeLayout.LayoutParams.WRAP_CONTENT));
-        tv.setBackgroundResource(R.drawable.rounded_corner);
-        tv.setText("your text");
-        ll.addView(tv);*/
 
         text_edit = (EditText) findViewById(R.id.edit_text);
         text_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -54,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void createDatabase(){
+        Shopping_Item item1 = new Shopping_Item();
+        item1.setName("Milk");
+        item1.setImage("PLACEHOLDER");
+        item1.setPrice(4.73);
+        item1.setDescription("Tucson Dairy Whole Vitman D Milk Gallon");
+        Shopping_Item item2 = new Shopping_Item();
+        item2.setName("Cookies");
+        item2.setImage("PLACEHOLDER");
+        item2.setPrice(3.50);
+        item2.setDescription("Generic Cookie Brand 3000 Whole Wheat Chocolate Chip");
+    }
     public void handleEditReturn(View v) {
         EditText edit = (EditText) findViewById(R.id.edit_text);
 

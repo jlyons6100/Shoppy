@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("");
 
+        createDatabase();
 
         text_edit = (EditText) findViewById(R.id.edit_text);
         text_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -52,14 +53,18 @@ public class MainActivity extends AppCompatActivity {
     public void createDatabase(){
         Shopping_Item item1 = new Shopping_Item();
         item1.setName("Milk");
-        item1.setImage("PLACEHOLDER");
+        item1.setImage("item_1");
         item1.setPrice(4.73);
         item1.setDescription("Tucson Dairy Whole Vitman D Milk Gallon");
+        item1.setItemID(1);
         Shopping_Item item2 = new Shopping_Item();
         item2.setName("Cookies");
-        item2.setImage("PLACEHOLDER");
+        item2.setImage("item_2");
         item2.setPrice(3.50);
         item2.setDescription("Generic Cookie Brand 3000 Whole Wheat Chocolate Chip");
+        item2.setItemID(2);
+        database.add(item1);
+        database.add(item2);
     }
     public void handleEditReturn(View v) {
         EditText edit = (EditText) findViewById(R.id.edit_text);

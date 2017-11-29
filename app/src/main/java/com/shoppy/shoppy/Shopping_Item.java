@@ -9,6 +9,7 @@ public class Shopping_Item {
     private String image;
     private double price;
     private String description;
+    private int itemID;
 
     public String getName(){
         return name;
@@ -21,13 +22,17 @@ public class Shopping_Item {
     public double getPrice(){
         return price;
     }
-    
+
     public String getDescription(){
         return description;
     }
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public int getItemID(){
+        return itemID;
     }
 
     public void setImage(String image){
@@ -41,6 +46,8 @@ public class Shopping_Item {
     public void setDescription(String description){
         this.description = description;
     }
-
+    public void setItemID(int itemID){
+        this.itemID = itemID;
+    }
 
 }

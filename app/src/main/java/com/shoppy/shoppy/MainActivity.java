@@ -57,14 +57,23 @@ public class MainActivity extends AppCompatActivity {
         item1.setPrice(4.73);
         item1.setDescription("Tucson Dairy Whole Vitman D Milk Gallon");
         item1.setItemID(1);
+        database.add(item1);
+
         Shopping_Item item2 = new Shopping_Item();
         item2.setName("Cookies");
         item2.setImage("item_2");
         item2.setPrice(3.50);
-        item2.setDescription("Generic Cookie Brand 3000 Whole Wheat Chocolate Chip");
+        item2.setDescription("Family size Assorted Cream Sandwich Cookies");
         item2.setItemID(2);
-        database.add(item1);
         database.add(item2);
+
+        Shopping_Item item3 = new Shopping_Item();
+        item3.setName("Notebook");
+        item3.setImage("item_3");
+        item3.setPrice(5.00);
+        item3.setDescription("Five star Mead Notebook");
+        item3.setItemID(3);
+        database.add(item3);
     }
     public void handleEditReturn(View v) {
         EditText edit = (EditText) findViewById(R.id.edit_text);

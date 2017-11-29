@@ -1,10 +1,12 @@
 package com.shoppy.shoppy;
 
+import java.io.Serializable;
+
 /**
  * Created by James on 11/28/2017.
  */
 
-public class Shopping_Item {
+public class Shopping_Item implements Serializable {
     private String name;
     private String image;
     private double price;

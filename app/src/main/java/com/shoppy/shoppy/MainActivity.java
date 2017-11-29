@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE = 0;
     //private String mEmail = getIntent().getStringExtra("mEmail");
     EditText text_edit;
-    ArrayList database = new ArrayList();
-    ArrayList cart = new ArrayList();
+    ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), CartActivity.class);
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+        intent.putExtra("database", database);
+        intent.putExtra("cart", cart);
         startActivity(intent);
     }
     public void openAccount(View v) {

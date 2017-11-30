@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -173,6 +174,20 @@ public class MainActivity extends AppCompatActivity {
             text1.setText(recommended.get(i).getName() + "-" + recommended.get(i).getDescription() + "\n$" + recommended.get(i).getPrice());
             card.addView(text1);
 
+            Button bt = new Button(this);
+            bt.setText("Add to Cart");
+            bt.setId(i);
+            bt.setLayoutParams(new  LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+           bt.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Perform action on click
+                    cart.add(recommended.get(v.getId()));
+                }
+            });
+            card.addView(bt);
+
+
             ll.addView(card);
         }
     }
@@ -209,6 +224,18 @@ public class MainActivity extends AppCompatActivity {
             + "\n"+"Last bought "+ (database.get(i).getDaysSinceLastBought()+" days ago"));
             card.addView(text1);
 
+            Button bt = new Button(this);
+            bt.setText("Add to Cart");
+            bt.setId(i);
+            bt.setLayoutParams(new  LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            bt.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Perform action on click
+                    cart.add(database.get(v.getId()));
+                }
+            });
+            card.addView(bt);
             if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
                 ll.addView(card);
             }

@@ -39,6 +39,9 @@
                 android:src="@mipmap/ic_cart_foreground" />
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_marginTop="55dp"
         android:layout_marginBottom="50dp"
@@ -67,5 +70,15 @@
                 </LinearLayout>
         </LinearLayout>
     </ScrollView>
+        <Button
+            android:onClick="checkOut"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Check Out"
+            android:src="@mipmap/ic_cart_foreground" />
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -44,7 +44,13 @@ public class CartActivity extends AppCompatActivity {
 
         drawCart(cart);
     }
-
+    public void checkOut(View v){
+        Context context = getApplicationContext();
+        CharSequence text = "Purchased Items!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
     public void drawCart(final ArrayList<Shopping_Item> cart){
         if (cart.size() == 0){
             LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);

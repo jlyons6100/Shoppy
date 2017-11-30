@@ -1,6 +1,7 @@
 package com.shoppy.shoppy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
-
+    ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> cart= new ArrayList<Shopping_Item>();
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -22,19 +25,27 @@ public class CartActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent();
+        intent.putExtra("database",database);
+        intent.putExtra("cart",cart);
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
 
-        ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
 
         drawCart(cart);
     }
 
-    public void drawCart(ArrayList<Shopping_Item> cart){
+    public void drawCart(final ArrayList<Shopping_Item> cart){
         if (cart.size() == 0){
             LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);
             linear_scrollview_horizontal.setVisibility(View.VISIBLE);
@@ -73,10 +84,63 @@ public class CartActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width*4,height*2);
                 parmsText.setMargins(margin,0,0,0);
                 text.setLayoutParams(parmsText);
-                text.setWidth((int)convertDpToPixel(175, getApplicationContext()));
+                text.setWidth((int)convertDpToPixel(150, getApplicationContext()));
                 text.setHeight((int)convertDpToPixel(75, getApplicationContext()));
                 text.setText(cart.get(i).getName() + "-" + cart.get(i).getDescription() +"\n$"+cart.get(i).getPrice());
                 card.addView(text);
+
+
+
+
+                final TextView num = new TextView(getApplicationContext());
+                num.setText( " " + cart.get(i).getAmount());
+
+                ImageView minus = new ImageView(getApplicationContext());
+                int width_minus = (int)convertDpToPixel(30, getApplicationContext());
+                int height_minus =(int) convertDpToPixel(30, getApplicationContext());
+                LinearLayout.LayoutParams paramsminus = new LinearLayout.LayoutParams(width_minus, height_minus);
+                minus.setLayoutParams(paramsminus);
+                minus.setImageResource(R.mipmap.ic_minus_round);
+                minus.setId(i);
+                minus.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        //v.getId() will give you the image id
+                        if (cart.get(v.getId()).getAmount() != 0) {
+                            cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
+                            num.setText(" " + cart.get(v.getId()).getAmount());
+                        }
+                        else {
+                            Context context = getApplicationContext();
+                            CharSequence text = "You can't buy a negative amount of an item!";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                        }
+                    }
+                });
+                card.addView(minus);
+
+
+                card.addView(num);
+                num.setTextSize(20);
+
+                ImageView plus = new ImageView(getApplicationContext());
+                LinearLayout.LayoutParams paramsplus = new LinearLayout.LayoutParams( width_minus, height_minus);
+                plus.setLayoutParams(paramsplus);
+                plus.setImageResource(R.mipmap.ic_plus_round);
+                plus.setId(i);
+                plus.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        //v.getId() will give you the image id
+                        cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() +1);
+                        num.setText( " " +cart.get(v.getId()).getAmount());
+                    }
+                });
+                card.addView(plus);
+
+
+
+
 
                 linear_scrollview.addView(card);
             }

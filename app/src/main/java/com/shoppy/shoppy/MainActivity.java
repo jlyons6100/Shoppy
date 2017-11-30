@@ -72,7 +72,22 @@ public class MainActivity extends AppCompatActivity {
         //text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_UP,
           //      KeyEvent.KEYCODE_ENTER, 0));
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent != null)
+            setIntent(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                if (data != null) {
+                    database = (ArrayList<Shopping_Item>) data.getSerializableExtra("database");
+                    cart = (ArrayList<Shopping_Item>) data.getSerializableExtra("cart");
+                }
+    }
+
     public void createDatabase(){
+
         Shopping_Item item1 = new Shopping_Item();
         item1.setName("Milk");
         item1.setImage("item_1");
@@ -183,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     // Perform action on click
                     cart.add(recommended.get(v.getId()));
+                    cart.get(cart.size()-1).setAmount(1);
                 }
             });
             card.addView(bt);
@@ -233,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     // Perform action on click
                     cart.add(database.get(v.getId()));
+                    cart.get(cart.size()-1).setAmount(1);
                 }
             });
             card.addView(bt);
@@ -346,8 +363,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
         intent.putExtra("database", database);
         intent.putExtra("cart", cart);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
+
     public void openAccount(View v) {
         /*Context context = getApplicationContext();
         CharSequence text = "Account not implemented!";

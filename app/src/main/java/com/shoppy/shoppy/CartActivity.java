@@ -29,7 +29,7 @@ public class CartActivity extends AppCompatActivity {
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
 
         ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
-        cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart"); //TODO: CHANGE THIS BACK, just testing full cart
+        cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
 
         drawCart(cart);
     }

@@ -63,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void handleOnScreenButtons(View v){
+        TextView text = (TextView) v;
+        text_edit.setText(text.getText());
+        text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_ENTER, 0));
+        //text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_UP,
+          //      KeyEvent.KEYCODE_ENTER, 0));
+    }
     public void createDatabase(){
         Shopping_Item item1 = new Shopping_Item();
         item1.setName("Milk");
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         item2.setAmount(-1);
         item2.setDaysSinceLastBought(5);
         database.add(item2);
+        recommended.add(item2);
 
         Shopping_Item item3 = new Shopping_Item();
         item3.setName("Notebook");
@@ -93,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         item3.setAmount(-1);
         item3.setDaysSinceLastBought(10);
         database.add(item3);
-        recommended.add(item3);
+
         remind.add(item3);
     }
 
@@ -149,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
             image.setLayoutParams(parmsImage);
 
+
             Context c = getApplicationContext();
             int id = c.getResources().getIdentifier("drawable/" + recommended.get(i).getImage(), null, c.getPackageName());
             image.setImageResource(id);
@@ -195,13 +205,23 @@ public class MainActivity extends AppCompatActivity {
             text1.setLayoutParams(parmsText);
             text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
             text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
-            text1.setText(database.get(i).getName() + "-" + database.get(i).getDescription() + "\n$" + database.get(i).getPrice());
+            text1.setText(database.get(i).getName() + "-" + database.get(i).getDescription() + "\n$" + database.get(i).getPrice()
+            + "\n"+"Last bought "+ (database.get(i).getDaysSinceLastBought()+" days ago"));
             card.addView(text1);
 
             if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
                 ll.addView(card);
             }
         }
+    }
+
+    public void handleMyOrders(LinearLayout ll){
+        Context context = getApplicationContext();
+        CharSequence text = "My orders not implemented!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     public void handleEditReturn(View v) {
@@ -218,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(edit.getText());
         ll.addView(tv);
 
-        String[] keywords = {"Buy", "Recommend", "Remind"};
+        String[] keywords = {"Buy", "Recommend", "My Orders"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
@@ -265,16 +285,14 @@ public class MainActivity extends AppCompatActivity {
             }
             ll.addView(tv1);
 
-            if(index == 0) {
+            if(index == 0)
                 handleBuying(ll, bought_item);
-            }
-            else if(index == 1) {
+            else if(index == 1)
                 handleRecommend(ll);
-            }
-            else if(index == 2){
-                handleRemind(ll);
-            }
+            else if(index == 2)
+                handleMyOrders(ll);
 
+            text_edit.setText("");
         }
         else {
             TextView tv1 = new TextView(this);

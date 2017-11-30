@@ -57,6 +57,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_marginTop="55dp"
+        android:paddingBottom="30dp"
         android:layout_marginBottom="50dp">
         <LinearLayout
 
@@ -82,6 +83,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/camera"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="My Orders"
+                android:onClick="handleOnScreenButtons"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Recommendations"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleOnScreenButtons"/>
+        </LinearLayout>
 
         <ImageView
         android:onClick="openCamera"

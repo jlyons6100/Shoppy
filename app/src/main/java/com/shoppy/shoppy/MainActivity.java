@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
+    ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("Order Placed!");
             ll.addView(tv1);
+
+            ArrayList<Shopping_Item> order;
+            order = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("order");
+            System.out.println(order.get(0).getDescription());
+            orders.add(order);
 
 
             TextView recommendations = findViewById(R.id.recommendations_bt);
@@ -354,13 +360,47 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void handleMyOrders(LinearLayout ll){
-        Context context = getApplicationContext();
+    public void handleMyOrders(LinearLayout ll) {
+        /*Context context = getApplicationContext();
         CharSequence text = "My orders not implemented!";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        toast.show();*/
+        for (int i = 0; i < orders.size(); i++) {
+            for (int j = 0; j < orders.get(i).size(); j++)
+            {
+        LinearLayout card = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int margin = (int) convertDpToPixel(10, getApplicationContext());
+        layoutParams.setMargins(margin, margin, 0, 0);
+        card.setLayoutParams(layoutParams);
+        card.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        ImageView image = new ImageView(getApplicationContext());
+        int width = (int) convertDpToPixel(50, getApplicationContext());
+        int height = (int) convertDpToPixel(50, getApplicationContext());
+        LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+        image.setLayoutParams(parmsImage);
+
+        Context c = getApplicationContext();
+        int id = c.getResources().getIdentifier("drawable/" + orders.get(i).get(j).getImage(), null, c.getPackageName());
+        image.setImageResource(id);
+        card.addView(image);
+
+        TextView text1 = new TextView(getApplicationContext());
+        LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+        parmsText.setMargins(margin, 0, 0, 0);
+        text1.setLayoutParams(parmsText);
+        text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+        text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+        text1.setText(orders.get(i).get(j).getName() + "-" + orders.get(i).get(j).getDescription() + "\n$" + orders.get(i).get(j).getPrice()
+                + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
+        card.addView(text1);
+        ll.addView(card);
+    }
+        }
     }
 
     public void handleEditReturn(View v) {

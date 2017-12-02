@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         text_edit.setText(text.getText());
         text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_DOWN,
                 KeyEvent.KEYCODE_ENTER, 0));
-        //text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_UP,
-          //      KeyEvent.KEYCODE_ENTER, 0));
+
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -436,17 +435,20 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(edit.getText());
         ll.addView(tv);
 
-        String[] keywords = {"Buy", "Recommend", "My Orders"};
+        String[] keywords = {"Buy", "Recommend", "My Orders", "View Cart"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
         for (int i = 0; i < keywords.length; i++){
-            if ( text.toLowerCase().contains(keywords[i].toLowerCase())){
+            if ( text.toLowerCase().startsWith(keywords[i].toLowerCase())){
                 matches++;
                 index = i;
             }
         }
-        if (matches > 1 ){
+
+        if (index == 3) openCart(null);
+
+        if (matches == 0 ){
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
@@ -456,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
-            tv1.setText("You cannot ask for multiple things at once");
+            tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
         }
         else if (matches == 1){

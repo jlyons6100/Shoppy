@@ -361,11 +361,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleMyOrders(LinearLayout ll) {
-        /*Context context = getApplicationContext();
-        CharSequence text = "My orders not implemented!";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();*/
+        if (orders.size() == 0){
+            LinearLayout card = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            layoutParams.setMargins(margin, margin, 0, 0);
+            card.setLayoutParams(layoutParams);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+            int width = (int) convertDpToPixel(50, getApplicationContext());
+            int height = (int) convertDpToPixel(50, getApplicationContext());
+
+            TextView text1 = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+            parmsText.setMargins(margin, 0, 0, 0);
+            text1.setLayoutParams(parmsText);
+            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+            text1.setText("No Recent Orders");
+            card.addView(text1);
+            ll.addView(card);
+        }
         for (int i = 0; i < orders.size(); i++) {
             for (int j = 0; j < orders.get(i).size(); j++)
             {

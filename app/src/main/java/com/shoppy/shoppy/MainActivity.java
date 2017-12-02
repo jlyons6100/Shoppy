@@ -416,7 +416,12 @@ public class MainActivity extends AppCompatActivity {
             String bought_item = "";
 
             if (index > 0) {
-                tv1.setText(keywords[index] + ":");
+                if (index != 1) {
+                    tv1.setText(keywords[index] + ":");
+                }
+                else {
+                    tv1.setText("Here you go" + ":");
+                }
             }
             else{
                 String[] strings  = text.split(" ", 2);

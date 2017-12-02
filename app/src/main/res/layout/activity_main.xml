@@ -121,10 +121,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+<<<<<<< HEAD
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+=======
+>>>>>>> 0fd9752bdd6731e020b0f9bed4dcf874f720aab7
                 android:text="Recommend for me"
                 android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"

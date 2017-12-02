@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
+    ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         text_edit.setText(text.getText());
         text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_DOWN,
                 KeyEvent.KEYCODE_ENTER, 0));
-        //text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_UP,
-          //      KeyEvent.KEYCODE_ENTER, 0));
+
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -95,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("Order Placed!");
             ll.addView(tv1);
+
+            ArrayList<Shopping_Item> order;
+            order = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("order");
+            System.out.println(order.get(0).getDescription());
+            orders.add(order);
 
 
             TextView recommendations = findViewById(R.id.recommendations_bt);
@@ -354,13 +359,63 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void handleMyOrders(LinearLayout ll){
-        Context context = getApplicationContext();
-        CharSequence text = "My orders not implemented!";
-        int duration = Toast.LENGTH_SHORT;
+    public void handleMyOrders(LinearLayout ll) {
+        if (orders.size() == 0){
+            LinearLayout card = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            layoutParams.setMargins(margin, margin, 0, 0);
+            card.setLayoutParams(layoutParams);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+            int width = (int) convertDpToPixel(50, getApplicationContext());
+            int height = (int) convertDpToPixel(50, getApplicationContext());
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+            TextView text1 = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+            parmsText.setMargins(margin, 0, 0, 0);
+            text1.setLayoutParams(parmsText);
+            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+            text1.setText("No Recent Orders");
+            card.addView(text1);
+            ll.addView(card);
+        }
+        for (int i = 0; i < orders.size(); i++) {
+            for (int j = 0; j < orders.get(i).size(); j++)
+            {
+        LinearLayout card = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int margin = (int) convertDpToPixel(10, getApplicationContext());
+        layoutParams.setMargins(margin, margin, 0, 0);
+        card.setLayoutParams(layoutParams);
+        card.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        ImageView image = new ImageView(getApplicationContext());
+        int width = (int) convertDpToPixel(50, getApplicationContext());
+        int height = (int) convertDpToPixel(50, getApplicationContext());
+        LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+        image.setLayoutParams(parmsImage);
+
+        Context c = getApplicationContext();
+        int id = c.getResources().getIdentifier("drawable/" + orders.get(i).get(j).getImage(), null, c.getPackageName());
+        image.setImageResource(id);
+        card.addView(image);
+
+        TextView text1 = new TextView(getApplicationContext());
+        LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+        parmsText.setMargins(margin, 0, 0, 0);
+        text1.setLayoutParams(parmsText);
+        text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+        text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+        text1.setText(orders.get(i).get(j).getName() + "-" + orders.get(i).get(j).getDescription() + "\n$" + orders.get(i).get(j).getPrice()
+                + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
+        card.addView(text1);
+        ll.addView(card);
+    }
+        }
     }
 
     public void handleEditReturn(View v) {
@@ -380,17 +435,20 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(edit.getText());
         ll.addView(tv);
 
-        String[] keywords = {"Buy", "Recommend", "My Orders"};
+        String[] keywords = {"Buy", "Recommend", "My Orders", "View Cart"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
         for (int i = 0; i < keywords.length; i++){
-            if ( text.toLowerCase().contains(keywords[i].toLowerCase())){
+            if ( text.toLowerCase().startsWith(keywords[i].toLowerCase())){
                 matches++;
                 index = i;
             }
         }
-        if (matches > 1 ){
+
+        if (index == 3) openCart(null);
+
+        if (matches == 0 ){
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
@@ -400,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
-            tv1.setText("You cannot ask for multiple things at once");
+            tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
         }
         else if (matches == 1){
@@ -416,7 +474,12 @@ public class MainActivity extends AppCompatActivity {
             String bought_item = "";
 
             if (index > 0) {
-                tv1.setText(keywords[index] + ":");
+                if (index != 1) {
+                    tv1.setText(keywords[index] + ":");
+                }
+                else {
+                    tv1.setText("Here you go" + ":");
+                }
             }
             else{
                 String[] strings  = text.split(" ", 2);

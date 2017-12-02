@@ -78,6 +78,16 @@
             android:layout_width="wrap_content"
             android:text="Check Out"
             android:src="@mipmap/ic_cart_foreground" />
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:id="@+id/cart_price"/>
+
     </RelativeLayout>
 
 

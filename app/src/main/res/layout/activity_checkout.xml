@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.shoppy.shoppy.CheckoutActivity">>
+<android.support.design.widget.AppBarLayout
+    android:id="@+id/appbar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:background="#f27348"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:textColor="#FFFF"
+            android:textSize="25dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check Out" />
+
+
+
+    </RelativeLayout>
+</android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+       android:layout_marginTop="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:text="Order Summary\nShipping to:
+        xxx\nEstimated Delivery Date: xxx\nItems:xxx\nOrder total:xxx\n"
+        android:id="@+id/order_summary"/>
+        <TextView
+            android:layout_marginTop="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Shipping Address\nJohn Doe\n781 Escondido Road, Stanford, CA, 94305"
+            android:id="@+id/shipping_address"/>
+        <TextView
+            android:layout_marginTop="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Payment Info\nDebit Card: Chase\nNumber:xxx-xxx-xx"
+            android:id="@+id/payment_info"/>
+
+
+
+</LinearLayout>
+        <TextView
+            android:layout_marginTop="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Total:"
+            android:visibility="gone"
+            android:id="@+id/total"/>
+        <Button
+            android:onClick="placeOrder"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Place Order"
+            android:src="@mipmap/ic_cart_foreground" />
+</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

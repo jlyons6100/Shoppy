@@ -72,6 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
                 android:text="Hi! I'm your shopping assistant, Shoppy."/>
 
         </LinearLayout>
@@ -95,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="My Orders"
-                android:onClick="handleOnScreenButtons"/>
+                android:onClick="handleOnScreenButtons"
+                android:id="@+id/my_orders_bt"/>
             <TextView
                 android:layout_marginTop="5dp"
                 android:background="@drawable/rounded_corner_orange"
@@ -104,7 +107,41 @@
                 android:layout_gravity="left"
                 android:text="Recommendations"
                 android:layout_marginBottom="8dp"
-                android:onClick="handleOnScreenButtons"/>
+                android:onClick="handleOnScreenButtons"
+                android:id="@+id/recommendations_bt"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Undo"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleOnScreenButtons"
+                android:visibility="gone"
+                android:id="@+id/undo_bt"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="View Cart"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleOnScreenButtons"
+                android:visibility="gone"
+                android:id="@+id/view_cart_bt"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Modify Number"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleOnScreenButtons"
+                android:visibility="gone"
+                android:id="@+id/modify_number_bt"/>
         </LinearLayout>
 
         <ImageView

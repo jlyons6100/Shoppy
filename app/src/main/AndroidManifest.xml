@@ -25,7 +25,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountActivity" />
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".CartActivity" />
+        <activity android:name=".CheckoutActivity"></activity>
     </application>
 
 </manifest>

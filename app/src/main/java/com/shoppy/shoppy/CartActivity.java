@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +28,6 @@ public class CartActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent();
         intent.putExtra("database",database);
         intent.putExtra("cart",cart);
@@ -39,18 +40,26 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
-
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
-
         drawCart(cart);
+
     }
+
     public void checkOut(View v){
-        Context context = getApplicationContext();
+        /*Context context = getApplicationContext();
         CharSequence text = "Purchased Items!";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        toast.show();*/
+        Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+        intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+        intent.putExtra("database", database);
+        intent.putExtra("cart", cart);
+        startActivityForResult(intent, 0);
     }
+
+
+
     public void drawCart(final ArrayList<Shopping_Item> cart){
         if (cart.size() == 0){
             LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);
@@ -68,7 +77,7 @@ public class CartActivity extends AppCompatActivity {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             int margin = (int)convertDpToPixel( 30, getApplicationContext());
-            layoutParams.setMargins(0,margin,0,0);
+            layoutParams.setMargins(margin/2,margin,0,0);
             card.setLayoutParams(layoutParams);
             card.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -114,6 +123,14 @@ public class CartActivity extends AppCompatActivity {
                         if (cart.get(v.getId()).getAmount() != 0) {
                             cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
                             num.setText(" " + cart.get(v.getId()).getAmount());
+                            TextView price_text = (TextView) findViewById(R.id.cart_price);
+                            double total_price = 0;
+                            int amount_of_items = 0;
+                            for (int i = 0; i < cart.size(); i++){
+                                amount_of_items += cart.get(i).getAmount();
+                                total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
+                            }
+                            price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
                         }
                         else {
                             Context context = getApplicationContext();
@@ -140,17 +157,27 @@ public class CartActivity extends AppCompatActivity {
                         //v.getId() will give you the image id
                         cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() +1);
                         num.setText( " " +cart.get(v.getId()).getAmount());
+                        TextView price_text = (TextView) findViewById(R.id.cart_price);
+                        double total_price = 0;
+                        int amount_of_items = 0;
+                        for (int i = 0; i < cart.size(); i++){
+                            amount_of_items += cart.get(i).getAmount();
+                            total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
+                        }
+                        price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
                     }
                 });
                 card.addView(plus);
-
-
-
-
-
                 linear_scrollview.addView(card);
             }
-
+            TextView price_text = (TextView) findViewById(R.id.cart_price);
+            double total_price = 0;
+            int amount_of_items = 0;
+            for (int i = 0; i < cart.size(); i++){
+               amount_of_items += cart.get(i).getAmount();
+               total_price+= (cart.get(i).getPrice()*cart.get(i).getAmount());
+            }
+            price_text.setText("$"+total_price+" / "+amount_of_items + " items");
         }
     }
 }

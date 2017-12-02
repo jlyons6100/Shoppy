@@ -78,12 +78,55 @@ public class MainActivity extends AppCompatActivity {
             setIntent(intent);
     }
 
+
+    protected void onResume() {
+        super.onResume();
+
+        if(getIntent().hasExtra("placedOrder")) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+            TextView tv1 = new TextView(this);
+            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            // params.weight = 1.0f;
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            params1.setMargins(margin, margin, 0, 0);
+            params1.gravity = Gravity.LEFT;
+            tv1.setLayoutParams(params1);
+            tv1.setForegroundGravity(Gravity.LEFT);
+            tv1.setBackgroundResource(R.drawable.rounded_corner);
+            tv1.setText("Order Placed!");
+            ll.addView(tv1);
+
+
+            TextView recommendations = findViewById(R.id.recommendations_bt);
+            recommendations.setVisibility(View.VISIBLE);
+            TextView my_orders = findViewById(R.id.my_orders_bt);
+            my_orders.setVisibility(View.VISIBLE);
+
+            TextView undo_bt = findViewById(R.id.undo_bt);
+            undo_bt.setVisibility(View.GONE);
+            TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+            modify_number_bt.setVisibility(View.GONE);
+            TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+            view_cart_bt.setVisibility(View.GONE);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 if (data != null) {
                     database = (ArrayList<Shopping_Item>) data.getSerializableExtra("database");
                     cart = (ArrayList<Shopping_Item>) data.getSerializableExtra("cart");
+
+                    if(data.hasExtra("placedOrder")){
+                       /* Context context = getApplicationContext();
+                        CharSequence text = "Order Placed!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();*/
+
+                    }
                 }
+
     }
 
     public void createDatabase(){
@@ -127,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int) convertDpToPixel(5, getApplicationContext());
-            layoutParams.setMargins(0, margin, 0, 0);
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            layoutParams.setMargins(margin, margin, 0, 0);
             card.setLayoutParams(layoutParams);
             card.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -162,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int) convertDpToPixel(5, getApplicationContext());
-            layoutParams.setMargins(0, margin, 0, 0);
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            layoutParams.setMargins(margin, margin, 0, 0);
             card.setLayoutParams(layoutParams);
             card.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -189,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
             text1.setText(recommended.get(i).getName() + "-" + recommended.get(i).getDescription() + "\n$" + recommended.get(i).getPrice());
             card.addView(text1);
 
+
             Button bt = new Button(this);
             bt.setText("Add to Cart");
             bt.setId(i);
@@ -199,6 +243,32 @@ public class MainActivity extends AppCompatActivity {
                     // Perform action on click
                     cart.add(recommended.get(v.getId()));
                     cart.get(cart.size()-1).setAmount(1);
+                    TextView recommendations = findViewById(R.id.recommendations_bt);
+                    recommendations.setVisibility(View.GONE);
+                    TextView my_orders = findViewById(R.id.my_orders_bt);
+                    my_orders.setVisibility(View.GONE);
+
+                    TextView undo_bt = findViewById(R.id.undo_bt);
+                    undo_bt.setVisibility(View.VISIBLE);
+                    TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+                    modify_number_bt.setVisibility(View.VISIBLE);
+                    TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+                    view_cart_bt.setVisibility(View.VISIBLE);
+
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+                    TextView tv1 = new TextView(getApplicationContext());
+                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    // params.weight = 1.0f;
+                    int margin = (int) convertDpToPixel(10, getApplicationContext());
+                    params1.setMargins(margin, margin, 0, 0);
+                    params1.gravity = Gravity.LEFT;
+                    tv1.setLayoutParams(params1);
+                    tv1.setForegroundGravity(Gravity.LEFT);
+                    tv1.setBackgroundResource(R.drawable.rounded_corner);
+                    tv1.setText("Added to Cart!");
+                    ll.addView(tv1);
+
+
                 }
             });
             card.addView(bt);
@@ -213,8 +283,8 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int) convertDpToPixel(5, getApplicationContext());
-            layoutParams.setMargins(0, margin, 0, 0);
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            layoutParams.setMargins(margin, margin, 0, 0);
             card.setLayoutParams(layoutParams);
             card.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -250,6 +320,31 @@ public class MainActivity extends AppCompatActivity {
                     // Perform action on click
                     cart.add(database.get(v.getId()));
                     cart.get(cart.size()-1).setAmount(1);
+                    TextView recommendations = findViewById(R.id.recommendations_bt);
+                    recommendations.setVisibility(View.GONE);
+                    TextView my_orders = findViewById(R.id.my_orders_bt);
+                    my_orders.setVisibility(View.GONE);
+
+                    TextView undo_bt = findViewById(R.id.undo_bt);
+                    undo_bt.setVisibility(View.VISIBLE);
+                    TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+                    modify_number_bt.setVisibility(View.VISIBLE);
+                    TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+                    view_cart_bt.setVisibility(View.VISIBLE);
+
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+                    TextView tv1 = new TextView(getApplicationContext());
+                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    // params.weight = 1.0f;
+                    int margin = (int) convertDpToPixel(10, getApplicationContext());
+                    params1.setMargins(margin, margin, 0, 0);
+                    params1.gravity = Gravity.LEFT;
+                    tv1.setLayoutParams(params1);
+                    tv1.setForegroundGravity(Gravity.LEFT);
+                    tv1.setBackgroundResource(R.drawable.rounded_corner);
+                    tv1.setText("Added to Cart!");
+                    ll.addView(tv1);
+
                 }
             });
             card.addView(bt);
@@ -275,7 +370,10 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = new TextView(this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         // params.weight = 1.0f;
+        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+        params.setMargins(0,0, margin1, 0);
         params.gravity = Gravity.RIGHT;
+
         tv.setLayoutParams(params);
         tv.setForegroundGravity(Gravity.RIGHT);
         tv.setBackgroundResource(R.drawable.rounded_corner);
@@ -296,6 +394,8 @@ public class MainActivity extends AppCompatActivity {
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            params1.setMargins(margin, margin, 0, 0);
             params1.gravity = Gravity.RIGHT;
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
@@ -307,6 +407,8 @@ public class MainActivity extends AppCompatActivity {
             TextView tv1 = new TextView(this);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
+            int margin = (int) convertDpToPixel(10, getApplicationContext());
+            params1.setMargins(margin, margin, 0, 0);
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
@@ -325,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
                         bought_item = bought_item + strings[j];
                     }
                 }
-                tv1.setText("Buying " + bought_item);
+                tv1.setText("According to your shopping history, I recommend this:");
             }
             ll.addView(tv1);
 

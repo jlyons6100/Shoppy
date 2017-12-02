@@ -14,7 +14,8 @@
         android:background="#f27348"
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle">
         <RelativeLayout
 
             android:layout_width="match_parent"
@@ -28,12 +29,13 @@
             </android.support.v7.widget.Toolbar>
 
             <TextView
-                android:textColor="#FFFF"
-                android:textSize="25dp"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"/>
+                android:layout_centerInParent="true"
+                android:text="@string/app_name"
+                android:textColor="#FFFF"
+                android:textSize="25dp" />
+
             <ImageView
             android:onClick="openAccount"
             android:layout_centerVertical="true"
@@ -73,7 +75,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="12sp"
                 android:fontFamily="sans-serif"
+                android:textColor="#515151"
                 android:text="Hi! I'm your shopping assistant, Shoppy."/>
 
         </LinearLayout>
@@ -83,38 +91,55 @@
         android:id="@+id/text_input_shopping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/camera"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal" >
             <TextView
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_corner_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="My Orders"
                 android:onClick="handleOnScreenButtons"
                 android:id="@+id/my_orders_bt"/>
             <TextView
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_corner_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Recommendations"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="Recommend for me"
                 android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:id="@+id/recommendations_bt"/>
             <TextView
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_corner_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="Undo"
                 android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
@@ -122,26 +147,36 @@
                 android:id="@+id/undo_bt"/>
             <TextView
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/rounded_corner_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="View Cart"
-                android:layout_marginBottom="8dp"
-                android:onClick="handleOnScreenButtons"
-                android:visibility="gone"
-                android:id="@+id/view_cart_bt"/>
-            <TextView
-                android:layout_marginTop="5dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="Modify Number"
                 android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:visibility="gone"
                 android:id="@+id/modify_number_bt"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/rounded_corner_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="View Cart"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleOnScreenButtons"
+                android:visibility="gone"
+                android:id="@+id/view_cart_bt"/>
         </LinearLayout>
 
         <ImageView

@@ -12,11 +12,13 @@
     tools:context="com.shoppy.shoppy.LoginActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:background="#f27348"
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_height="wrap_content">
+        android:background="@android:color/transparent"
+        style="?android:attr/borderlessButtonStyle">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -25,17 +27,16 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-            </android.support.v7.widget.Toolbar>
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"></android.support.v7.widget.Toolbar>
 
             <TextView
-                android:textColor="#FFFF"
-                android:textSize="25dp"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"/>
-
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/rochester_regular"
+                android:text="@string/app_name"
+                android:textColor="#FFFF"
+                android:textSize="40sp" />
 
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeActionLabel="@string/action_log_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -94,12 +95,25 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/AppTheme.Button"
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Sign in"
+                android:elevation="20dp"
+                android:text="@string/action_log_in"
+                android:textStyle="bold" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/AppTheme.Button"
+                android:id="@+id/email_sign_up_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:elevation="20dp"
+                android:text="@string/action_sign_up"
                 android:textStyle="bold" />
 
         </LinearLayout>

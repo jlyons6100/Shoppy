@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="default_text" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#515151</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_name" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#515151</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_reason" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_marginTop">-2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">#F4682A</item>
+        <item name="android:textSize">9.5sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_detail" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">7.875sp</item>
+        <item name="android:layout_width">110dp</item>
+        <item name="android:textColor">#515151</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_dollar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#515151</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_price" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#515151</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_marginBottom">-2dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="item_wet" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_marginLeft">65dp</item>
+        <item name="android:textColor">#515151</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">7.875sp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

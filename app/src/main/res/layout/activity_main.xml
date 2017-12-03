@@ -69,114 +69,547 @@
             android:orientation="vertical" >
 
             <TextView
-                android:layout_marginTop="5dp"
+                style="@style/chat_text_style"
                 android:background="@drawable/rounded_corner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif"
-                android:textColor="#515151"
                 android:text="Hi! I'm your shopping assistant, Shoppy."/>
 
+            <!-- Recommendations -->
+            <LinearLayout
+                android:background="@drawable/rounded_corner"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="13dp"
+                android:layout_gravity="left"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!-- Top bar with icon -->
+                <LinearLayout
+                    android:layout_gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginLeft="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="15dp"
+                        android:layout_width="11dp"
+                        android:src="@drawable/ic_recommend" />
+                    <TextView
+                        style="@style/default_text"
+                        android:layout_marginLeft="6dp"
+                        android:text="Recommendations"/>
+                </LinearLayout>
+                <!-- line -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- one item -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/item_1" />
+                    <!-- item text -->
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical">
+                        <!-- name -->
+                        <TextView
+                            style="@style/item_name"
+                            android:text="Milk"/>
+                        <!-- reason -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_reason_friend" />
+                            <TextView
+                                style="@style/item_reason"
+                                android:text="Your friends are also buying"/>
+                        </LinearLayout>
+                        <!-- details -->
+                        <TextView
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"/>
+                        <!-- price and add to cart -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal">
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"/>
+                            <TextView
+                                style="@style/item_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:text=" / 1L"/>
+                            <!-- add button -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="23dp"
+                                android:paddingLeft="11dp"
+                                android:paddingRight="15dp"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/add_button"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_shopping_cart" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="9dp"
+                                    android:fontFamily="sans-serif"
+                                    android:paddingTop="1dp"
+                                    android:paddingBottom="1dp"
+                                    android:text="Add"
+                                    android:textColor="#ffffff"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- one item -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/item_1" />
+                    <!-- item text -->
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical">
+                        <!-- name -->
+                        <TextView
+                            style="@style/item_name"
+                            android:text="Milk"/>
+                        <!-- reason -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_reason_on_sale" />
+                            <TextView
+                                style="@style/item_reason"
+                                android:text="On sale"/>
+                        </LinearLayout>
+                        <!-- details -->
+                        <TextView
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"/>
+                        <!-- price and add to cart -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal">
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"/>
+                            <TextView
+                                style="@style/item_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:text=" / 1L"/>
+                            <!-- add button -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="23dp"
+                                android:paddingLeft="11dp"
+                                android:paddingRight="15dp"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/add_button"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_shopping_cart" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="9dp"
+                                    android:fontFamily="sans-serif"
+                                    android:paddingTop="1dp"
+                                    android:paddingBottom="1dp"
+                                    android:text="Add"
+                                    android:textColor="#ffffff"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- one item -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/item_1" />
+                    <!-- item text -->
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical">
+                        <!-- name -->
+                        <TextView
+                            style="@style/item_name"
+                            android:text="Milk"/>
+                        <!-- reason -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_reason_time" />
+                            <TextView
+                                style="@style/item_reason"
+                                android:text="You bought it 10 days ago"/>
+                        </LinearLayout>
+                        <!-- details -->
+                        <TextView
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"/>
+                        <!-- price and add to cart -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal">
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"/>
+                            <TextView
+                                style="@style/item_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:text=" / 1L"/>
+                            <!-- add button -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="23dp"
+                                android:paddingLeft="11dp"
+                                android:paddingRight="15dp"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/add_button"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_shopping_cart" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="9dp"
+                                    android:fontFamily="sans-serif"
+                                    android:paddingTop="1dp"
+                                    android:paddingBottom="1dp"
+                                    android:text="Add"
+                                    android:textColor="#ffffff"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- Bottom bar with arrow -->
+                <LinearLayout
+                    android:layout_gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginLeft="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="15dp"
+                        android:layout_width="11dp"
+                        android:src="@drawable/ic_arrow_forward_black_24dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12sp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#515151"
+                        android:text="More recommendations"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- Routine Buy -->
+            <LinearLayout
+                android:background="@drawable/rounded_corner"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="13dp"
+                android:layout_gravity="left"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!-- Top bar with icon -->
+                <LinearLayout
+                    android:layout_gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="-2dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="20dp"
+                        android:layout_width="11dp"
+                        android:src="@drawable/ic_routine_24dp" />
+                    <TextView
+                        style="@style/default_text"
+                        android:layout_marginLeft="6dp"
+                        android:text="Routine Buy"/>
+                </LinearLayout>
+                <!-- line -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- one item -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/item_1" />
+                    <!-- item text -->
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical">
+                        <!-- name -->
+                        <TextView
+                            style="@style/item_name"
+                            android:text="Milk"/>
+                        <!-- reason -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_reason_time" />
+                            <TextView
+                                style="@style/item_reason"
+                                android:text="You bought it 10 days ago"/>
+                        </LinearLayout>
+                        <!-- details -->
+                        <TextView
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"/>
+                        <!-- price and add to cart -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal">
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"/>
+                            <TextView
+                                style="@style/item_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:text=" / 1L"/>
+                            <!-- add button -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="23dp"
+                                android:paddingLeft="11dp"
+                                android:paddingRight="15dp"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/add_button"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="14dp"
+                                    android:layout_height="14dp"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_shopping_cart" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="9dp"
+                                    android:fontFamily="sans-serif"
+                                    android:paddingTop="1dp"
+                                    android:paddingBottom="1dp"
+                                    android:text="Add"
+                                    android:textColor="#ffffff"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+                <!-- Bottom bar with arrow -->
+                <LinearLayout
+                    android:layout_gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginLeft="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="15dp"
+                        android:layout_width="11dp"
+                        android:src="@drawable/ic_arrow_forward_black_24dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12sp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#515151"
+                        android:text="Product detail"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
 
         android:id="@+id/text_input_shopping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/camera"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
             android:orientation="horizontal" >
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                style="@style/suggest_input"
                 android:text="My Orders"
                 android:onClick="handleOnScreenButtons"
                 android:id="@+id/my_orders_bt"/>
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-<<<<<<< HEAD
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-=======
->>>>>>> 0fd9752bdd6731e020b0f9bed4dcf874f720aab7
+                style="@style/suggest_input"
                 android:text="Recommend for me"
                 android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:id="@+id/recommendations_bt"/>
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                style="@style/suggest_input"
                 android:text="Undo"
-                android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:visibility="gone"
                 android:id="@+id/undo_bt"/>
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                style="@style/suggest_input"
                 android:text="Modify Number"
-                android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:visibility="gone"
                 android:id="@+id/modify_number_bt"/>
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_corner_orange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                style="@style/suggest_input"
                 android:text="View Cart"
-                android:layout_marginBottom="8dp"
                 android:onClick="handleOnScreenButtons"
                 android:visibility="gone"
                 android:id="@+id/view_cart_bt"/>
@@ -220,6 +653,7 @@
 
 
 
-    </RelativeLayout>
+    </RelativeLayout
+>
 
 </android.support.constraint.ConstraintLayout>

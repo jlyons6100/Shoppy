@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
     ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
+
+
+
+    public void textTemplate(TextView tx){
+        TextView tx_temp = findViewById(R.id.text_template);
+        ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
+        tx.setLayoutParams(params);
+        tx.setBackgroundResource(R.drawable.rounded_corner);
+        tx.setTextColor(tx_temp.getTextColors());
+        tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
+        tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(getIntent().hasExtra("placedOrder")) {
             LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-            TextView tv1 = new TextView(this);
-            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            // params.weight = 1.0f;
-            int margin = (int) convertDpToPixel(10, getApplicationContext());
-            params1.setMargins(margin, margin, 0, 0);
-            params1.gravity = Gravity.LEFT;
-            tv1.setLayoutParams(params1);
-            tv1.setForegroundGravity(Gravity.LEFT);
-            tv1.setBackgroundResource(R.drawable.rounded_corner);
-            tv1.setText("Order Placed!");
+            TextView tv1 = new TextView(getApplicationContext());
+            textTemplate(tv1);
             ll.addView(tv1);
 
             ArrayList<Shopping_Item> order;
@@ -423,7 +429,8 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
         TextView tv = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        textTemplate(tv);
+       LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         // params.weight = 1.0f;
         int margin1 = (int) convertDpToPixel(10, getApplicationContext());
         params.setMargins(0,0, margin1, 0);
@@ -450,19 +457,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (matches == 0 ){
             TextView tv1 = new TextView(this);
-            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            // params.weight = 1.0f;
-            int margin = (int) convertDpToPixel(10, getApplicationContext());
-            params1.setMargins(margin, margin, 0, 0);
-            params1.gravity = Gravity.RIGHT;
-            tv1.setLayoutParams(params1);
-            tv1.setForegroundGravity(Gravity.LEFT);
-            tv1.setBackgroundResource(R.drawable.rounded_corner);
-            tv1.setText("What are you trying to ask me?");
-            ll.addView(tv1);
-        }
-        else if (matches == 1){
-            TextView tv1 = new TextView(this);
+            textTemplate(tv1);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
             int margin = (int) convertDpToPixel(10, getApplicationContext());
@@ -471,6 +466,12 @@ public class MainActivity extends AppCompatActivity {
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
+            tv1.setText("What are you trying to ask me?");
+            ll.addView(tv1);
+        }
+        else if (matches == 1){
+            TextView tv1 = new TextView(this);
+            textTemplate(tv1);
             String bought_item = "";
 
             if (index > 0) {
@@ -505,12 +506,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             TextView tv1 = new TextView(this);
+            textTemplate(tv1);
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
            // params.weight = 1.0f;
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
-            tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
         }

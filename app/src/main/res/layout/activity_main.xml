@@ -71,7 +71,8 @@
             <TextView
                 style="@style/chat_text_style"
                 android:background="@drawable/rounded_corner"
-                android:text="Hi! I'm your shopping assistant, Shoppy."/>
+                android:text="Hi! I'm your shopping assistant, Shoppy."
+                android:id="@+id/text_template"/>
 
             <!-- Recommendations -->
             <LinearLayout
@@ -83,35 +84,44 @@
                 android:layout_width="333dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/rec_temp"
                 >
                 <!-- Top bar with icon -->
                 <LinearLayout
                     android:layout_gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/top_bar_temp"
+                    >
                     <ImageView
                         android:layout_marginLeft="5dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
-                        android:src="@drawable/ic_recommend" />
+                        android:src="@drawable/ic_recommend"
+                        android:id="@+id/top_bar_icon"
+                        />
                     <TextView
                         style="@style/default_text"
                         android:layout_marginLeft="6dp"
-                        android:text="Recommendations"/>
+                        android:text="Recommendations"
+                        android:id="@+id/top_bar_text"/>
                 </LinearLayout>
                 <!-- line -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#f2f2f2"/>
+                    android:background="#f2f2f2"
+                    android:id="@+id/card_line"/>
                 <!-- one item -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="108dp"
                     android:layout_gravity="left"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/one_item"
+                    >
                     <ImageView
                         android:layout_width="90dp"
                         android:layout_height="90dp"
@@ -120,7 +130,8 @@
                         android:layout_marginTop="6dp"
                         android:layout_marginBottom="6dp"
                         android:layout_marginLeft="1dp"
-                        android:src="@drawable/item_1" />
+                        android:src="@drawable/item_1"
+                        android:id="@+id/item_image"/>
                     <!-- item text -->
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -128,37 +139,45 @@
                         android:layout_gravity="left"
                         android:layout_marginLeft="15dp"
                         android:background="@drawable/rounded_corner"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:id="@+id/item_text_box">
                         <!-- name -->
                         <TextView
                             style="@style/item_name"
-                            android:text="Milk"/>
+
+                            android:text="Milk"
+                            android:id="@+id/item_name"/>
                         <!-- reason -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:id="@+id/item_reason">
                             <ImageView
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_reason_friend" />
+                                android:src="@drawable/ic_reason_friend"
+                                android:id="@+id/item_icon"/>
                             <TextView
                                 style="@style/item_reason"
-                                android:text="Your friends are also buying"/>
+                                android:text="Your friends are also buying"
+                                android:id="@+id/item_icon_text"/>
                         </LinearLayout>
                         <!-- details -->
                         <TextView
                             style="@style/item_detail"
-                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"/>
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
+                            android:id="@+id/item_detail"/>
                         <!-- price and add to cart -->
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="33dp"
                             android:layout_gravity="bottom"
                             android:background="@drawable/rounded_corner"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:id="@+id/cart_box">
                             <!-- price -->
                             <TextView
                                 style="@style/item_dollar"

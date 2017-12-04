@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void textTemplate(TextView tx){
-        TextView tx_temp = findViewById(R.id.text_template);
+    public void textTemplate(TextView tx, TextView tx_temp){
+      //tx_temp = findViewById(R.id.text_template);
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
         tx.setBackgroundResource(R.drawable.rounded_corner);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent().hasExtra("placedOrder")) {
             LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
             TextView tv1 = new TextView(getApplicationContext());
-            textTemplate(tv1);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             ll.addView(tv1);
 
             ArrayList<Shopping_Item> order;
@@ -212,7 +212,90 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleRecommend( LinearLayout ll ){
+        LinearLayout card = new LinearLayout(getApplicationContext());
+        LinearLayout card_temp = findViewById(R.id.rec_temp);
+        card.setLayoutParams(card_temp.getLayoutParams());
+        card.setOrientation(card_temp.getOrientation());
+        card.setBackgroundResource(R.drawable.rounded_corner);
+
+        LinearLayout topBar = new LinearLayout(getApplicationContext());
+        LinearLayout topBar_temp = findViewById(R.id.top_bar_temp);
+        topBar.setLayoutParams(topBar_temp.getLayoutParams());
+        topBar.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        ImageView topBar_icon = new ImageView(getApplicationContext());
+        ImageView topBar_icon_temp = findViewById(R.id.top_bar_icon);
+        topBar_icon.setLayoutParams(topBar_icon_temp.getLayoutParams());
+        topBar_icon.setImageResource(R.drawable.ic_recommend);
+        topBar.addView(topBar_icon);
+
+
+
+
+        TextView top_bar_text = new TextView(getApplicationContext());
+        textTemplate(top_bar_text, (TextView) findViewById(R.id.top_bar_text));
+        top_bar_text.setText("Recommendations");
+        topBar.addView(top_bar_text);
+
+        card.addView(topBar);
+
+        View v = new View(getApplicationContext());
+        View v_temp = findViewById(R.id.card_line);
+        v.setLayoutParams(v_temp.getLayoutParams());
+        v.setBackground(v_temp.getBackground());
+        card.addView(v);
+
         for (int i = 0; i < recommended.size(); i++) {
+            LinearLayout one_item = new LinearLayout(getApplicationContext());
+            LinearLayout one_item_temp = findViewById(R.id.one_item);
+            one_item.setLayoutParams(one_item_temp.getLayoutParams());
+            one_item.setOrientation(LinearLayout.HORIZONTAL);
+
+            ImageView item_img = new ImageView(getApplicationContext());
+            ImageView item_img_temp = findViewById(R.id.item_image);
+            item_img.setLayoutParams(item_img_temp.getLayoutParams());
+            Context c = getApplicationContext();
+            int id = c.getResources().getIdentifier("drawable/" + recommended.get(i).getImage(), null, c.getPackageName());
+            item_img.setImageResource(id);
+            one_item.addView(item_img);
+
+            LinearLayout item_text_box = new LinearLayout(getApplicationContext());
+            LinearLayout item_text_box_temp = findViewById(R.id.item_text_box);
+            item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
+            item_text_box.setBackgroundResource(R.drawable.rounded_corner);
+            item_text_box.setOrientation(LinearLayout.VERTICAL);
+
+            TextView item_name = new TextView(getApplicationContext());
+            item_name.setTextAppearance(R.style.item_name);
+            item_name.setText(recommended.get(i).getName());
+            item_text_box.addView(item_name);
+
+            LinearLayout item_reason = new LinearLayout(getApplicationContext());
+            LinearLayout item_reason_temp = findViewById(R.id.item_reason);
+            item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
+            item_reason.setOrientation(LinearLayout.HORIZONTAL);
+
+            ImageView item_icon = new ImageView(getApplicationContext());
+            ImageView item_icon_temp = findViewById(R.id.item_icon);
+            item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
+            item_icon.setImageResource(R.drawable.ic_reason_friend);
+            item_reason.addView(item_icon);
+
+            TextView item_icon_text = new TextView(getApplicationContext());
+            item_icon_text.setTextAppearance(R.style.item_reason);
+            item_icon_text.setText("Put the reason here");
+            item_reason.addView(item_icon_text);
+
+
+            item_text_box.addView(item_reason);
+
+            one_item.addView(item_text_box);
+
+
+            card.addView(one_item);
+        }
+      /*  for (int i = 0; i < recommended.size(); i++) {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -286,7 +369,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             ll.addView(card);
-        }
+        }*/
+
+      ll.addView(card);
     }
 
     public void handleBuying( LinearLayout ll, String buy_item ){
@@ -429,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
         TextView tv = new TextView(this);
-        textTemplate(tv);
+        textTemplate(tv, (TextView)findViewById(R.id.text_template));
        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         // params.weight = 1.0f;
         int margin1 = (int) convertDpToPixel(10, getApplicationContext());
@@ -457,7 +542,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (matches == 0 ){
             TextView tv1 = new TextView(this);
-            textTemplate(tv1);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             // params.weight = 1.0f;
             int margin = (int) convertDpToPixel(10, getApplicationContext());
@@ -471,7 +556,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (matches == 1){
             TextView tv1 = new TextView(this);
-            textTemplate(tv1);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             String bought_item = "";
 
             if (index > 0) {
@@ -506,7 +591,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             TextView tv1 = new TextView(this);
-            textTemplate(tv1);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
            // params.weight = 1.0f;
             params1.gravity = Gravity.LEFT;

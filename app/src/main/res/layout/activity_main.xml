@@ -171,7 +171,7 @@
                             android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
                             android:id="@+id/item_detail"/>
                         <!-- price and add to cart -->
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="33dp"
                             android:layout_gravity="bottom"
@@ -181,7 +181,8 @@
                             <!-- price -->
                             <TextView
                                 style="@style/item_dollar"
-                                android:text="$"/>
+                                android:text="$"
+                                />
                             <TextView
                                 style="@style/item_price"
                                 android:text="4.98"/>
@@ -196,12 +197,14 @@
                                 android:paddingRight="15dp"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/add_button"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                >
                                 <ImageView
                                     android:layout_width="14dp"
                                     android:layout_height="14dp"
                                     android:layout_centerVertical="true"
-                                    android:src="@drawable/ic_shopping_cart" />
+                                    android:src="@drawable/ic_shopping_cart"
+                                    android:id="@+id/shopping_icon"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -211,9 +214,10 @@
                                     android:paddingBottom="1dp"
                                     android:text="Add"
                                     android:textColor="#ffffff"
-                                    android:textSize="10sp" />
+                                    android:textSize="10sp"
+                                    android:id="@+id/shopping_icon_text"/>
                             </LinearLayout>
-                        </RelativeLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
                 <View
@@ -388,12 +392,14 @@
                                 android:paddingRight="15dp"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/add_button"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:id="@+id/button_add">
                                 <ImageView
                                     android:layout_width="14dp"
                                     android:layout_height="14dp"
                                     android:layout_centerVertical="true"
-                                    android:src="@drawable/ic_shopping_cart" />
+                                    android:src="@drawable/ic_shopping_cart"
+                                    android:id="@+id/button_add_img"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -403,7 +409,8 @@
                                     android:paddingBottom="1dp"
                                     android:text="Add"
                                     android:textColor="#ffffff"
-                                    android:textSize="10sp" />
+                                    android:textSize="10sp"
+                                    android:id="@+id/button_add_txt"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </LinearLayout>

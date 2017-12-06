@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
             TextView shopping_icon_text = new TextView(getApplicationContext());
             TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
             textTemplate(shopping_icon_text, shopping_icon_text_temp);
- 
+
             shopping_icon_text.setBackgroundResource(0);
             shopping_icon_text.setText("Add    ");
 

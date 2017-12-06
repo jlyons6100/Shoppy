@@ -39,35 +39,195 @@ tools:context="com.shoppy.shoppy.CheckoutActivity">>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
-           android:layout_marginTop="55dp"
+           android:layout_marginTop="70dp"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
-            android:text="Order Summary\nShipping to:
-            xxx\nEstimated Delivery Date: xxx\nItems:xxx\nOrder total:xxx\n"
-            android:id="@+id/order_summary"/>
+            android:text="Order Summary"
+            android:textSize="20dp"
+            android:id="@+id/order_summary_title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Estimated Delivery Date:"
+                android:id="@+id/estimated_delivery_date_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="12/08/2017"
+                android:id="@+id/estimated_delivery_date_detail"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Items:"
+                android:id="@+id/items_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="$54.20"
+                android:id="@+id/items_detail"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Shipping:"
+                android:id="@+id/shipping_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="$0.00"
+                android:id="@+id/shipping_detail"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Total Before Tax:"
+                android:id="@+id/total_before_tax_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="$54.20"
+                android:id="@+id/total_before_tax_detail"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Estimated Tax:"
+                android:id="@+id/estimated_tax_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="$4.80"
+                android:id="@+id/estimated_tax_total"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Order Total:"
+                android:id="@+id/order_total_title"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="$59.00"
+                android:id="@+id/order_total_detail"/>
+        </LinearLayout>
+
         <TextView
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
-            android:text="Shipping Address\nJohn Doe\n781 Escondido Road, Stanford, CA, 94305"
-            android:id="@+id/shipping_address"/>
+            android:text="Shipping Address"
+            android:textSize="20dp"
+            android:id="@+id/shipping_address_title"/>
         <TextView
-            android:layout_marginTop="55dp"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
-            android:text="Payment Info\nDebit Card: Chase\nNumber:xxx-xxx-xx"
+            android:text="John Doe\n781 Escondido Road, Stanford, CA, 94305"
+            android:id="@+id/shipping_address_detail"/>
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Payment Information"
+            android:textSize="20dp"
+            android:id="@+id/shipping_address_title"/>
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Debit Card: Chase\nNumber:xxx-xxx-xx"
             android:id="@+id/payment_info"/>
 
     </LinearLayout>

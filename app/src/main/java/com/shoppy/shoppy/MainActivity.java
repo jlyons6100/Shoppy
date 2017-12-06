@@ -287,9 +287,54 @@ public class MainActivity extends AppCompatActivity {
             item_icon_text.setText("Put the reason here");
             item_reason.addView(item_icon_text);
 
-
             item_text_box.addView(item_reason);
 
+            TextView item_detail = new TextView(getApplicationContext());
+            item_detail.setTextAppearance(R.style.item_detail);
+            item_detail.setText(recommended.get(i).getDescription());
+            item_text_box.addView(item_detail);
+
+            LinearLayout cart_box = new LinearLayout(getApplicationContext()); //add to item text box
+            LinearLayout cart_box_temp = findViewById(R.id.cart_box);
+            cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
+            cart_box.setBackgroundResource(R.drawable.rounded_corner);
+
+            TextView carts_text1 = new TextView(getApplicationContext());
+            carts_text1.setTextAppearance(R.style.item_dollar);
+            carts_text1.setText("$    ");
+            TextView carts_text2 = new TextView(getApplicationContext());
+            carts_text2.setTextAppearance(R.style.item_price);
+            carts_text2.setText(""+recommended.get(i).getPrice());
+            TextView carts_text3 = new TextView(getApplicationContext());
+            carts_text3.setTextAppearance(R.style.item_wet);
+            carts_text3.setText("     /1L");
+            cart_box.addView(carts_text1);
+            cart_box.addView(carts_text2);
+            cart_box.addView(carts_text3);
+
+            LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
+            LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
+            buttonAdd.setBackgroundResource(R.drawable.add_button);
+
+
+            ImageView shopping_icon = new ImageView(getApplicationContext());
+            ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
+            shopping_icon.setLayoutParams(shopping_icon_temp.getLayoutParams());
+            shopping_icon.setImageResource(R.drawable.ic_shopping_cart);
+            buttonAdd.addView(shopping_icon);
+
+            TextView shopping_icon_text = new TextView(getApplicationContext());
+            TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
+            textTemplate(shopping_icon_text, shopping_icon_text_temp);
+ 
+            shopping_icon_text.setBackgroundResource(0);
+            shopping_icon_text.setText("Add    ");
+
+            buttonAdd.addView(shopping_icon_text);
+
+            cart_box.addView(buttonAdd);
+            item_text_box.addView(cart_box);
             one_item.addView(item_text_box);
 
 

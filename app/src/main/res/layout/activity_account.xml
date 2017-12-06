@@ -45,6 +45,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
             <LinearLayout
+                android:onClick="openOrders"
+                android:id="@+id/linear_scrollview_horizontal1"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textSize="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Orders" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="Text"
+                    android:src="@mipmap/ic_right_arrow_foreground"/>
+
+            </LinearLayout>
+            <LinearLayout
                 android:onClick="openAccountSettings"
                 android:id="@+id/linear_scrollview_horizontal1"
                 android:layout_marginTop="15dp"

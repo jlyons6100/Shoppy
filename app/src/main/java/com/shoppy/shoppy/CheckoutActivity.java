@@ -23,8 +23,6 @@ public class CheckoutActivity extends AppCompatActivity {
         for (int i = 0; i < cart.size();i++){
           total += (cart.get(i).getPrice()*cart.get(i).getAmount());
         }
-        TextView order_summary =  findViewById(R.id.order_summary);
-       order_summary.setText("Order Summary\nShipping to:xxx\nEstimated Delivery Date: xxx\nItem Price:"+total+"\nOrder total:"+total+"\n");
     }
 
     public void placeOrder(View v){

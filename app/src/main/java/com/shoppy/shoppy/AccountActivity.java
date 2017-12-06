@@ -18,6 +18,12 @@ public class AccountActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.account_text);
         //text.setText("Account settings:" + getIntent().getStringExtra("mEmail"));
     }
+    public void openOrders(View v) {
+        Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
+        intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+        startActivity(intent);
+    }
+
     public void openAccountSettings(View v) {
 //        Context context = getApplicationContext();
 //        CharSequence text = "Open Account Settings not implemented!";

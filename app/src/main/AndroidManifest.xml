@@ -29,7 +29,8 @@
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".ManageAddressesActivity" />
-        <activity android:name=".LinkWithStoresActivity"></activity>
+        <activity android:name=".LinkWithStoresActivity" />
+        <activity android:name=".OrdersActivity"></activity>
     </application>
 
 </manifest>

@@ -41,16 +41,16 @@ tools:context="com.shoppy.shoppy.CheckoutActivity">>
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-       android:layout_marginTop="55dp"
-        android:layout_alignParentLeft="true"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:text="Order Summary\nShipping to:
-        xxx\nEstimated Delivery Date: xxx\nItems:xxx\nOrder total:xxx\n"
-        android:id="@+id/order_summary"/>
+        <TextView
+           android:layout_marginTop="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:text="Order Summary\nShipping to:
+            xxx\nEstimated Delivery Date: xxx\nItems:xxx\nOrder total:xxx\n"
+            android:id="@+id/order_summary"/>
         <TextView
             android:layout_marginTop="55dp"
             android:layout_alignParentLeft="true"
@@ -70,9 +70,7 @@ tools:context="com.shoppy.shoppy.CheckoutActivity">>
             android:text="Payment Info\nDebit Card: Chase\nNumber:xxx-xxx-xx"
             android:id="@+id/payment_info"/>
 
-
-
-</LinearLayout>
+    </LinearLayout>
         <TextView
             android:layout_marginTop="55dp"
             android:layout_alignParentLeft="true"

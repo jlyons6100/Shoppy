@@ -28,16 +28,7 @@
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account Settings" />
-
-
-            <ImageView
-                android:id="@+id/account_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/ic_account_foreground" />
+                android:text="Account" />
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -54,6 +45,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
             <LinearLayout
+                android:onClick="openAccountSettings"
                 android:id="@+id/linear_scrollview_horizontal1"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
@@ -65,9 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:text="Account Settings" />
+                    android:text="Account Setting" />
                 <ImageView
-                    android:onClick="openAccountSettings"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:text="Text"
@@ -75,6 +66,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:onClick="openManageAddresses"
                 android:id="@+id/linear_scrollview_horizontal2"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
@@ -90,12 +82,12 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:onClick="openManageAddresses"
                     android:src="@mipmap/ic_right_arrow_foreground"
                     android:text="Text" />
 
             </LinearLayout>
             <LinearLayout
+                android:onClick="openLinkWithStores"
                 android:id="@+id/linear_scrollview_horizontal3"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
@@ -108,7 +100,6 @@
                     android:layout_gravity="left"
                     android:text="Link with Stores"/>
                 <ImageView
-                    android:onClick="openLinkWithStores"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:text="Text"

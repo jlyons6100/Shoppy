@@ -41,10 +41,11 @@ tools:context="com.shoppy.shoppy.CheckoutActivity">>
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="55dp">
 
         <TextView
-           android:layout_marginTop="70dp"
+           android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

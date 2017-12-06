@@ -36,7 +36,9 @@
                 android:fontFamily="@font/rochester_regular"
                 android:text="@string/app_name"
                 android:textColor="#FFFF"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:shadowColor="#42000000"
+                android:shadowRadius="10"/>
 
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>

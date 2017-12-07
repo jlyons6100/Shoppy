@@ -18,4 +18,9 @@ public class LinkWithStoresActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.link_with_stores_text);
         //text.setText("Account settings:" + getIntent().getStringExtra("mEmail"));
     }
+
+    public void submit(View v){
+        Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+        startActivityForResult(intent, 0);
+    }
 }

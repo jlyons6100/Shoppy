@@ -18,4 +18,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.account_settings_text);
         //text.setText("Account settings:" + getIntent().getStringExtra("mEmail"));
     }
+    public void submit(View v){
+        Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+        startActivityForResult(intent, 0);
+    }
 }

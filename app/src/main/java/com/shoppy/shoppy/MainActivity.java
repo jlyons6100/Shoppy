@@ -112,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
             TextView tv1 = new TextView(getApplicationContext());
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+
             ll.addView(tv1);
+            scrollDownAutomatically();
 
             ArrayList<Shopping_Item> order;
             order = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("order");
@@ -219,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
             card.addView(text1);
 
             ll.addView(card);
+            scrollDownAutomatically();
         }
     }
 
@@ -375,6 +378,7 @@ public class MainActivity extends AppCompatActivity {
                     params.gravity = Gravity.LEFT;
                     tv.setText("Added to Cart!");
                     ll.addView(tv);
+                    scrollDownAutomatically();
 
 
                 }
@@ -426,6 +430,7 @@ public class MainActivity extends AppCompatActivity {
 
         card.addView(bottomBar);
         ll.addView(card);
+        scrollDownAutomatically();
     }
 
     public void handleBuying( LinearLayout ll, String buy_item ){
@@ -567,6 +572,7 @@ public class MainActivity extends AppCompatActivity {
                     params.gravity = Gravity.LEFT;
                     tv.setText("Added to Cart!");
                     ll.addView(tv);
+                    scrollDownAutomatically();
 
 
                 }
@@ -622,6 +628,7 @@ public class MainActivity extends AppCompatActivity {
         card.addView(bottomBar);
 
         ll.addView(card);
+        scrollDownAutomatically();
         /*for (int i = 0; i < database.size(); i++) {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -710,6 +717,7 @@ public class MainActivity extends AppCompatActivity {
             text1.setText("No Recent Orders");
             card.addView(text1);
             ll.addView(card);
+            scrollDownAutomatically();
         }
         for (int i = 0; i < orders.size(); i++) {
             for (int j = 0; j < orders.get(i).size(); j++)
@@ -744,6 +752,7 @@ public class MainActivity extends AppCompatActivity {
                         + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
                 card.addView(text1);
                 ll.addView(card);
+                scrollDownAutomatically();
             }
         }
     }
@@ -765,6 +774,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setBackgroundResource(R.drawable.rounded_corner);
         tv.setText(edit.getText());
         ll.addView(tv);
+        scrollDownAutomatically();
 
         String[] keywords = {"buy", "recommend", "my Orders", "view Cart"};
         String text = edit.getText().toString();
@@ -792,6 +802,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
+            scrollDownAutomatically();
         }
         else if (matches == 1){
             TextView tv1 = new TextView(this);
@@ -817,7 +828,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tv1.setText("According to your shopping history, I recommend this:");
             }
+
             ll.addView(tv1);
+            scrollDownAutomatically();
 
             if(index == 0)
                 handleBuying(ll, bought_item);
@@ -838,7 +851,12 @@ public class MainActivity extends AppCompatActivity {
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
+            scrollDownAutomatically();
         }
+        scrollDownAutomatically();
+    }
+
+    public void scrollDownAutomatically(){
         final ScrollView scr =  findViewById(R.id.previous_text);
         scr.postDelayed(new Runnable() {
             @Override

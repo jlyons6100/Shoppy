@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shoppy.shoppy.ReminderActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/cartpage_appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:background="#f27348"
+                android:id="@+id/cartpage_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+            </android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:textColor="#FFFF"
+                android:textSize="25dp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shopping Cart" />
+
+            <TextView
+                android:onClick="editCart"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:text="Edit"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"/>
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="50dp"
+            android:id="@+id/cartpage_cart_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="#FFFFFF">
+            <LinearLayout
+                android:id="@+id/cartpage_linear_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal"
+                    android:id="@+id/one_item"
+                    >
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:src="@drawable/item_1"
+                        android:id="@+id/item_image"/>
+                    <!-- item text -->
+                    <RelativeLayout
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/rounded_corner"
+                        android:id="@+id/item_text_box">
+                        <!-- name -->
+                        <TextView
+                            android:layout_marginTop="7dp"
+                            style="@style/item_name"
+                            android:text="Milk"
+                            android:id="@+id/item_name"/>
+                        <!-- details -->
+                        <TextView
+                            android:layout_marginTop="40dp"
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
+                            android:id="@+id/item_detail"/>
+                        <!-- price-->
+                        <RelativeLayout
+                            android:layout_marginTop="60dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal"
+                            android:id="@+id/cart_box">
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"
+                                android:layout_alignParentBottom="true"
+                                android:id="@+id/cart_dollar"
+                                />
+                            <TextView
+                                style="@style/item_price"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="16dp"
+                                android:id="@+id/cart_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="72dp"
+                                android:id="@+id/cart_wet"
+                                android:text=" / 1L"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="bottom"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/amount_bar">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_remove_circle_black_24dp"
+                            android:id="@+id/amount_minus"/>
+                        <TextView
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="1"
+                            android:gravity="center"
+                            android:id="@+id/amount_num"/>
+                        <ImageView
+                            android:layout_marginLeft="60dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_add_circle_black_24dp"
+                            android:id="@+id/amount_plus"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"
+                    android:id="@+id/card_line"/>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal"
+
+                    android:gravity="bottom"
+                    android:layout_marginTop="6dp">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/item_1"
+                        />
+                    <LinearLayout
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="vertical"
+                        android:gravity="bottom"
+                        >
+                        <TextView
+                            style="@style/item_name"
+                            android:text="Milk"
+                            />
+                        <TextView
+                            style="@style/item_detail"
+                            android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rounded_corner"
+                            android:orientation="horizontal"
+                            >
+                            <!-- price -->
+                            <TextView
+                                style="@style/item_dollar"
+                                android:text="$"/>
+                            <TextView
+                                style="@style/item_price"
+                                android:text="4.98"/>
+                            <TextView
+                                style="@style/item_wet"
+                                android:text=" / 1L"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="bottom"
+                        android:layout_marginBottom="5dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_remove_circle_black_24dp"/>
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="1"
+                            android:gravity="center"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_add_circle_black_24dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:visibility="gone"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f2f2f2"/>
+
+
+                <!--<LinearLayout-->
+                <!--android:id="@+id/linear_scrollview_horizontal"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal" >-->
+                <!--</LinearLayout>-->
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:background="#E0E0E0">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp">
+                <TextView
+                    style="@style/item_dollar"
+                    android:text="$"
+                    android:textSize="25dp"/>
+                <TextView
+                    style="@style/item_price"
+                    android:id="@+id/cart_price"
+                    android:text="4.98"
+                    android:textSize="25dp"/>
+                <TextView
+                    style="@style/item_number"
+                    android:textSize="15dp"
+                    android:text="/ 2 items"/>
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:onClick="checkOut"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Check Out"
+                android:src="@mipmap/ic_cart_foreground"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

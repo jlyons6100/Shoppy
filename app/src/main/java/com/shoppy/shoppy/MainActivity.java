@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         item4.setDaysSinceLastBought(2);
         database.add(item4);
         recommended.add(item4);
+        remind.add(item4);
 
         Shopping_Item item5 = new Shopping_Item();
         item5.setName("Toothpaste");
@@ -809,6 +810,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("database", database);
         //Log.d("CART", "Opening cart" + cart.get(0).getDescription() );
         intent.putExtra("cart", cart);
+        intent.putExtra("remind", remind);
         startActivityForResult(intent, 0);
     }
 

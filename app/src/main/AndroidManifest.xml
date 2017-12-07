@@ -30,7 +30,8 @@
         <activity android:name=".AccountSettingsActivity" />
         <activity android:name=".ManageAddressesActivity" />
         <activity android:name=".LinkWithStoresActivity" />
-        <activity android:name=".OrdersActivity"></activity>
+        <activity android:name=".OrdersActivity" />
+        <activity android:name=".ReminderActivity"></activity>
     </application>
 
 </manifest>

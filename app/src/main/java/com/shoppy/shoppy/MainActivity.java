@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //private String mEmail = getIntent().getStringExtra("mEmail");
     EditText text_edit;
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
-    ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
+    public ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
     ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void textTemplate(TextView tx, TextView tx_temp){
-      //tx_temp = findViewById(R.id.text_template);
+        //tx_temp = findViewById(R.id.text_template);
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
         tx.setBackgroundResource(R.drawable.rounded_corner);
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //                .build()
 //        );
 
+        //Log.d("CART", "Cart errors printing");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -132,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                if (data != null) {
-                    database = (ArrayList<Shopping_Item>) data.getSerializableExtra("database");
-                    cart = (ArrayList<Shopping_Item>) data.getSerializableExtra("cart");
+        if (data != null) {
+            database = (ArrayList<Shopping_Item>) data.getSerializableExtra("database");
+            cart = (ArrayList<Shopping_Item>) data.getSerializableExtra("cart");
 
-                    if(data.hasExtra("placedOrder")){
+            if(data.hasExtra("placedOrder")){
                        /* Context context = getApplicationContext();
                         CharSequence text = "Order Placed!";
                         int duration = Toast.LENGTH_SHORT;
@@ -144,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();*/
 
-                    }
-                }
+            }
+        }
 
     }
 
@@ -334,47 +336,48 @@ public class MainActivity extends AppCompatActivity {
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);
 
-            TextView space = new TextView(getApplicationContext());
-            space.setText("                       ");
-            cart_box.addView(space);
             RelativeLayout buttonAdd = new RelativeLayout(getApplicationContext());
             RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
             buttonAdd.setClickable(true);
+
             buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
             buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setBackgroundResource(R.drawable.add_button);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                      public void onClick(View v) {
-                                          // Perform action on click
-                                          cart.add(recommended.get(v.getId()));
-                                          cart.get(cart.size()-1).setAmount(1);
-                                          TextView recommendations = findViewById(R.id.recommendations_bt);
-                                          recommendations.setVisibility(View.GONE);
-                                          TextView my_orders = findViewById(R.id.my_orders_bt);
-                                          my_orders.setVisibility(View.GONE);
 
-                                          TextView undo_bt = findViewById(R.id.undo_bt);
-                                          undo_bt.setVisibility(View.VISIBLE);
-                                          TextView modify_number_bt = findViewById(R.id.modify_number_bt);
-                                          modify_number_bt.setVisibility(View.VISIBLE);
-                                          TextView view_cart_bt = findViewById(R.id.view_cart_bt);
-                                          view_cart_bt.setVisibility(View.VISIBLE);
+                @Override
+                public void onClick(View v) {
+                    // Perform action on click
+                    cart.add(recommended.get(v.getId()));
+                    //Log.d("CART", "CART: " );
+                    //Log.d("CART", cart.get(0).getDescription());
+                    cart.get(cart.size()-1).setAmount(1);
+                    TextView recommendations = findViewById(R.id.recommendations_bt);
+                    recommendations.setVisibility(View.GONE);
+                    TextView my_orders = findViewById(R.id.my_orders_bt);
+                    my_orders.setVisibility(View.GONE);
 
-                                          LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-                                        TextView tv = new TextView(getApplicationContext());
-                                        textTemplate(tv, (TextView)findViewById(R.id.text_template));
-                                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                        // params.weight = 1.0f;
-                                        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
-                                        params.setMargins(0,0, margin1, 0);
-                                        params.gravity = Gravity.LEFT;
-                                        tv.setText("Added to Cart!");
-                                          ll.addView(tv);
+                    TextView undo_bt = findViewById(R.id.undo_bt);
+                    undo_bt.setVisibility(View.VISIBLE);
+                    TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+                    modify_number_bt.setVisibility(View.VISIBLE);
+                    TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+                    view_cart_bt.setVisibility(View.VISIBLE);
+
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+                    TextView tv = new TextView(getApplicationContext());
+                    textTemplate(tv, (TextView)findViewById(R.id.text_template));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    // params.weight = 1.0f;
+                    int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+                    params.setMargins(0,0, margin1, 0);
+                    params.gravity = Gravity.LEFT;
+                    tv.setText("Added to Cart!");
+                    ll.addView(tv);
 
 
-                                      }
+                }
 
             });
 
@@ -422,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.addView(bottomBar_text);
 
         card.addView(bottomBar);
-      ll.addView(card);
+        ll.addView(card);
     }
 
     public void handleBuying( LinearLayout ll, String buy_item ){
@@ -627,19 +630,15 @@ public class MainActivity extends AppCompatActivity {
             layoutParams.setMargins(margin, margin, 0, 0);
             card.setLayoutParams(layoutParams);
             card.setOrientation(LinearLayout.HORIZONTAL);
-
-
             ImageView image = new ImageView(getApplicationContext());
             int width = (int) convertDpToPixel(50, getApplicationContext());
             int height = (int) convertDpToPixel(50, getApplicationContext());
             LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
             image.setLayoutParams(parmsImage);
-
             Context c = getApplicationContext();
             int id = c.getResources().getIdentifier("drawable/" + database.get(i).getImage(), null, c.getPackageName());
             image.setImageResource(id);
             card.addView(image);
-
             TextView text1 = new TextView(getApplicationContext());
             LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
             parmsText.setMargins(margin, 0, 0, 0);
@@ -649,7 +648,6 @@ public class MainActivity extends AppCompatActivity {
             text1.setText(database.get(i).getName() + "-" + database.get(i).getDescription() + "\n$" + database.get(i).getPrice()
             + "\n"+"Last bought "+ (database.get(i).getDaysSinceLastBought()+" days ago"));
             card.addView(text1);
-
             Button bt = new Button(this);
             bt.setText("Add to Cart");
             bt.setId(i);
@@ -664,14 +662,12 @@ public class MainActivity extends AppCompatActivity {
                     recommendations.setVisibility(View.GONE);
                     TextView my_orders = findViewById(R.id.my_orders_bt);
                     my_orders.setVisibility(View.GONE);
-
                     TextView undo_bt = findViewById(R.id.undo_bt);
                     undo_bt.setVisibility(View.VISIBLE);
                     TextView modify_number_bt = findViewById(R.id.modify_number_bt);
                     modify_number_bt.setVisibility(View.VISIBLE);
                     TextView view_cart_bt = findViewById(R.id.view_cart_bt);
                     view_cart_bt.setVisibility(View.VISIBLE);
-
                     LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
                     TextView tv1 = new TextView(getApplicationContext());
                     LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -684,7 +680,6 @@ public class MainActivity extends AppCompatActivity {
                     tv1.setBackgroundResource(R.drawable.rounded_corner);
                     tv1.setText("Added to Cart!");
                     ll.addView(tv1);
-
                 }
             });
             card.addView(bt);
@@ -719,37 +714,37 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < orders.size(); i++) {
             for (int j = 0; j < orders.get(i).size(); j++)
             {
-        LinearLayout card = new LinearLayout(getApplicationContext());
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int margin = (int) convertDpToPixel(10, getApplicationContext());
-        layoutParams.setMargins(margin, margin, 0, 0);
-        card.setLayoutParams(layoutParams);
-        card.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout card = new LinearLayout(getApplicationContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                int margin = (int) convertDpToPixel(10, getApplicationContext());
+                layoutParams.setMargins(margin, margin, 0, 0);
+                card.setLayoutParams(layoutParams);
+                card.setOrientation(LinearLayout.HORIZONTAL);
 
 
-        ImageView image = new ImageView(getApplicationContext());
-        int width = (int) convertDpToPixel(50, getApplicationContext());
-        int height = (int) convertDpToPixel(50, getApplicationContext());
-        LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
-        image.setLayoutParams(parmsImage);
+                ImageView image = new ImageView(getApplicationContext());
+                int width = (int) convertDpToPixel(50, getApplicationContext());
+                int height = (int) convertDpToPixel(50, getApplicationContext());
+                LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
+                image.setLayoutParams(parmsImage);
 
-        Context c = getApplicationContext();
-        int id = c.getResources().getIdentifier("drawable/" + orders.get(i).get(j).getImage(), null, c.getPackageName());
-        image.setImageResource(id);
-        card.addView(image);
+                Context c = getApplicationContext();
+                int id = c.getResources().getIdentifier("drawable/" + orders.get(i).get(j).getImage(), null, c.getPackageName());
+                image.setImageResource(id);
+                card.addView(image);
 
-        TextView text1 = new TextView(getApplicationContext());
-        LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
-        parmsText.setMargins(margin, 0, 0, 0);
-        text1.setLayoutParams(parmsText);
-        text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
-        text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
-        text1.setText(orders.get(i).get(j).getName() + "-" + orders.get(i).get(j).getDescription() + "\n$" + orders.get(i).get(j).getPrice()
-                + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
-        card.addView(text1);
-        ll.addView(card);
-    }
+                TextView text1 = new TextView(getApplicationContext());
+                LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
+                parmsText.setMargins(margin, 0, 0, 0);
+                text1.setLayoutParams(parmsText);
+                text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
+                text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
+                text1.setText(orders.get(i).get(j).getName() + "-" + orders.get(i).get(j).getDescription() + "\n$" + orders.get(i).get(j).getPrice()
+                        + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
+                card.addView(text1);
+                ll.addView(card);
+            }
         }
     }
 
@@ -759,7 +754,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
         TextView tv = new TextView(this);
         textTemplate(tv, (TextView)findViewById(R.id.text_template));
-       LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         // params.weight = 1.0f;
         int margin1 = (int) convertDpToPixel(10, getApplicationContext());
         params.setMargins(0,0, margin1, 0);
@@ -837,7 +832,7 @@ public class MainActivity extends AppCompatActivity {
             TextView tv1 = new TextView(this);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-           // params.weight = 1.0f;
+            // params.weight = 1.0f;
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
@@ -856,14 +851,13 @@ public class MainActivity extends AppCompatActivity {
         /*Context context = getApplicationContext();
         CharSequence text = "Cart not implemented!";
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();*/
 
         Intent intent = new Intent(getApplicationContext(), CartActivity.class);
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
         intent.putExtra("database", database);
-
+        //Log.d("CART", "Opening cart" + cart.get(0).getDescription() );
         intent.putExtra("cart", cart);
         startActivityForResult(intent, 0);
     }

@@ -41,7 +41,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
-        System.out.println("CART IN cartActivity:" + cart);
+        //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
         drawCart(cart);
     }
 
@@ -60,7 +60,13 @@ public class CartActivity extends AppCompatActivity {
 
 
 
-    public void drawCart(final ArrayList<Shopping_Item> cart){
+    public void drawCart(final ArrayList<Shopping_Item> cart)
+    {
+
+    }
+
+
+    /* {
         if (cart.size() == 0){
             LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);
             linear_scrollview_horizontal.setVisibility(View.VISIBLE);
@@ -180,5 +186,5 @@ public class CartActivity extends AppCompatActivity {
             }
             price_text.setText("$"+total_price+" / "+amount_of_items + " items");
         }
-    }
+    }*/
 }

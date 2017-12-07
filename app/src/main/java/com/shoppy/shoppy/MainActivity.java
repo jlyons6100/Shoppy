@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 //                .build()
 //        );
 
+        
         //Log.d("CART", "Cart errors printing");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);
@@ -345,7 +346,10 @@ public class MainActivity extends AppCompatActivity {
             buttonAdd.setBackgroundResource(R.drawable.add_button);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0b128b6b925b143989ef146c7ec903f7c3b7d555
                 @Override
                 public void onClick(View v) {
                     // Perform action on click

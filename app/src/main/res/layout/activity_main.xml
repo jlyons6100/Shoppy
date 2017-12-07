@@ -81,7 +81,7 @@
 
             <!-- Recommendations -->
             <LinearLayout
-                android:visibility="gone"
+
                 android:background="@drawable/rounded_corner"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -464,7 +464,6 @@
             </LinearLayout>
             <!-- Routine Buy -->
             <LinearLayout
-                android:visibility="gone"
                 android:background="@drawable/rounded_corner"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"

@@ -504,11 +504,11 @@ public class MainActivity extends AppCompatActivity {
             item_img.setImageResource(id);
             one_item.addView(item_img);
 
-            LinearLayout item_text_box = new LinearLayout(getApplicationContext());
-            LinearLayout item_text_box_temp = findViewById(R.id.item_text_box);
+            RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
+            RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
             item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
             item_text_box.setBackgroundResource(R.drawable.rounded_corner);
-            item_text_box.setOrientation(LinearLayout.VERTICAL);
+//            item_text_box.setOrientation(LinearLayout.VERTICAL);
 
             TextView item_name = new TextView(getApplicationContext());
             item_name.setTextAppearance(R.style.item_name);
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
             space.setText("                       ");
             cart_box.addView(space);
             LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
-            LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
             buttonAdd.setClickable(true);
             buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());

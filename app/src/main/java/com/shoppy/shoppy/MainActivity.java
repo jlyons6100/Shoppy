@@ -112,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
             TextView tv1 = new TextView(getApplicationContext());
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+
             ll.addView(tv1);
+            scrollDownAutomatically();
 
             ArrayList<Shopping_Item> order;
             order = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("order");
@@ -183,8 +185,29 @@ public class MainActivity extends AppCompatActivity {
         item3.setAmount(-1);
         item3.setDaysSinceLastBought(10);
         database.add(item3);
-
         remind.add(item3);
+
+        Shopping_Item item4 = new Shopping_Item();
+        item4.setName("Pencils");
+        item4.setImage("item_4");
+        item4.setPrice(5.95);
+        item4.setDescription("Ticonderoga graphite #2 pencil");
+        item4.setItemID(1);
+        item4.setAmount(-1);
+        item4.setDaysSinceLastBought(2);
+        database.add(item4);
+        recommended.add(item4);
+
+        Shopping_Item item5 = new Shopping_Item();
+        item5.setName("Toothpaste");
+        item5.setImage("item_5");
+        item5.setPrice(2.67);
+        item5.setDescription("Crest whitening toothpaste");
+        item5.setItemID(1);
+        item5.setAmount(-1);
+        item5.setDaysSinceLastBought(2);
+        database.add(item5);
+        recommended.add(item5);
     }
 
     public void handleRemind( LinearLayout ll ){
@@ -219,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
             card.addView(text1);
 
             ll.addView(card);
+            scrollDownAutomatically();
         }
     }
 
@@ -375,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
                     params.gravity = Gravity.LEFT;
                     tv.setText("Added to Cart!");
                     ll.addView(tv);
+                    scrollDownAutomatically();
 
 
                 }
@@ -400,13 +425,14 @@ public class MainActivity extends AppCompatActivity {
             one_item.addView(item_text_box);
 
             card.addView(one_item);
+            View v2 = new View(getApplicationContext());
+            View v2_temp = findViewById(R.id.card_line);
+            v2.setLayoutParams(v2_temp.getLayoutParams());
+            v2.setBackground(v2_temp.getBackground());
+            card.addView(v2);
         }
 
-        View v2 = new View(getApplicationContext());
-        View v2_temp = findViewById(R.id.card_line);
-        v2.setLayoutParams(v2_temp.getLayoutParams());
-        v2.setBackground(v2_temp.getBackground());
-        card.addView(v2);
+
 
         LinearLayout bottomBar = new LinearLayout(getApplicationContext());
         LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
@@ -426,6 +452,7 @@ public class MainActivity extends AppCompatActivity {
 
         card.addView(bottomBar);
         ll.addView(card);
+        scrollDownAutomatically();
     }
 
     public void handleBuying( LinearLayout ll, String buy_item ){
@@ -477,11 +504,11 @@ public class MainActivity extends AppCompatActivity {
             item_img.setImageResource(id);
             one_item.addView(item_img);
 
-            LinearLayout item_text_box = new LinearLayout(getApplicationContext());
-            LinearLayout item_text_box_temp = findViewById(R.id.item_text_box);
+            RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
+            RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
             item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
             item_text_box.setBackgroundResource(R.drawable.rounded_corner);
-            item_text_box.setOrientation(LinearLayout.VERTICAL);
+//            item_text_box.setOrientation(LinearLayout.VERTICAL);
 
             TextView item_name = new TextView(getApplicationContext());
             item_name.setTextAppearance(R.style.item_name);
@@ -533,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
             space.setText("                       ");
             cart_box.addView(space);
             LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
-            LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
             buttonAdd.setClickable(true);
             buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
@@ -567,6 +594,7 @@ public class MainActivity extends AppCompatActivity {
                     params.gravity = Gravity.LEFT;
                     tv.setText("Added to Cart!");
                     ll.addView(tv);
+                    scrollDownAutomatically();
 
 
                 }
@@ -622,6 +650,7 @@ public class MainActivity extends AppCompatActivity {
         card.addView(bottomBar);
 
         ll.addView(card);
+        scrollDownAutomatically();
         /*for (int i = 0; i < database.size(); i++) {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -710,6 +739,7 @@ public class MainActivity extends AppCompatActivity {
             text1.setText("No Recent Orders");
             card.addView(text1);
             ll.addView(card);
+            scrollDownAutomatically();
         }
         for (int i = 0; i < orders.size(); i++) {
             for (int j = 0; j < orders.get(i).size(); j++)
@@ -744,6 +774,7 @@ public class MainActivity extends AppCompatActivity {
                         + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
                 card.addView(text1);
                 ll.addView(card);
+                scrollDownAutomatically();
             }
         }
     }
@@ -765,6 +796,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setBackgroundResource(R.drawable.rounded_corner);
         tv.setText(edit.getText());
         ll.addView(tv);
+        scrollDownAutomatically();
 
         String[] keywords = {"buy", "recommend", "my Orders", "view Cart"};
         String text = edit.getText().toString();
@@ -792,6 +824,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
+            scrollDownAutomatically();
         }
         else if (matches == 1){
             TextView tv1 = new TextView(this);
@@ -817,7 +850,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tv1.setText("According to your shopping history, I recommend this:");
             }
+
             ll.addView(tv1);
+            scrollDownAutomatically();
 
             if(index == 0)
                 handleBuying(ll, bought_item);
@@ -838,7 +873,12 @@ public class MainActivity extends AppCompatActivity {
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
+            scrollDownAutomatically();
         }
+        scrollDownAutomatically();
+    }
+
+    public void scrollDownAutomatically(){
         final ScrollView scr =  findViewById(R.id.previous_text);
         scr.postDelayed(new Runnable() {
             @Override

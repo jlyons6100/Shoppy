@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //private String mEmail = getIntent().getStringExtra("mEmail");
     EditText text_edit;
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
-    ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
+    public ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> recommended = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
     ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 //                .setFontAttrId(R.attr.fontPath)
 //                .build()
 //        );
-
+        //Log.d("CART", "Cart errors printing");
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -336,6 +337,8 @@ public class MainActivity extends AppCompatActivity {
                                       public void onClick(View v) {
                                           // Perform action on click
                                           cart.add(recommended.get(v.getId()));
+                                          //Log.d("CART", "CART: " );
+                                          //Log.d("CART", cart.get(0).getDescription());
                                           cart.get(cart.size()-1).setAmount(1);
                                           TextView recommendations = findViewById(R.id.recommendations_bt);
                                           recommendations.setVisibility(View.GONE);
@@ -850,7 +853,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), CartActivity.class);
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
         intent.putExtra("database", database);
-
+        //Log.d("CART", "Opening cart" + cart.get(0).getDescription() );
         intent.putExtra("cart", cart);
         startActivityForResult(intent, 0);
     }

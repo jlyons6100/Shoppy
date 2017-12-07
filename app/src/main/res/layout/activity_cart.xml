@@ -31,11 +31,13 @@
 
             <TextView
                 android:onClick="editCart"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:text="Edit"
+                android:textSize="20dp"
                 android:textColor="#FFFFFF"/>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
@@ -48,25 +50,26 @@
         android:id="@+id/cart_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:background="#FFFFFF">
         <LinearLayout
             android:id="@+id/linear_scrollview_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="108dp"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:id="@+id/one_item">
+                android:id="@+id/one_item"
+                android:gravity="bottom"
+                android:layout_marginTop="6dp">
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
                     android:layout_marginLeft="1dp"
                     android:src="@drawable/item_1"
                     android:id="@+id/item_image"/>
@@ -74,13 +77,13 @@
                     android:layout_width="160dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/rounded_corner"
                     android:orientation="vertical"
+                    android:gravity="bottom"
                     android:id="@+id/item_text_box">
                     <TextView
                         style="@style/item_name"
-
                         android:text="Milk"
                         android:id="@+id/item_name"/>
                     <TextView
@@ -97,8 +100,7 @@
                         <!-- price -->
                         <TextView
                             style="@style/item_dollar"
-                            android:text="$"
-                            />
+                            android:text="$"/>
                         <TextView
                             style="@style/item_price"
                             android:text="4.98"/>
@@ -111,21 +113,106 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="5dp">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_minus_web"/>
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_remove_circle_black_24dp"/>
                     <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="1"/>
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:text="1"
+                        android:gravity="center"/>
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_plus_web"/>
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_add_circle_black_24dp"/>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f2f2f2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="108dp"
+                android:layout_gravity="left"
+                android:orientation="horizontal"
+
+                android:gravity="bottom"
+                android:layout_marginTop="6dp">
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="1dp"
+                    android:src="@drawable/item_1"
+                    />
+                <LinearLayout
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/rounded_corner"
+                    android:orientation="vertical"
+                    android:gravity="bottom"
+                   >
+                    <TextView
+                        style="@style/item_name"
+                        android:text="Milk"
+                        />
+                    <TextView
+                        style="@style/item_detail"
+                        android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="33dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/rounded_corner"
+                        android:orientation="horizontal"
+                        >
+                        <!-- price -->
+                        <TextView
+                            style="@style/item_dollar"
+                            android:text="$"/>
+                        <TextView
+                            style="@style/item_price"
+                            android:text="4.98"/>
+                        <TextView
+                            style="@style/item_wet"
+                            android:text=" / 1L"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="5dp">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_remove_circle_black_24dp"/>
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:text="1"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_add_circle_black_24dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f2f2f2"/>
 
 
             <!--<LinearLayout-->
@@ -137,23 +224,48 @@
             <!--</LinearLayout>-->
         </LinearLayout>
     </ScrollView>
-        <Button
-            android:onClick="checkOut"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="bottom"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Check Out"
-            android:src="@mipmap/ic_cart_foreground" />
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:text=""
-            android:id="@+id/cart_price"/>
+            android:background="#E0E0E0">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp">
+                <TextView
+                    style="@style/item_dollar"
+                    android:text="$"
+                    android:textSize="25dp"/>
+                <TextView
+                    style="@style/item_price"
+                    android:id="@+id/cart_price"
+                    android:text="4.98"
+                    android:textSize="25dp"/>
+                <TextView
+                    style="@style/item_number"
+                    android:textSize="15dp"
+                    android:text="/ 2 items"/>
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <Button
+                android:onClick="checkOut"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Check Out"
+                android:src="@mipmap/ic_cart_foreground"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
 
     </RelativeLayout>
 

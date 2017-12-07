@@ -41,12 +41,12 @@
                 />
 
             <ImageView
-            android:onClick="openAccount"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_height="40dp"
-            android:layout_width="40dp"
-            android:src="@mipmap/ic_account_foreground"/>
+                android:onClick="openAccount"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/ic_account_foreground"/>
             <ImageView
                 android:onClick="openCart"
                 android:layout_centerVertical="true"
@@ -652,14 +652,14 @@
         </LinearLayout>
 
         <ImageView
-        android:onClick="openCamera"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="Text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:src="@mipmap/ic_camera_foreground"
-        android:id="@+id/camera"/>
+            android:onClick="openCamera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="Text"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_camera_foreground"
+            android:id="@+id/camera"/>
         <ImageView
             android:onClick="openMicrophone"
             android:layout_width="40dp"
@@ -690,6 +690,6 @@
 
 
     </RelativeLayout
->
+        >
 
 </android.support.constraint.ConstraintLayout>

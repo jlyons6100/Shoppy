@@ -43,7 +43,8 @@
             android:id="@+id/linear_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
             <LinearLayout
                 android:onClick="openOrders"
                 android:id="@+id/linear_scrollview_horizontal1"

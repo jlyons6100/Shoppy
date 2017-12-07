@@ -261,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
             one_item.setLayoutParams(one_item_temp.getLayoutParams());
             one_item.setOrientation(LinearLayout.HORIZONTAL);
 
+            // Item image
             ImageView item_img = new ImageView(getApplicationContext());
             ImageView item_img_temp = findViewById(R.id.item_image);
             item_img.setLayoutParams(item_img_temp.getLayoutParams());
@@ -269,17 +270,19 @@ public class MainActivity extends AppCompatActivity {
             item_img.setImageResource(id);
             one_item.addView(item_img);
 
-            LinearLayout item_text_box = new LinearLayout(getApplicationContext());
-            LinearLayout item_text_box_temp = findViewById(R.id.item_text_box);
+            // Item text
+            RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
+            RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
             item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
             item_text_box.setBackgroundResource(R.drawable.rounded_corner);
-            item_text_box.setOrientation(LinearLayout.VERTICAL);
 
+            // Item text -- name
             TextView item_name = new TextView(getApplicationContext());
             item_name.setTextAppearance(R.style.item_name);
             item_name.setText(recommended.get(i).getName());
             item_text_box.addView(item_name);
 
+            // Item text -- reason
             LinearLayout item_reason = new LinearLayout(getApplicationContext());
             LinearLayout item_reason_temp = findViewById(R.id.item_reason);
             item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
@@ -298,25 +301,35 @@ public class MainActivity extends AppCompatActivity {
 
             item_text_box.addView(item_reason);
 
+            // Item text -- detail
             TextView item_detail = new TextView(getApplicationContext());
+            TextView detail_temp = findViewById(R.id.item_detail);
+            item_detail.setLayoutParams(detail_temp.getLayoutParams());
             item_detail.setTextAppearance(R.style.item_detail);
             item_detail.setText(recommended.get(i).getDescription());
             item_text_box.addView(item_detail);
 
-            LinearLayout cart_box = new LinearLayout(getApplicationContext()); //add to item text box
-            LinearLayout cart_box_temp = findViewById(R.id.cart_box);
+            // Item text -- price and add
+            RelativeLayout cart_box = new RelativeLayout(getApplicationContext()); //add to item text box
+            RelativeLayout cart_box_temp = findViewById(R.id.cart_box);
             cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
             cart_box.setBackgroundResource(R.drawable.rounded_corner);
 
             TextView carts_text1 = new TextView(getApplicationContext());
+            TextView dollar_temp = findViewById(R.id.cart_dollar);
+            carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
             carts_text1.setTextAppearance(R.style.item_dollar);
-            carts_text1.setText("$    ");
+            carts_text1.setText("$");
             TextView carts_text2 = new TextView(getApplicationContext());
+            TextView price_temp = findViewById(R.id.cart_price);
+            carts_text2.setLayoutParams(price_temp.getLayoutParams());
             carts_text2.setTextAppearance(R.style.item_price);
             carts_text2.setText(""+recommended.get(i).getPrice());
             TextView carts_text3 = new TextView(getApplicationContext());
+            TextView wet_temp = findViewById(R.id.cart_wet);
+            carts_text3.setLayoutParams(wet_temp.getLayoutParams());
             carts_text3.setTextAppearance(R.style.item_wet);
-            carts_text3.setText("     /1L");
+            carts_text3.setText(" / 1L");
             cart_box.addView(carts_text1);
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);
@@ -324,11 +337,11 @@ public class MainActivity extends AppCompatActivity {
             TextView space = new TextView(getApplicationContext());
             space.setText("                       ");
             cart_box.addView(space);
-            LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
-            LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            RelativeLayout buttonAdd = new RelativeLayout(getApplicationContext());
+            RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
             buttonAdd.setClickable(true);
-            //buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft()+100, buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
+            buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setBackgroundResource(R.drawable.add_button);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {

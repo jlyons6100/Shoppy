@@ -6,11 +6,13 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,56 +64,85 @@ public class CartActivity extends AppCompatActivity {
 
     public void drawCart(final ArrayList<Shopping_Item> cart)
     {
-
-    }
-
-
-    /* {
         if (cart.size() == 0){
-            LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);
+            LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
             linear_scrollview_horizontal.setVisibility(View.VISIBLE);
         }
         else {
-            LinearLayout linear_scrollview_horizontal = (LinearLayout) findViewById(R.id.linear_scrollview_horizontal);
+            LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
             linear_scrollview_horizontal.setVisibility(View.GONE);
 
-            LinearLayout linear_scrollview = (LinearLayout) findViewById(R.id.linear_scrollview);
+            LinearLayout linear_scrollview = (LinearLayout) findViewById(R.id.cartpage_linear_scrollview);
 
-
+            LinearLayout one_item_temp = findViewById(R.id.one_item);
             for (int i = 0 ; i < cart.size(); i++) {
-            LinearLayout card = new LinearLayout(getApplicationContext());
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int)convertDpToPixel( 30, getApplicationContext());
-            layoutParams.setMargins(margin/2,margin,0,0);
-            card.setLayoutParams(layoutParams);
-            card.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout card = new LinearLayout(getApplicationContext());
+                card.setLayoutParams(one_item_temp.getLayoutParams());
+                card.setOrientation(LinearLayout.HORIZONTAL);
+                card.setGravity(Gravity.BOTTOM);
 
-
-                ImageView image = new ImageView(getApplicationContext());
-                int width = (int)convertDpToPixel(50, getApplicationContext());
-                int height =(int) convertDpToPixel(50, getApplicationContext());
-                LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width,height);
-                image.setLayoutParams(parmsImage);
-
+                // Item image
+                ImageView item_img = new ImageView(getApplicationContext());
+                ImageView item_img_temp = findViewById(R.id.item_image);
+                item_img.setLayoutParams(item_img_temp.getLayoutParams());
                 Context c = getApplicationContext();
                 int id = c.getResources().getIdentifier("drawable/" + cart.get(i).getImage(), null, c.getPackageName());
-                image.setImageResource(id);
-                card.addView(image);
+                item_img.setImageResource(id);
+                card.addView(item_img);
 
-                TextView text = new TextView(getApplicationContext());
-                //int width = (int)convertPixelsToDp(500, getApplicationContext());
-                //int height =(int) convertPixelsToDp(500, getApplicationContext());
-                LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width*4,height*2);
-                parmsText.setMargins(margin,0,0,0);
-                text.setLayoutParams(parmsText);
-                text.setWidth((int)convertDpToPixel(150, getApplicationContext()));
-                text.setHeight((int)convertDpToPixel(75, getApplicationContext()));
-                text.setText(cart.get(i).getName() + "-" + cart.get(i).getDescription() +"\n$"+cart.get(i).getPrice());
-                card.addView(text);
+                // Item text
+                RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
+                RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
+                item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
+                item_text_box.setBackgroundResource(R.drawable.rounded_corner);
 
+                // Item text -- name
+                TextView item_name = new TextView(getApplicationContext());
+                item_name.setTextAppearance(R.style.item_name);
+                item_name.setText(cart.get(i).getName());
+                item_text_box.addView(item_name);
 
+                // Item text -- detail
+                TextView item_detail = new TextView(getApplicationContext());
+                TextView detail_temp = findViewById(R.id.item_detail);
+                item_detail.setLayoutParams(detail_temp.getLayoutParams());
+                item_detail.setTextAppearance(R.style.item_detail);
+                item_detail.setText(cart.get(i).getDescription());
+                item_text_box.addView(item_detail);
 
+                // Item text -- price and add
+                RelativeLayout cart_box = new RelativeLayout(getApplicationContext()); //add to item text box
+                RelativeLayout cart_box_temp = findViewById(R.id.cart_box);
+                cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
+                cart_box.setBackgroundResource(R.drawable.rounded_corner);
+
+                TextView carts_text1 = new TextView(getApplicationContext());
+                TextView dollar_temp = findViewById(R.id.cart_dollar);
+                carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
+                carts_text1.setTextAppearance(R.style.item_dollar);
+                carts_text1.setText("$");
+                TextView carts_text2 = new TextView(getApplicationContext());
+                TextView price_temp = findViewById(R.id.cart_price);
+                carts_text2.setLayoutParams(price_temp.getLayoutParams());
+                carts_text2.setTextAppearance(R.style.item_price);
+                carts_text2.setText(""+cart.get(i).getPrice());
+                TextView carts_text3 = new TextView(getApplicationContext());
+                TextView wet_temp = findViewById(R.id.cart_wet);
+                carts_text3.setLayoutParams(wet_temp.getLayoutParams());
+                carts_text3.setTextAppearance(R.style.item_wet);
+                carts_text3.setText(" / 1L");
+                cart_box.addView(carts_text1);
+                cart_box.addView(carts_text2);
+                cart_box.addView(carts_text3);
+
+                RelativeLayout buttonAdd = new RelativeLayout(getApplicationContext());
+                RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
+                buttonAdd.setClickable(true);
+
+                buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
+                buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
+                buttonAdd.setBackgroundResource(R.drawable.add_button);
+                buttonAdd.setId(i);
 
                 final TextView num = new TextView(getApplicationContext());
                 num.setText( " " + cart.get(i).getAmount());
@@ -186,5 +217,5 @@ public class CartActivity extends AppCompatActivity {
             }
             price_text.setText("$"+total_price+" / "+amount_of_items + " items");
         }
-    }*/
+    }
 }

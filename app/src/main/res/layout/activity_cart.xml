@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.shoppy.shoppy.CartActivity">
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar_layout"
+        android:id="@+id/cartpage_appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
@@ -15,7 +15,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:background="#f27348"
-                android:id="@+id/toolbar"
+                android:id="@+id/cartpage_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
@@ -47,13 +47,13 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_marginTop="55dp"
         android:layout_marginBottom="50dp"
-        android:id="@+id/cart_scrollview"
+        android:id="@+id/cartpage_cart_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:background="#FFFFFF">
         <LinearLayout
-            android:id="@+id/linear_scrollview_horizontal"
+            android:id="@+id/cartpage_linear_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -81,7 +81,7 @@
                     android:background="@drawable/rounded_corner"
                     android:orientation="vertical"
                     android:gravity="bottom"
-                    android:id="@+id/item_text_box">
+                    android:id="@+id/cartpage_item_text_box">
                     <TextView
                         style="@style/item_name"
                         android:text="Milk"
@@ -132,11 +132,13 @@
                 </LinearLayout>
             </LinearLayout>
             <View
+                android:visibility="gone"
                 android:layout_marginTop="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#f2f2f2"/>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="108dp"
                 android:layout_gravity="left"
@@ -209,6 +211,7 @@
                 </LinearLayout>
             </LinearLayout>
             <View
+                android:visibility="gone"
                 android:layout_marginTop="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

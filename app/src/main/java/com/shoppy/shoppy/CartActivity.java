@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -62,6 +63,21 @@ public class CartActivity extends AppCompatActivity {
 
     public void drawCart(final ArrayList<Shopping_Item> cart)
     {
+        // Total bar
+        double total_price = 0;
+        int amount_of_items = 0;
+        for (int i = 0; i < cart.size(); i++){
+            amount_of_items += cart.get(i).getAmount();
+            total_price+= (cart.get(i).getPrice()*cart.get(i).getAmount());
+        }
+        TextView total_text1 = findViewById(R.id.total_dollar);
+        total_text1.setText("$");
+        final TextView total_text2 = findViewById(R.id.total_price);
+        total_text2.setText(String.format("%.02f", total_price));
+        final TextView total_text3 = findViewById(R.id.total_num);
+        total_text3.setText(" / "+amount_of_items + " items");
+        Button checkout = findViewById(R.id.total_checkout);
+
 
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 
@@ -109,7 +125,7 @@ public class CartActivity extends AppCompatActivity {
             item_detail.setText(cart.get(i).getDescription());
             item_text_box.addView(item_detail);
 
-            // Item text -- price
+            // Item text -- price and amount
             RelativeLayout cart_box = new RelativeLayout(getApplicationContext()); //add to item text box
             cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
             cart_box.setBackgroundResource(R.drawable.rounded_corner);
@@ -137,8 +153,6 @@ public class CartActivity extends AppCompatActivity {
             RelativeLayout amount_bar_temp = findViewById(R.id.amount_bar);
             amount_bar.setLayoutParams(amount_bar_temp.getLayoutParams());
 
-
-
             ImageView minus = new ImageView(getApplicationContext());
             ImageView minus_temp = findViewById(R.id.amount_minus);
             minus.setLayoutParams(minus_temp.getLayoutParams());
@@ -162,82 +176,56 @@ public class CartActivity extends AppCompatActivity {
             minus.setClickable(true);
             plus.setClickable(true);
 
-//
-//                ImageView minus = new ImageView(getApplicationContext());
-//                int width_minus = (int)convertDpToPixel(30, getApplicationContext());
-//                int height_minus =(int) convertDpToPixel(30, getApplicationContext());
-//                LinearLayout.LayoutParams paramsminus = new LinearLayout.LayoutParams(width_minus, height_minus);
-//                minus.setLayoutParams(paramsminus);
-//                minus.setImageResource(R.mipmap.ic_minus_round);
-                minus.setId(i);
-                minus.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        //v.getId() will give you the image id
-                        if (cart.get(v.getId()).getAmount() != 0) {
-                            cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
-                            num.setText("" + cart.get(v.getId()).getAmount());
-                            TextView price_text = (TextView) findViewById(R.id.cart_price);
-                            double total_price = 0;
-                            int amount_of_items = 0;
-                            for (int i = 0; i < cart.size(); i++){
-                                amount_of_items += cart.get(i).getAmount();
-                                total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
-                            }
-                            price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
-                        }
-                        else {
-                            Context context = getApplicationContext();
-                            CharSequence text = "You can't buy a negative amount of an item!";
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                        }
-                    }
-                });
-//                card.addView(minus);
-//
-//
-//                card.addView(num);
-//                num.setTextSize(20);
-//
-//                ImageView plus = new ImageView(getApplicationContext());
-//                LinearLayout.LayoutParams paramsplus = new LinearLayout.LayoutParams( width_minus, height_minus);
-//                plus.setLayoutParams(paramsplus);
-//                plus.setImageResource(R.mipmap.ic_plus_round);
-                plus.setId(i);
-                plus.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        //v.getId() will give you the image id
-                        cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() +1);
-                        num.setText( "" +cart.get(v.getId()).getAmount());
-                        TextView price_text = (TextView) findViewById(R.id.cart_price);
+            minus.setId(i);
+            minus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //v.getId() will give you the image id
+                    if (cart.get(v.getId()).getAmount() != 0) {
+                        cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
+                        num.setText("" + cart.get(v.getId()).getAmount());
                         double total_price = 0;
                         int amount_of_items = 0;
                         for (int i = 0; i < cart.size(); i++){
                             amount_of_items += cart.get(i).getAmount();
-                            total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
+                            total_price += (cart.get(i).getAmount()*cart.get(i).getPrice());
                         }
-                        price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
+                        total_text2.setText(String.format("%.02f", total_price));
+                        total_text3.setText(" / "+amount_of_items + " items");
                     }
-                });
-//                if (card != null)
-            card.addView(amount_bar);
+                    else {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Click Edit to delete items.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }
+            });
+
+            plus.setId(i);
+            plus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    //v.getId() will give you the image id
+                    cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() +1);
+                    num.setText( "" +cart.get(v.getId()).getAmount());
+                    double total_price = 0;
+                    int amount_of_items = 0;
+                    for (int i = 0; i < cart.size(); i++){
+                        amount_of_items += cart.get(i).getAmount();
+                        total_price += (cart.get(i).getAmount()*cart.get(i).getPrice());
+                    }
+                    total_text2.setText(String.format("%.02f", total_price));
+                    total_text3.setText(" / "+amount_of_items + " items");
+                }
+            });
+            cart_box.addView(amount_bar);
 
             linear_scrollview_horizontal.addView(card);
             View v2 = new View(getApplicationContext());
             View v2_temp = findViewById(R.id.card_line);
             v2.setLayoutParams(v2_temp.getLayoutParams());
             v2.setBackground(v2_temp.getBackground());
-            card.addView(v2);
+            linear_scrollview_horizontal.addView(v2);
         }
-//        TextView price_text = (TextView) findViewById(R.id.cart_price);
-//        double total_price = 0;
-//        int amount_of_items = 0;
-//        for (int i = 0; i < cart.size(); i++){
-//           amount_of_items += cart.get(i).getAmount();
-//           total_price+= (cart.get(i).getPrice()*cart.get(i).getAmount());
-//        }
-//        price_text.setText("$"+total_price+" / "+amount_of_items + " items");
-
     }
 }

@@ -199,7 +199,6 @@
                                 android:layout_height="23dp"
                                 android:paddingLeft="11dp"
                                 android:paddingRight="15dp"
-                                android:layout_alignParentRight="true"
                                 android:background="@drawable/add_button"
                                 android:orientation="horizontal"
                                 >
@@ -429,13 +428,16 @@
                     android:layout_gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/bottom_bar">
                     <ImageView
                         android:layout_marginLeft="5dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
-                        android:src="@drawable/ic_arrow_forward_black_24dp" />
+                        android:src="@drawable/ic_arrow_forward_black_24dp"
+                        android:id="@+id/bottom_bar_img"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -443,7 +445,9 @@
                         android:textSize="12sp"
                         android:fontFamily="sans-serif"
                         android:textColor="#515151"
-                        android:text="More recommendations"/>
+                        android:text="More recommendations"
+                        android:id="@+id/bottom_bar_text"
+                        />
                 </LinearLayout>
             </LinearLayout>
             <!-- Routine Buy -->

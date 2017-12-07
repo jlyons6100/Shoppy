@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 //                .setFontAttrId(R.attr.fontPath)
 //                .build()
 //        );
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -317,11 +320,49 @@ public class MainActivity extends AppCompatActivity {
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);
 
+            TextView space = new TextView(getApplicationContext());
+            space.setText("                       ");
+            cart_box.addView(space);
             LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
             LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            buttonAdd.setClickable(true);
+            //buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft()+100, buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
             buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
             buttonAdd.setBackgroundResource(R.drawable.add_button);
+            buttonAdd.setId(i);
+            buttonAdd.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                      public void onClick(View v) {
+                                          // Perform action on click
+                                          cart.add(recommended.get(v.getId()));
+                                          cart.get(cart.size()-1).setAmount(1);
+                                          TextView recommendations = findViewById(R.id.recommendations_bt);
+                                          recommendations.setVisibility(View.GONE);
+                                          TextView my_orders = findViewById(R.id.my_orders_bt);
+                                          my_orders.setVisibility(View.GONE);
 
+                                          TextView undo_bt = findViewById(R.id.undo_bt);
+                                          undo_bt.setVisibility(View.VISIBLE);
+                                          TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+                                          modify_number_bt.setVisibility(View.VISIBLE);
+                                          TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+                                          view_cart_bt.setVisibility(View.VISIBLE);
+
+                                          LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+                                        TextView tv = new TextView(getApplicationContext());
+                                        textTemplate(tv, (TextView)findViewById(R.id.text_template));
+                                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                        // params.weight = 1.0f;
+                                        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+                                        params.setMargins(0,0, margin1, 0);
+                                        params.gravity = Gravity.LEFT;
+                                        tv.setText("Added to Cart!");
+                                          ll.addView(tv);
+
+
+                                      }
+
+            });
 
             ImageView shopping_icon = new ImageView(getApplicationContext());
             ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
@@ -334,58 +375,158 @@ public class MainActivity extends AppCompatActivity {
             textTemplate(shopping_icon_text, shopping_icon_text_temp);
 
             shopping_icon_text.setBackgroundResource(0);
-            shopping_icon_text.setText("Add    ");
-
+            shopping_icon_text.setText("Add");
             buttonAdd.addView(shopping_icon_text);
 
             cart_box.addView(buttonAdd);
             item_text_box.addView(cart_box);
             one_item.addView(item_text_box);
 
-
             card.addView(one_item);
         }
-      /*  for (int i = 0; i < recommended.size(); i++) {
-            LinearLayout card = new LinearLayout(getApplicationContext());
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int) convertDpToPixel(10, getApplicationContext());
-            layoutParams.setMargins(margin, margin, 0, 0);
-            card.setLayoutParams(layoutParams);
-            card.setOrientation(LinearLayout.HORIZONTAL);
+
+        View v2 = new View(getApplicationContext());
+        View v2_temp = findViewById(R.id.card_line);
+        v2.setLayoutParams(v2_temp.getLayoutParams());
+        v2.setBackground(v2_temp.getBackground());
+        card.addView(v2);
+
+        LinearLayout bottomBar = new LinearLayout(getApplicationContext());
+        LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
+        bottomBar.setLayoutParams(bottomBar_temp.getLayoutParams());
+        bottomBar.setOrientation(LinearLayout.HORIZONTAL);
+
+        ImageView bottomBar_icon = new ImageView(getApplicationContext());
+        ImageView bottomBar_icon_temp = findViewById(R.id.bottom_bar_img);
+        bottomBar_icon.setLayoutParams(bottomBar_icon_temp.getLayoutParams());
+        bottomBar_icon.setImageResource(R.drawable.ic_recommend);
+        bottomBar.addView(bottomBar_icon);
+
+        TextView bottomBar_text = new TextView(getApplicationContext());
+        textTemplate(bottomBar_text, (TextView) findViewById(R.id.bottom_bar_text));
+        bottomBar_text.setText("More Recommendations");
+        bottomBar.addView(bottomBar_text);
+
+        card.addView(bottomBar);
+      ll.addView(card);
+    }
+
+    public void handleBuying( LinearLayout ll, String buy_item ){
+        LinearLayout card = new LinearLayout(getApplicationContext());
+        LinearLayout card_temp = findViewById(R.id.rec_temp);
+        card.setLayoutParams(card_temp.getLayoutParams());
+        card.setOrientation(card_temp.getOrientation());
+        card.setBackgroundResource(R.drawable.rounded_corner);
+
+        LinearLayout topBar = new LinearLayout(getApplicationContext());
+        LinearLayout topBar_temp = findViewById(R.id.top_bar_temp);
+        topBar.setLayoutParams(topBar_temp.getLayoutParams());
+        topBar.setOrientation(LinearLayout.HORIZONTAL);
 
 
-            ImageView image = new ImageView(getApplicationContext());
-            int width = (int) convertDpToPixel(50, getApplicationContext());
-            int height = (int) convertDpToPixel(50, getApplicationContext());
-            LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
-            image.setLayoutParams(parmsImage);
+        ImageView topBar_icon = new ImageView(getApplicationContext());
+        ImageView topBar_icon_temp = findViewById(R.id.top_bar_icon);
+        topBar_icon.setLayoutParams(topBar_icon_temp.getLayoutParams());
+        topBar_icon.setImageResource(R.drawable.ic_recommend);
+        topBar.addView(topBar_icon);
 
 
+
+
+        TextView top_bar_text = new TextView(getApplicationContext());
+        textTemplate(top_bar_text, (TextView) findViewById(R.id.top_bar_text));
+        top_bar_text.setText("Routine Buy");
+        topBar.addView(top_bar_text);
+
+        card.addView(topBar);
+
+        View v = new View(getApplicationContext());
+        View v_temp = findViewById(R.id.card_line);
+        v.setLayoutParams(v_temp.getLayoutParams());
+        v.setBackground(v_temp.getBackground());
+        card.addView(v);
+
+        for (int i = 0; i < database.size(); i++) {
+            LinearLayout one_item = new LinearLayout(getApplicationContext());
+            LinearLayout one_item_temp = findViewById(R.id.one_item);
+            one_item.setLayoutParams(one_item_temp.getLayoutParams());
+            one_item.setOrientation(LinearLayout.HORIZONTAL);
+
+            ImageView item_img = new ImageView(getApplicationContext());
+            ImageView item_img_temp = findViewById(R.id.item_image);
+            item_img.setLayoutParams(item_img_temp.getLayoutParams());
             Context c = getApplicationContext();
-            int id = c.getResources().getIdentifier("drawable/" + recommended.get(i).getImage(), null, c.getPackageName());
-            image.setImageResource(id);
-            card.addView(image);
+            int id = c.getResources().getIdentifier("drawable/" + database.get(i).getImage(), null, c.getPackageName());
+            item_img.setImageResource(id);
+            one_item.addView(item_img);
 
-            TextView text1 = new TextView(getApplicationContext());
-            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
-            parmsText.setMargins(margin, 0, 0, 0);
-            text1.setLayoutParams(parmsText);
-            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
-            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
-            text1.setText(recommended.get(i).getName() + "-" + recommended.get(i).getDescription() + "\n$" + recommended.get(i).getPrice());
-            card.addView(text1);
+            LinearLayout item_text_box = new LinearLayout(getApplicationContext());
+            LinearLayout item_text_box_temp = findViewById(R.id.item_text_box);
+            item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
+            item_text_box.setBackgroundResource(R.drawable.rounded_corner);
+            item_text_box.setOrientation(LinearLayout.VERTICAL);
 
+            TextView item_name = new TextView(getApplicationContext());
+            item_name.setTextAppearance(R.style.item_name);
+            item_name.setText(database.get(i).getName());
+            item_text_box.addView(item_name);
 
-            Button bt = new Button(this);
-            bt.setText("Add to Cart");
-            bt.setId(i);
-            bt.setLayoutParams(new  LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-           bt.setOnClickListener(new View.OnClickListener() {
+            LinearLayout item_reason = new LinearLayout(getApplicationContext());
+            LinearLayout item_reason_temp = findViewById(R.id.item_reason);
+            item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
+            item_reason.setOrientation(LinearLayout.HORIZONTAL);
+
+            ImageView item_icon = new ImageView(getApplicationContext());
+            ImageView item_icon_temp = findViewById(R.id.item_icon);
+            item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
+            item_icon.setImageResource(R.drawable.ic_reason_friend);
+            item_reason.addView(item_icon);
+
+            TextView item_icon_text = new TextView(getApplicationContext());
+            item_icon_text.setTextAppearance(R.style.item_reason);
+            item_icon_text.setText("Put the reason here");
+            item_reason.addView(item_icon_text);
+
+            item_text_box.addView(item_reason);
+
+            TextView item_detail = new TextView(getApplicationContext());
+            item_detail.setTextAppearance(R.style.item_detail);
+            item_detail.setText(database.get(i).getDescription());
+            item_text_box.addView(item_detail);
+
+            LinearLayout cart_box = new LinearLayout(getApplicationContext()); //add to item text box
+            LinearLayout cart_box_temp = findViewById(R.id.cart_box);
+            cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
+            cart_box.setBackgroundResource(R.drawable.rounded_corner);
+
+            TextView carts_text1 = new TextView(getApplicationContext());
+            carts_text1.setTextAppearance(R.style.item_dollar);
+            carts_text1.setText("$    ");
+            TextView carts_text2 = new TextView(getApplicationContext());
+            carts_text2.setTextAppearance(R.style.item_price);
+            carts_text2.setText(""+database.get(i).getPrice());
+            TextView carts_text3 = new TextView(getApplicationContext());
+            carts_text3.setTextAppearance(R.style.item_wet);
+            carts_text3.setText("     /1L");
+            cart_box.addView(carts_text1);
+            cart_box.addView(carts_text2);
+            cart_box.addView(carts_text3);
+
+            TextView space = new TextView(getApplicationContext());
+            space.setText("                       ");
+            cart_box.addView(space);
+            LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
+            LinearLayout buttonAdd_temp = findViewById(R.id.button_add);
+            buttonAdd.setClickable(true);
+            buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
+            buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
+            buttonAdd.setBackgroundResource(R.drawable.add_button);
+            buttonAdd.setId(i);
+            buttonAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     // Perform action on click
-                    cart.add(recommended.get(v.getId()));
+                    cart.add(database.get(v.getId()));
                     cart.get(cart.size()-1).setAmount(1);
                     TextView recommendations = findViewById(R.id.recommendations_bt);
                     recommendations.setVisibility(View.GONE);
@@ -400,32 +541,71 @@ public class MainActivity extends AppCompatActivity {
                     view_cart_bt.setVisibility(View.VISIBLE);
 
                     LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-                    TextView tv1 = new TextView(getApplicationContext());
-                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    TextView tv = new TextView(getApplicationContext());
+                    textTemplate(tv, (TextView)findViewById(R.id.text_template));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     // params.weight = 1.0f;
-                    int margin = (int) convertDpToPixel(10, getApplicationContext());
-                    params1.setMargins(margin, margin, 0, 0);
-                    params1.gravity = Gravity.LEFT;
-                    tv1.setLayoutParams(params1);
-                    tv1.setForegroundGravity(Gravity.LEFT);
-                    tv1.setBackgroundResource(R.drawable.rounded_corner);
-                    tv1.setText("Added to Cart!");
-                    ll.addView(tv1);
+                    int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+                    params.setMargins(0,0, margin1, 0);
+                    params.gravity = Gravity.LEFT;
+                    tv.setText("Added to Cart!");
+                    ll.addView(tv);
 
 
                 }
+
             });
-            card.addView(bt);
 
+            ImageView shopping_icon = new ImageView(getApplicationContext());
+            ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
+            shopping_icon.setLayoutParams(shopping_icon_temp.getLayoutParams());
+            shopping_icon.setImageResource(R.drawable.ic_shopping_cart);
+            buttonAdd.addView(shopping_icon);
 
-            ll.addView(card);
-        }*/
+            TextView shopping_icon_text = new TextView(getApplicationContext());
+            TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
+            textTemplate(shopping_icon_text, shopping_icon_text_temp);
 
-      ll.addView(card);
-    }
+            shopping_icon_text.setBackgroundResource(0);
+            shopping_icon_text.setText("Add");
 
-    public void handleBuying( LinearLayout ll, String buy_item ){
-        for (int i = 0; i < database.size(); i++) {
+            buttonAdd.addView(shopping_icon_text);
+
+            cart_box.addView(buttonAdd);
+            item_text_box.addView(cart_box);
+            one_item.addView(item_text_box);
+            if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
+                card.addView(one_item);
+            }
+
+        }
+
+        View v2 = new View(getApplicationContext());
+        View v2_temp = findViewById(R.id.card_line);
+        v2.setLayoutParams(v2_temp.getLayoutParams());
+        v2.setBackground(v2_temp.getBackground());
+        card.addView(v2);
+
+        LinearLayout bottomBar = new LinearLayout(getApplicationContext());
+        LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
+        bottomBar.setLayoutParams(bottomBar_temp.getLayoutParams());
+        bottomBar.setOrientation(LinearLayout.HORIZONTAL);
+
+        ImageView bottomBar_icon = new ImageView(getApplicationContext());
+        ImageView bottomBar_icon_temp = findViewById(R.id.bottom_bar_img);
+        bottomBar_icon.setLayoutParams(bottomBar_icon_temp.getLayoutParams());
+        bottomBar_icon.setImageResource(R.drawable.ic_recommend);
+        bottomBar.addView(bottomBar_icon);
+
+        TextView bottomBar_text = new TextView(getApplicationContext());
+        textTemplate(bottomBar_text, (TextView) findViewById(R.id.bottom_bar_text));
+        bottomBar_text.setText("Product Detail");
+        bottomBar.addView(bottomBar_text);
+
+        card.addView(bottomBar);
+
+        ll.addView(card);
+        /*for (int i = 0; i < database.size(); i++) {
             LinearLayout card = new LinearLayout(getApplicationContext());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -497,7 +677,7 @@ public class MainActivity extends AppCompatActivity {
             if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
                 ll.addView(card);
             }
-        }
+        }*/
     }
 
     public void handleMyOrders(LinearLayout ll) {
@@ -577,7 +757,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(edit.getText());
         ll.addView(tv);
 
-        String[] keywords = {"Buy", "Recommend", "My Orders", "View Cart"};
+        String[] keywords = {"buy", "recommend", "my Orders", "view Cart"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
@@ -663,6 +843,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), CartActivity.class);
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
         intent.putExtra("database", database);
+
         intent.putExtra("cart", cart);
         startActivityForResult(intent, 0);
     }

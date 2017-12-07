@@ -41,8 +41,8 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
+        System.out.println("CART IN cartActivity:" + cart);
         drawCart(cart);
-
     }
 
     public void checkOut(View v){
@@ -168,6 +168,7 @@ public class CartActivity extends AppCompatActivity {
                     }
                 });
                 card.addView(plus);
+                if (card != null)
                 linear_scrollview.addView(card);
             }
             TextView price_text = (TextView) findViewById(R.id.cart_price);

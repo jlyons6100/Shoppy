@@ -376,9 +376,6 @@ public class MainActivity extends AppCompatActivity {
         topBar_icon.setImageResource(R.drawable.ic_recommend);
         topBar.addView(topBar_icon);
 
-
-
-
         TextView top_bar_text = new TextView(getApplicationContext());
         textTemplate(top_bar_text, (TextView) findViewById(R.id.top_bar_text));
         top_bar_text.setText("Recommendations");
@@ -497,9 +494,6 @@ public class MainActivity extends AppCompatActivity {
         topBar_icon.setLayoutParams(topBar_icon_temp.getLayoutParams());
         topBar_icon.setImageResource(R.drawable.ic_routine_24dp);
         topBar.addView(topBar_icon);
-
-
-
 
         TextView top_bar_text = new TextView(getApplicationContext());
         textTemplate(top_bar_text, (TextView) findViewById(R.id.top_bar_text));

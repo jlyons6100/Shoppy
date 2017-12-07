@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -20,30 +21,44 @@ import java.util.ArrayList;
 
 public class ReminderActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
-    ArrayList<Shopping_Item> remind= new ArrayList<Shopping_Item>();
+    private ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
+    private ArrayList<Shopping_Item> cart = new ArrayList<Shopping_Item>();
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
         return px;
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent != null)
+            setIntent(intent);
+    }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("database",database);
-        intent.putExtra("cart",remind);
-        setResult(RESULT_OK, intent);
         super.onBackPressed();
+        Log.d("CART", "Cart:");
+        for (int i = 0; i < cart.size(); i++){
+            Log.d("CART", "" + cart.get(i).toString());
+        }
+        Intent openMainActivity= new Intent(ReminderActivity.this, CartActivity.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        openMainActivity.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+        openMainActivity.putExtra("database", database);
+        openMainActivity.putExtra("cart", cart);
+        openMainActivity.putExtra("remind", remind);
+        startActivityIfNeeded(openMainActivity, 0);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
+        setContentView(R.layout.activity_reminder);
+         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
-        //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
+        cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         drawCart(remind);
     }
 
@@ -58,6 +73,19 @@ public class ReminderActivity extends AppCompatActivity {
         intent.putExtra("database", database);
         intent.putExtra("remind", remind);
         startActivityForResult(intent, 0);
+    }
+    public void handleOnClick(View v){
+        cart.add(remind.get(v.getId()));
+        cart.get(cart.size()-1).setAmount(1);
+        Context context = getApplicationContext();
+        CharSequence text = remind.get(v.getId()).getName()+ " added to cart!";
+        remind.remove(v.getId());
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        for (int i = 0; i < cart.size(); i++){
+            Log.d("CART", "After: " + cart.get(i).toString());
+        }
     }
 
     public void drawCart(final ArrayList<Shopping_Item> cart)
@@ -133,111 +161,30 @@ public class ReminderActivity extends AppCompatActivity {
 
             card.addView(item_text_box);
 
-            RelativeLayout amount_bar = new RelativeLayout(getApplicationContext());
-            RelativeLayout amount_bar_temp = findViewById(R.id.amount_bar);
+            TextView amount_bar = new TextView(getApplicationContext());
+            TextView amount_bar_temp = findViewById(R.id.amount_bar);
             amount_bar.setLayoutParams(amount_bar_temp.getLayoutParams());
-
-
-
-            ImageView minus = new ImageView(getApplicationContext());
-            ImageView minus_temp = findViewById(R.id.amount_minus);
-            minus.setLayoutParams(minus_temp.getLayoutParams());
-            minus.setImageResource(R.drawable.ic_remove_circle_black_24dp);
-            amount_bar.addView(minus);
-
-            final TextView num = new TextView(getApplicationContext());
-            TextView amount_num_temp = findViewById(R.id.amount_num);
-//            textTemplate(amount_num, amount_num_temp);
-            num.setLayoutParams(amount_num_temp.getLayoutParams());
-            num.setText("" + cart.get(i).getAmount());
-            num.setGravity(Gravity.CENTER);
-            amount_bar.addView(num);
-
-            ImageView plus = new ImageView(getApplicationContext());
-            ImageView plus_temp = findViewById(R.id.amount_plus);
-            plus.setLayoutParams(plus_temp.getLayoutParams());
-            plus.setImageResource(R.drawable.ic_add_circle_black_24dp);
-            amount_bar.addView(plus);
-
-            minus.setClickable(true);
-            plus.setClickable(true);
-
-//
-//                ImageView minus = new ImageView(getApplicationContext());
-//                int width_minus = (int)convertDpToPixel(30, getApplicationContext());
-//                int height_minus =(int) convertDpToPixel(30, getApplicationContext());
-//                LinearLayout.LayoutParams paramsminus = new LinearLayout.LayoutParams(width_minus, height_minus);
-//                minus.setLayoutParams(paramsminus);
-//                minus.setImageResource(R.mipmap.ic_minus_round);
-            minus.setId(i);
-            minus.setOnClickListener(new View.OnClickListener() {
+            amount_bar.setText("Move to Cart");
+            amount_bar.setTextColor(amount_bar_temp.getTextColors());
+            amount_bar.setClickable(true );
+            amount_bar.setId(i);
+            amount_bar.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
-                    //v.getId() will give you the image id
-                    if (cart.get(v.getId()).getAmount() != 0) {
-                        cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
-                        num.setText("" + cart.get(v.getId()).getAmount());
-                        TextView price_text = (TextView) findViewById(R.id.cart_price);
-                        double total_price = 0;
-                        int amount_of_items = 0;
-                        for (int i = 0; i < cart.size(); i++){
-                            amount_of_items += cart.get(i).getAmount();
-                            total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
-                        }
-                        price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
-                    }
-                    else {
-                        Context context = getApplicationContext();
-                        CharSequence text = "You can't buy a negative amount of an item!";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                    }
+                    handleOnClick(v);
                 }
-            });
-//                card.addView(minus);
-//
-//
-//                card.addView(num);
-//                num.setTextSize(20);
-//
-//                ImageView plus = new ImageView(getApplicationContext());
-//                LinearLayout.LayoutParams paramsplus = new LinearLayout.LayoutParams( width_minus, height_minus);
-//                plus.setLayoutParams(paramsplus);
-//                plus.setImageResource(R.mipmap.ic_plus_round);
-            plus.setId(i);
-            plus.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    //v.getId() will give you the image id
-                    cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() +1);
-                    num.setText( "" +cart.get(v.getId()).getAmount());
-                    TextView price_text = (TextView) findViewById(R.id.cart_price);
-                    double total_price = 0;
-                    int amount_of_items = 0;
-                    for (int i = 0; i < cart.size(); i++){
-                        amount_of_items += cart.get(i).getAmount();
-                        total_price+= (cart.get(i).getAmount()*cart.get(i).getPrice());
-                    }
-                    price_text.setText("$"+total_price+" / "+amount_of_items+ " items");
-                }
-            });
-//                if (card != null)
-            card.addView(amount_bar);
 
-            linear_scrollview_horizontal.addView(card);
+            });
+
+            cart_box.addView(amount_bar);
+
             View v2 = new View(getApplicationContext());
             View v2_temp = findViewById(R.id.card_line);
             v2.setLayoutParams(v2_temp.getLayoutParams());
             v2.setBackground(v2_temp.getBackground());
             card.addView(v2);
+            linear_scrollview_horizontal.addView(card);
         }
-//        TextView price_text = (TextView) findViewById(R.id.cart_price);
-//        double total_price = 0;
-//        int amount_of_items = 0;
-//        for (int i = 0; i < cart.size(); i++){
-//           amount_of_items += cart.get(i).getAmount();
-//           total_price+= (cart.get(i).getPrice()*cart.get(i).getAmount());
-//        }
-//        price_text.setText("$"+total_price+" / "+amount_of_items + " items");
 
     }
 }

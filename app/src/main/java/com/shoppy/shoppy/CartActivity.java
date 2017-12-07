@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -31,6 +32,24 @@ public class CartActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent != null)
+            setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("CART", "Resuming in cart");
+        database = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("database");
+        cart = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("cart");
+        remind = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("remind");
+        Log.d("CART", "Cart:");
+        for (int i = 0; i < cart.size(); i++){
+            Log.d("CART", "" + cart.get(i).toString());
+        }
+    }
+    @Override
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra("database",database);
@@ -47,6 +66,10 @@ public class CartActivity extends AppCompatActivity {
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
+        Log.d("CART", "Cart:");
+        for (int i = 0; i < cart.size(); i++){
+            Log.d("CART", "" + cart.get(i).toString()+" "+cart.size());
+        }
         drawCart(cart, remind);
     }
 
@@ -91,7 +114,19 @@ public class CartActivity extends AppCompatActivity {
                 remind_text.setText(remind.size()+" items might be used up soon");
             }
         }
+        remind_bar.setClickable(true );
+        remind_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
+                intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+                intent.putExtra("database", database);
+                intent.putExtra("cart", cart);
+                intent.putExtra("remind", remind);
+                startActivityForResult(intent, 0);
+            }
 
+        });
         // Item list
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 

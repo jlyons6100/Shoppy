@@ -64,4 +64,8 @@ public class Shopping_Item implements Serializable {
     public void setDaysSinceLastBought(int daysSinceLastBought){this.daysSinceLastBought = daysSinceLastBought;}
 
 
+    public String toString() {
+        return "["+name+" , "+amount+ "]";
+    }
+
 }

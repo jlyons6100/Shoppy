@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -830,7 +831,13 @@ public class MainActivity extends AppCompatActivity {
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
         }
-
+        final ScrollView scr =  findViewById(R.id.previous_text);
+        scr.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scr.fullScroll(scr.FOCUS_DOWN);
+            }
+        },500);
     }
     public void openCart(View v) {
         /*Context context = getApplicationContext();

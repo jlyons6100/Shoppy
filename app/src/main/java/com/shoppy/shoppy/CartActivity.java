@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -48,6 +49,16 @@ public class CartActivity extends AppCompatActivity {
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
         drawCart(cart, remind);
+    }
+
+    public void textTemplate(TextView tx, TextView tx_temp){
+        //tx_temp = findViewById(R.id.text_template);
+        ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
+        tx.setLayoutParams(params);
+        tx.setBackgroundResource(R.drawable.rounded_corner);
+        tx.setTextColor(tx_temp.getTextColors());
+        tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
+        tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
     }
 
     public void checkOut(View v){
@@ -175,7 +186,7 @@ public class CartActivity extends AppCompatActivity {
 
             final TextView num = new TextView(getApplicationContext());
             TextView amount_num_temp = findViewById(R.id.amount_num);
-//            textTemplate(amount_num, amount_num_temp);
+            textTemplate(num, amount_num_temp);
             num.setLayoutParams(amount_num_temp.getLayoutParams());
             num.setText("" + cart.get(i).getAmount());
             num.setGravity(Gravity.CENTER);

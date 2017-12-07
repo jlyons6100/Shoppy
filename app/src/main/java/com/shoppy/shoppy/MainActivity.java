@@ -390,10 +390,6 @@ public class MainActivity extends AppCompatActivity {
                     //Log.d("CART", "CART: " );
                     //Log.d("CART", cart.get(0).getDescription());
                     cart.get(cart.size()-1).setAmount(1);
-                    TextView recommendations = findViewById(R.id.recommendations_bt);
-                    recommendations.setVisibility(View.GONE);
-                    TextView my_orders = findViewById(R.id.my_orders_bt);
-                    my_orders.setVisibility(View.GONE);
 
                     TextView undo_bt = findViewById(R.id.undo_bt);
                     undo_bt.setVisibility(View.VISIBLE);
@@ -413,8 +409,6 @@ public class MainActivity extends AppCompatActivity {
                     tv.setText("Added to Cart!");
                     ll.addView(tv);
                     scrollDownAutomatically();
-
-
                 }
 
             });
@@ -426,8 +420,6 @@ public class MainActivity extends AppCompatActivity {
             v2.setBackground(v2_temp.getBackground());
             card.addView(v2);
         }
-
-
 
         LinearLayout bottomBar = new LinearLayout(getApplicationContext());
         LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
@@ -461,6 +453,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
         ll.addView(card);
+
+        TextView recommendations = findViewById(R.id.recommendations_bt);
+        recommendations.setVisibility(View.GONE);
+        TextView my_orders = findViewById(R.id.my_orders_bt);
+        my_orders.setVisibility(View.GONE);
+
         scrollDownAutomatically();
     }
 

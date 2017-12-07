@@ -169,23 +169,29 @@ public class RecommendationsActivity extends AppCompatActivity {
         return buttonAdd;
     }
 
-    public void drawCart(final ArrayList<Shopping_Item> remind)
+    public void drawCart(final ArrayList<Shopping_Item> recommend)
     {
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 
-        for (int i = 0 ; i < remind.size(); i++) {
+        for (int i = 0 ; i < recommend.size(); i++) {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
-            RelativeLayout buttonAdd = oneItem(remind.get(i), one_item);
+            RelativeLayout buttonAdd = oneItem(recommend.get(i), one_item);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     // Perform action on click
-                    cart.add(remind.get(v.getId()));
+                    cart.add(recommend.get(v.getId()));
                     //Log.d("CART", "CART: " );
                     //Log.d("CART", cart.get(0).getDescription());
                     cart.get(cart.size()-1).setAmount(1);
+
+                    Context context = getApplicationContext();
+                    CharSequence text = recommend.get(v.getId()).getName()+ " added to cart!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
 
             });
@@ -197,5 +203,22 @@ public class RecommendationsActivity extends AppCompatActivity {
             v2.setBackground(v2_temp.getBackground());
             linear_scrollview_horizontal.addView(v2);
         }
+    }
+
+    public void openCart(View v) {
+        /*Context context = getApplicationContext();
+        CharSequence text = "Cart not implemented!";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();*/
+
+        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+        intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+        intent.putExtra("database", database);
+        //Log.d("CART", "Opening cart" + cart.get(0).getDescription() );
+        intent.putExtra("cart", cart);
+        intent.putExtra("remind", remind);
+        intent.putExtra("recommended", recommended);
+        startActivityForResult(intent, 0);
     }
 }

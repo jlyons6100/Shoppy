@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayList<Shopping_Item> order;
             order = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("order");
-            System.out.println(order.get(0).getDescription());
             orders.add(order);
 
 
@@ -142,15 +141,6 @@ public class MainActivity extends AppCompatActivity {
         if (data != null) {
             database = (ArrayList<Shopping_Item>) data.getSerializableExtra("database");
             cart = (ArrayList<Shopping_Item>) data.getSerializableExtra("cart");
-
-            if(data.hasExtra("placedOrder")){
-                       /* Context context = getApplicationContext();
-                        CharSequence text = "Order Placed!";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();*/
-
-            }
         }
 
     }

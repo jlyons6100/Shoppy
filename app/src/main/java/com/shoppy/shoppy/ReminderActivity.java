@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class ReminderActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
-    ArrayList<Shopping_Item> cart= new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> remind= new ArrayList<Shopping_Item>();
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -32,7 +32,7 @@ public class ReminderActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra("database",database);
-        intent.putExtra("cart",cart);
+        intent.putExtra("cart",remind);
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }
@@ -42,9 +42,9 @@ public class ReminderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
-        cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
+        remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
-        drawCart(cart);
+        drawCart(remind);
     }
 
     public void checkOut(View v){
@@ -56,7 +56,7 @@ public class ReminderActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
         intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
         intent.putExtra("database", database);
-        intent.putExtra("cart", cart);
+        intent.putExtra("remind", remind);
         startActivityForResult(intent, 0);
     }
 

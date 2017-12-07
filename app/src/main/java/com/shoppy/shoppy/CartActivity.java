@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class CartActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> cart= new ArrayList<Shopping_Item>();
+    ArrayList<Shopping_Item> remind= new ArrayList<Shopping_Item>();
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -44,8 +45,9 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
+        remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
-        drawCart(cart);
+        drawCart(cart, remind);
     }
 
     public void checkOut(View v){
@@ -61,7 +63,7 @@ public class CartActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    public void drawCart(final ArrayList<Shopping_Item> cart)
+    public void drawCart(final ArrayList<Shopping_Item> cart, final ArrayList<Shopping_Item> remind)
     {
         // Total bar
         double total_price = 0;
@@ -78,7 +80,19 @@ public class CartActivity extends AppCompatActivity {
         total_text3.setText(" / "+amount_of_items + " items");
         Button checkout = findViewById(R.id.total_checkout);
 
+        // Remind bar
+        RelativeLayout remind_bar = findViewById(R.id.remind_bar);
+        if (remind.size()>0) {
+            remind_bar.setVisibility(View.VISIBLE);
+            TextView remind_text = findViewById(R.id.remind_text);
+            if (remind.size()==1)
+                remind_text.setText("1 item might be used up soon");
+            else {
+                remind_text.setText(remind.size()+" items might be used up soon");
+            }
+        }
 
+        // Item list
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 
         LinearLayout one_item_temp = findViewById(R.id.one_item);

@@ -44,127 +44,154 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/cartpage_cart_scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="#FFFFFF">
         <LinearLayout
-            android:id="@+id/cartpage_linear_scrollview"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="50dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <LinearLayout
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="108dp"
-                android:layout_gravity="left"
-                android:orientation="horizontal"
-                android:id="@+id/one_item"
-                >
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginLeft="6dp"
-                    android:src="@drawable/item_1"
-                    android:id="@+id/item_image"/>
-                <!-- item text -->
-                <RelativeLayout
-                    android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:background="#494b60"
+                android:id="@+id/remind_bar">
+                <TextView
+                    android:gravity="center"
+                    android:layout_marginLeft="13dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/rounded_corner"
-                    android:id="@+id/item_text_box">
-                <!-- name -->
+                    android:textColor="#ffffff"
+                    android:text="1 item might be used up soon"
+                    android:id="@+id/remind_text"/>
                 <TextView
-                    android:layout_marginTop="7dp"
-                    style="@style/item_name"
-                    android:text="Milk"
-                    android:id="@+id/item_name"/>
-                <!-- details -->
-                <TextView
-                    android:layout_marginTop="40dp"
-                    style="@style/item_detail"
-                    android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
-                    android:id="@+id/item_detail"/>
-                <!-- price and amount-->
-                <RelativeLayout
-                    android:layout_marginTop="60dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="33dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/rounded_corner"
-                    android:orientation="horizontal"
-                    android:id="@+id/cart_box">
-                <!-- price -->
-                <TextView
-                    style="@style/item_dollar"
-                    android:text="$"
-                    android:layout_alignParentBottom="true"
-                    android:id="@+id/cart_dollar"
-                    />
-                <TextView
-                    style="@style/item_price"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="16dp"
-                    android:id="@+id/cart_price"
-                    android:text="4.98"/>
-                <TextView
-                    style="@style/item_wet"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="72dp"
-                    android:id="@+id/cart_wet"
-                    android:text=" / 1L"/>
-
-                    <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="bottom"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/amount_bar">
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_remove_circle_black_24dp"
-                            android:id="@+id/amount_minus"/>
-                        <TextView
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:text="1"
-                            android:gravity="center"
-                            android:id="@+id/amount_num"/>
-                        <ImageView
-                            android:layout_marginLeft="60dp"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_add_circle_black_24dp"
-                            android:id="@+id/amount_plus"/>
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-            <View
-                android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="#ffffff"
+                    android:text="View >"/>
+            </RelativeLayout>
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/cartpage_cart_scrollview"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#f2f2f2"
-                android:id="@+id/card_line"/>
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+                <LinearLayout
+                    android:id="@+id/cartpage_linear_scrollview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="108dp"
+                        android:layout_gravity="left"
+                        android:orientation="horizontal"
+                        android:id="@+id/one_item"
+                        >
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="11dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginLeft="6dp"
+                            android:src="@drawable/item_1"
+                            android:id="@+id/item_image"/>
+                        <!-- item text -->
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/rounded_corner"
+                            android:id="@+id/item_text_box">
+                            <!-- name -->
+                            <TextView
+                                android:layout_marginTop="7dp"
+                                style="@style/item_name"
+                                android:text="Milk"
+                                android:id="@+id/item_name"/>
+                            <!-- details -->
+                            <TextView
+                                android:layout_marginTop="40dp"
+                                style="@style/item_detail"
+                                android:text="Tuscan Dairy Whole Vitamin D Milk, Gallon"
+                                android:id="@+id/item_detail"/>
+                            <!-- price and amount-->
+                            <RelativeLayout
+                                android:layout_marginTop="60dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="33dp"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/rounded_corner"
+                                android:orientation="horizontal"
+                                android:id="@+id/cart_box">
+                                <!-- price -->
+                                <TextView
+                                    style="@style/item_dollar"
+                                    android:text="$"
+                                    android:layout_alignParentBottom="true"
+                                    android:id="@+id/cart_dollar"
+                                    />
+                                <TextView
+                                    style="@style/item_price"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginLeft="16dp"
+                                    android:id="@+id/cart_price"
+                                    android:text="4.98"/>
+                                <TextView
+                                    style="@style/item_wet"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginLeft="72dp"
+                                    android:id="@+id/cart_wet"
+                                    android:text=" / 1L"/>
+
+                                <RelativeLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:gravity="bottom"
+                                    android:layout_alignParentRight="true"
+                                    android:id="@+id/amount_bar">
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_remove_circle_black_24dp"
+                                        android:id="@+id/amount_minus"/>
+                                    <TextView
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:text="1"
+                                        android:gravity="center"
+                                        android:id="@+id/amount_num"/>
+                                    <ImageView
+                                        android:layout_marginLeft="60dp"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_add_circle_black_24dp"
+                                        android:id="@+id/amount_plus"/>
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#f2f2f2"
+                        android:id="@+id/card_line"/>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
-    </ScrollView>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"

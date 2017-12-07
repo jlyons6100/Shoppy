@@ -31,7 +31,8 @@
         <activity android:name=".ManageAddressesActivity" />
         <activity android:name=".LinkWithStoresActivity" />
         <activity android:name=".OrdersActivity" />
-        <activity android:name=".ReminderActivity"></activity>
+        <activity android:name=".ReminderActivity" />
+        <activity android:name=".RecommendationsActivity"></activity>
     </application>
 
 </manifest>

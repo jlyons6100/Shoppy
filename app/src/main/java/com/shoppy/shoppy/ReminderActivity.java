@@ -3,6 +3,7 @@ package com.shoppy.shoppy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -168,15 +169,17 @@ public class ReminderActivity extends AppCompatActivity {
             amount_bar.setTextColor(amount_bar_temp.getTextColors());
             amount_bar.setClickable(true );
             amount_bar.setId(i);
+            cart_box.addView(amount_bar);
             amount_bar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     handleOnClick(v);
+                     v.setVisibility(View.GONE);
                 }
 
             });
 
-            cart_box.addView(amount_bar);
+
 
             View v2 = new View(getApplicationContext());
             View v2_temp = findViewById(R.id.card_line);

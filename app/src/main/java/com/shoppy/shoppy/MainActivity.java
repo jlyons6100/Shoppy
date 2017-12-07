@@ -246,6 +246,114 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public  RelativeLayout oneItem(Shopping_Item item, LinearLayout one_item) {
+        LinearLayout one_item_temp = findViewById(R.id.one_item);
+        one_item.setLayoutParams(one_item_temp.getLayoutParams());
+        one_item.setOrientation(LinearLayout.HORIZONTAL);
+
+        // Item image
+        ImageView item_img = new ImageView(getApplicationContext());
+        ImageView item_img_temp = findViewById(R.id.item_image);
+        item_img.setLayoutParams(item_img_temp.getLayoutParams());
+        Context c = getApplicationContext();
+        int id = c.getResources().getIdentifier("drawable/" + item.getImage(), null, c.getPackageName());
+        item_img.setImageResource(id);
+        one_item.addView(item_img);
+
+        // Item text
+        RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
+        RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
+        item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
+        item_text_box.setBackgroundResource(R.drawable.rounded_corner);
+
+        // Item text -- name
+        TextView item_name = new TextView(getApplicationContext());
+        item_name.setTextAppearance(R.style.item_name);
+        item_name.setText(item.getName());
+        item_text_box.addView(item_name);
+
+        // Item text -- reason
+        LinearLayout item_reason = new LinearLayout(getApplicationContext());
+        LinearLayout item_reason_temp = findViewById(R.id.item_reason);
+        item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
+        item_reason.setOrientation(LinearLayout.HORIZONTAL);
+
+        ImageView item_icon = new ImageView(getApplicationContext());
+        ImageView item_icon_temp = findViewById(R.id.item_icon);
+        item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
+        item_icon.setImageResource(R.drawable.ic_reason_friend);
+        item_reason.addView(item_icon);
+
+        TextView item_icon_text = new TextView(getApplicationContext());
+        item_icon_text.setTextAppearance(R.style.item_reason);
+        item_icon_text.setText("Put the reason here");
+        item_reason.addView(item_icon_text);
+
+        item_text_box.addView(item_reason);
+
+        // Item text -- detail
+        TextView item_detail = new TextView(getApplicationContext());
+        TextView detail_temp = findViewById(R.id.item_detail);
+        item_detail.setLayoutParams(detail_temp.getLayoutParams());
+        item_detail.setTextAppearance(R.style.item_detail);
+        item_detail.setText(item.getDescription());
+        item_text_box.addView(item_detail);
+
+        // Item text -- price and add
+        RelativeLayout cart_box = new RelativeLayout(getApplicationContext()); //add to item text box
+        RelativeLayout cart_box_temp = findViewById(R.id.cart_box);
+        cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
+        cart_box.setBackgroundResource(R.drawable.rounded_corner);
+
+        TextView carts_text1 = new TextView(getApplicationContext());
+        TextView dollar_temp = findViewById(R.id.cart_dollar);
+        carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
+        carts_text1.setTextAppearance(R.style.item_dollar);
+        carts_text1.setText("$");
+        TextView carts_text2 = new TextView(getApplicationContext());
+        TextView price_temp = findViewById(R.id.cart_price);
+        carts_text2.setLayoutParams(price_temp.getLayoutParams());
+        carts_text2.setTextAppearance(R.style.item_price);
+        carts_text2.setText(""+item.getPrice());
+        TextView carts_text3 = new TextView(getApplicationContext());
+        TextView wet_temp = findViewById(R.id.cart_wet);
+        carts_text3.setLayoutParams(wet_temp.getLayoutParams());
+        carts_text3.setTextAppearance(R.style.item_wet);
+        carts_text3.setText(" / 1L");
+        cart_box.addView(carts_text1);
+        cart_box.addView(carts_text2);
+        cart_box.addView(carts_text3);
+
+        RelativeLayout buttonAdd = new RelativeLayout(getApplicationContext());
+        RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
+        buttonAdd.setClickable(true);
+
+        buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
+        buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
+        buttonAdd.setBackgroundResource(R.drawable.add_button);
+
+
+        ImageView shopping_icon = new ImageView(getApplicationContext());
+        ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
+        shopping_icon.setLayoutParams(shopping_icon_temp.getLayoutParams());
+        shopping_icon.setImageResource(R.drawable.ic_shopping_cart);
+        buttonAdd.addView(shopping_icon);
+
+        TextView shopping_icon_text = new TextView(getApplicationContext());
+        TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
+        textTemplate(shopping_icon_text, shopping_icon_text_temp);
+
+        shopping_icon_text.setBackgroundResource(0);
+        shopping_icon_text.setText("Add");
+        buttonAdd.addView(shopping_icon_text);
+
+        cart_box.addView(buttonAdd);
+        item_text_box.addView(cart_box);
+        one_item.addView(item_text_box);
+
+        return buttonAdd;
+    }
+
     public void handleRecommend( LinearLayout ll ){
         LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
@@ -283,90 +391,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < recommended.size(); i++) {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
-            LinearLayout one_item_temp = findViewById(R.id.one_item);
-            one_item.setLayoutParams(one_item_temp.getLayoutParams());
-            one_item.setOrientation(LinearLayout.HORIZONTAL);
-
-            // Item image
-            ImageView item_img = new ImageView(getApplicationContext());
-            ImageView item_img_temp = findViewById(R.id.item_image);
-            item_img.setLayoutParams(item_img_temp.getLayoutParams());
-            Context c = getApplicationContext();
-            int id = c.getResources().getIdentifier("drawable/" + recommended.get(i).getImage(), null, c.getPackageName());
-            item_img.setImageResource(id);
-            one_item.addView(item_img);
-
-            // Item text
-            RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
-            RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
-            item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
-            item_text_box.setBackgroundResource(R.drawable.rounded_corner);
-
-            // Item text -- name
-            TextView item_name = new TextView(getApplicationContext());
-            item_name.setTextAppearance(R.style.item_name);
-            item_name.setText(recommended.get(i).getName());
-            item_text_box.addView(item_name);
-
-            // Item text -- reason
-            LinearLayout item_reason = new LinearLayout(getApplicationContext());
-            LinearLayout item_reason_temp = findViewById(R.id.item_reason);
-            item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
-            item_reason.setOrientation(LinearLayout.HORIZONTAL);
-
-            ImageView item_icon = new ImageView(getApplicationContext());
-            ImageView item_icon_temp = findViewById(R.id.item_icon);
-            item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
-            item_icon.setImageResource(R.drawable.ic_reason_friend);
-            item_reason.addView(item_icon);
-
-            TextView item_icon_text = new TextView(getApplicationContext());
-            item_icon_text.setTextAppearance(R.style.item_reason);
-            item_icon_text.setText("Put the reason here");
-            item_reason.addView(item_icon_text);
-
-            item_text_box.addView(item_reason);
-
-            // Item text -- detail
-            TextView item_detail = new TextView(getApplicationContext());
-            TextView detail_temp = findViewById(R.id.item_detail);
-            item_detail.setLayoutParams(detail_temp.getLayoutParams());
-            item_detail.setTextAppearance(R.style.item_detail);
-            item_detail.setText(recommended.get(i).getDescription());
-            item_text_box.addView(item_detail);
-
-            // Item text -- price and add
-            RelativeLayout cart_box = new RelativeLayout(getApplicationContext()); //add to item text box
-            RelativeLayout cart_box_temp = findViewById(R.id.cart_box);
-            cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
-            cart_box.setBackgroundResource(R.drawable.rounded_corner);
-
-            TextView carts_text1 = new TextView(getApplicationContext());
-            TextView dollar_temp = findViewById(R.id.cart_dollar);
-            carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
-            carts_text1.setTextAppearance(R.style.item_dollar);
-            carts_text1.setText("$");
-            TextView carts_text2 = new TextView(getApplicationContext());
-            TextView price_temp = findViewById(R.id.cart_price);
-            carts_text2.setLayoutParams(price_temp.getLayoutParams());
-            carts_text2.setTextAppearance(R.style.item_price);
-            carts_text2.setText(""+recommended.get(i).getPrice());
-            TextView carts_text3 = new TextView(getApplicationContext());
-            TextView wet_temp = findViewById(R.id.cart_wet);
-            carts_text3.setLayoutParams(wet_temp.getLayoutParams());
-            carts_text3.setTextAppearance(R.style.item_wet);
-            carts_text3.setText(" / 1L");
-            cart_box.addView(carts_text1);
-            cart_box.addView(carts_text2);
-            cart_box.addView(carts_text3);
-
-            RelativeLayout buttonAdd = new RelativeLayout(getApplicationContext());
-            RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
-            buttonAdd.setClickable(true);
-
-            buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
-            buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
-            buttonAdd.setBackgroundResource(R.drawable.add_button);
+            RelativeLayout buttonAdd = oneItem(recommended.get(i), one_item);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
 
@@ -405,24 +430,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
-
-            ImageView shopping_icon = new ImageView(getApplicationContext());
-            ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
-            shopping_icon.setLayoutParams(shopping_icon_temp.getLayoutParams());
-            shopping_icon.setImageResource(R.drawable.ic_shopping_cart);
-            buttonAdd.addView(shopping_icon);
-
-            TextView shopping_icon_text = new TextView(getApplicationContext());
-            TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
-            textTemplate(shopping_icon_text, shopping_icon_text_temp);
-
-            shopping_icon_text.setBackgroundResource(0);
-            shopping_icon_text.setText("Add");
-            buttonAdd.addView(shopping_icon_text);
-
-            cart_box.addView(buttonAdd);
-            item_text_box.addView(cart_box);
-            one_item.addView(item_text_box);
 
             card.addView(one_item);
             View v2 = new View(getApplicationContext());
@@ -492,79 +499,8 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < database.size(); i++) {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
-            LinearLayout one_item_temp = findViewById(R.id.one_item);
-            one_item.setLayoutParams(one_item_temp.getLayoutParams());
-            one_item.setOrientation(LinearLayout.HORIZONTAL);
+            RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
 
-            ImageView item_img = new ImageView(getApplicationContext());
-            ImageView item_img_temp = findViewById(R.id.item_image);
-            item_img.setLayoutParams(item_img_temp.getLayoutParams());
-            Context c = getApplicationContext();
-            int id = c.getResources().getIdentifier("drawable/" + database.get(i).getImage(), null, c.getPackageName());
-            item_img.setImageResource(id);
-            one_item.addView(item_img);
-
-            RelativeLayout item_text_box = new RelativeLayout(getApplicationContext());
-            RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
-            item_text_box.setLayoutParams(item_text_box_temp.getLayoutParams());
-            item_text_box.setBackgroundResource(R.drawable.rounded_corner);
-//            item_text_box.setOrientation(LinearLayout.VERTICAL);
-
-            TextView item_name = new TextView(getApplicationContext());
-            item_name.setTextAppearance(R.style.item_name);
-            item_name.setText(database.get(i).getName());
-            item_text_box.addView(item_name);
-
-            LinearLayout item_reason = new LinearLayout(getApplicationContext());
-            LinearLayout item_reason_temp = findViewById(R.id.item_reason);
-            item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
-            item_reason.setOrientation(LinearLayout.HORIZONTAL);
-
-            ImageView item_icon = new ImageView(getApplicationContext());
-            ImageView item_icon_temp = findViewById(R.id.item_icon);
-            item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
-            item_icon.setImageResource(R.drawable.ic_reason_friend);
-            item_reason.addView(item_icon);
-
-            TextView item_icon_text = new TextView(getApplicationContext());
-            item_icon_text.setTextAppearance(R.style.item_reason);
-            item_icon_text.setText("Put the reason here");
-            item_reason.addView(item_icon_text);
-
-            item_text_box.addView(item_reason);
-
-            TextView item_detail = new TextView(getApplicationContext());
-            item_detail.setTextAppearance(R.style.item_detail);
-            item_detail.setText(database.get(i).getDescription());
-            item_text_box.addView(item_detail);
-
-            LinearLayout cart_box = new LinearLayout(getApplicationContext()); //add to item text box
-            LinearLayout cart_box_temp = findViewById(R.id.cart_box);
-            cart_box.setLayoutParams(cart_box_temp.getLayoutParams());
-            cart_box.setBackgroundResource(R.drawable.rounded_corner);
-
-            TextView carts_text1 = new TextView(getApplicationContext());
-            carts_text1.setTextAppearance(R.style.item_dollar);
-            carts_text1.setText("$    ");
-            TextView carts_text2 = new TextView(getApplicationContext());
-            carts_text2.setTextAppearance(R.style.item_price);
-            carts_text2.setText(""+database.get(i).getPrice());
-            TextView carts_text3 = new TextView(getApplicationContext());
-            carts_text3.setTextAppearance(R.style.item_wet);
-            carts_text3.setText("     /1L");
-            cart_box.addView(carts_text1);
-            cart_box.addView(carts_text2);
-            cart_box.addView(carts_text3);
-
-            TextView space = new TextView(getApplicationContext());
-            space.setText("                       ");
-            cart_box.addView(space);
-            LinearLayout buttonAdd = new LinearLayout(getApplicationContext());
-            RelativeLayout buttonAdd_temp = findViewById(R.id.button_add);
-            buttonAdd.setClickable(true);
-            buttonAdd.setPadding(buttonAdd_temp.getPaddingLeft(), buttonAdd_temp.getPaddingTop(), buttonAdd_temp.getPaddingRight(), buttonAdd_temp.getPaddingBottom());
-            buttonAdd.setLayoutParams(buttonAdd_temp.getLayoutParams());
-            buttonAdd.setBackgroundResource(R.drawable.add_button);
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -601,24 +537,6 @@ public class MainActivity extends AppCompatActivity {
 
             });
 
-            ImageView shopping_icon = new ImageView(getApplicationContext());
-            ImageView shopping_icon_temp = findViewById(R.id.shopping_icon);
-            shopping_icon.setLayoutParams(shopping_icon_temp.getLayoutParams());
-            shopping_icon.setImageResource(R.drawable.ic_shopping_cart);
-            buttonAdd.addView(shopping_icon);
-
-            TextView shopping_icon_text = new TextView(getApplicationContext());
-            TextView shopping_icon_text_temp = findViewById(R.id.shopping_icon_text);
-            textTemplate(shopping_icon_text, shopping_icon_text_temp);
-
-            shopping_icon_text.setBackgroundResource(0);
-            shopping_icon_text.setText("Add");
-
-            buttonAdd.addView(shopping_icon_text);
-
-            cart_box.addView(buttonAdd);
-            item_text_box.addView(cart_box);
-            one_item.addView(item_text_box);
             if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
                 card.addView(one_item);
             }

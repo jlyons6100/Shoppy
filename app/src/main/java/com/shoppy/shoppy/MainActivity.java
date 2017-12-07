@@ -461,6 +461,20 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.addView(bottomBar_text);
 
         card.addView(bottomBar);
+        bottomBar.setClickable(true );
+        bottomBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecommendationsActivity.class);
+                intent.putExtra("mEmail", getIntent().getStringExtra("mEmail"));
+                intent.putExtra("database", database);
+                intent.putExtra("cart", cart);
+                intent.putExtra("remind", remind);
+                intent.putExtra("recommended", recommended);
+                startActivityForResult(intent, 0);
+            }
+
+        });
         ll.addView(card);
         scrollDownAutomatically();
     }
@@ -567,8 +581,8 @@ public class MainActivity extends AppCompatActivity {
         textTemplate(bottomBar_text, (TextView) findViewById(R.id.bottom_bar_text));
         bottomBar_text.setText("Product Detail");
         bottomBar.addView(bottomBar_text);
-
         card.addView(bottomBar);
+
 
         ll.addView(card);
         scrollDownAutomatically();
@@ -811,6 +825,7 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("CART", "Opening cart" + cart.get(0).getDescription() );
         intent.putExtra("cart", cart);
         intent.putExtra("remind", remind);
+        intent.putExtra("recommended", recommended);
         startActivityForResult(intent, 0);
     }
 

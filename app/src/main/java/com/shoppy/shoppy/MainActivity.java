@@ -49,13 +49,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> remind = new ArrayList<Shopping_Item>();
     ArrayList<ArrayList<Shopping_Item>> orders = new ArrayList<ArrayList<Shopping_Item>>();
 
-
-
     public void textTemplate(TextView tx, TextView tx_temp){
         //tx_temp = findViewById(R.id.text_template);
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
-        tx.setBackgroundResource(R.drawable.rounded_corner);
+        tx.setBackground(tx_temp.getBackground());
         tx.setTextColor(tx_temp.getTextColors());
         tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
         tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
@@ -694,19 +692,11 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
         TextView tv = new TextView(this);
-        textTemplate(tv, (TextView)findViewById(R.id.text_template));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        // params.weight = 1.0f;
-        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
-        params.setMargins(0,0, margin1, 0);
-        params.gravity = Gravity.RIGHT;
+        TextView tv_temp = findViewById(R.id.text_template_in);
+        textTemplate(tv, tv_temp);
 
-        tv.setLayoutParams(params);
-        tv.setForegroundGravity(Gravity.RIGHT);
-        tv.setBackgroundResource(R.drawable.rounded_corner);
         tv.setText(edit.getText());
         ll.addView(tv);
-        scrollDownAutomatically();
 
         String[] keywords = {"buy", "recommend", "my orders", "view cart", "undo", "modify number"};
         String text = edit.getText().toString();
@@ -734,7 +724,6 @@ public class MainActivity extends AppCompatActivity {
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
-            scrollDownAutomatically();
         }
         else if (matches == 1){
             TextView tv1 = new TextView(this);
@@ -756,9 +745,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tv1.setText("According to your shopping history, I recommend this:");
             }
-
             ll.addView(tv1);
-            scrollDownAutomatically();
 
             if(index == 0)
                 handleBuying(ll, bought_item);
@@ -782,8 +769,9 @@ public class MainActivity extends AppCompatActivity {
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
-            scrollDownAutomatically();
         }
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollDownAutomatically();
     }
 

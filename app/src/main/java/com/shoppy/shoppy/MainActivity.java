@@ -185,8 +185,29 @@ public class MainActivity extends AppCompatActivity {
         item3.setAmount(-1);
         item3.setDaysSinceLastBought(10);
         database.add(item3);
-
         remind.add(item3);
+
+        Shopping_Item item4 = new Shopping_Item();
+        item4.setName("Pencils");
+        item4.setImage("item_4");
+        item4.setPrice(5.95);
+        item4.setDescription("Ticonderoga graphite #2 pencil");
+        item4.setItemID(1);
+        item4.setAmount(-1);
+        item4.setDaysSinceLastBought(2);
+        database.add(item4);
+        recommended.add(item4);
+
+        Shopping_Item item5 = new Shopping_Item();
+        item5.setName("Toothpaste");
+        item5.setImage("item_5");
+        item5.setPrice(2.67);
+        item5.setDescription("Crest whitening toothpaste");
+        item5.setItemID(1);
+        item5.setAmount(-1);
+        item5.setDaysSinceLastBought(2);
+        database.add(item5);
+        recommended.add(item5);
     }
 
     public void handleRemind( LinearLayout ll ){
@@ -404,13 +425,14 @@ public class MainActivity extends AppCompatActivity {
             one_item.addView(item_text_box);
 
             card.addView(one_item);
+            View v2 = new View(getApplicationContext());
+            View v2_temp = findViewById(R.id.card_line);
+            v2.setLayoutParams(v2_temp.getLayoutParams());
+            v2.setBackground(v2_temp.getBackground());
+            card.addView(v2);
         }
 
-        View v2 = new View(getApplicationContext());
-        View v2_temp = findViewById(R.id.card_line);
-        v2.setLayoutParams(v2_temp.getLayoutParams());
-        v2.setBackground(v2_temp.getBackground());
-        card.addView(v2);
+
 
         LinearLayout bottomBar = new LinearLayout(getApplicationContext());
         LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);

@@ -79,6 +79,13 @@
                 android:text="Hi! I'm your shopping assistant, Shoppy."
                 android:id="@+id/text_template"/>
 
+            <TextView
+                android:visibility="gone"
+                style="@style/chat_text_style_in"
+                android:background="@drawable/rounded_corner_in"
+                android:text="Great, nice to meet you."
+                android:id="@+id/text_template_in"/>
+
             <!-- Recommendations -->
             <LinearLayout
                 android:visibility="gone"

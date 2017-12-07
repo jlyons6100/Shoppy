@@ -55,7 +55,7 @@ public class CartActivity extends AppCompatActivity {
         //tx_temp = findViewById(R.id.text_template);
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
-        tx.setBackgroundResource(R.drawable.rounded_corner);
+        tx.setBackground(tx_temp.getBackground());
         tx.setTextColor(tx_temp.getTextColors());
         tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
         tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());

@@ -41,12 +41,12 @@
                 />
 
             <ImageView
-            android:onClick="openAccount"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_height="40dp"
-            android:layout_width="40dp"
-            android:src="@mipmap/ic_account_foreground"/>
+                android:onClick="openAccount"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/ic_account_foreground"/>
             <ImageView
                 android:onClick="openCart"
                 android:layout_centerVertical="true"
@@ -64,7 +64,8 @@
         android:fillViewport="true"
         android:layout_marginTop="55dp"
         android:paddingBottom="30dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        >
         <LinearLayout
 
             android:id="@+id/linear_scrollview"
@@ -80,6 +81,7 @@
 
             <!-- Recommendations -->
             <LinearLayout
+
                 android:background="@drawable/rounded_corner"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -199,7 +201,6 @@
                                 android:layout_height="23dp"
                                 android:paddingLeft="11dp"
                                 android:paddingRight="15dp"
-                                android:layout_alignParentRight="true"
                                 android:background="@drawable/add_button"
                                 android:orientation="horizontal"
                                 >
@@ -429,13 +430,16 @@
                     android:layout_gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/bottom_bar">
                     <ImageView
                         android:layout_marginLeft="5dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
-                        android:src="@drawable/ic_arrow_forward_black_24dp" />
+                        android:src="@drawable/ic_arrow_forward_black_24dp"
+                        android:id="@+id/bottom_bar_img"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -443,7 +447,9 @@
                         android:textSize="12sp"
                         android:fontFamily="sans-serif"
                         android:textColor="#515151"
-                        android:text="More recommendations"/>
+                        android:text="More recommendations"
+                        android:id="@+id/bottom_bar_text"
+                        />
                 </LinearLayout>
             </LinearLayout>
             <!-- Routine Buy -->
@@ -646,14 +652,14 @@
         </LinearLayout>
 
         <ImageView
-        android:onClick="openCamera"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="Text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:src="@mipmap/ic_camera_foreground"
-        android:id="@+id/camera"/>
+            android:onClick="openCamera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="Text"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_camera_foreground"
+            android:id="@+id/camera"/>
         <ImageView
             android:onClick="openMicrophone"
             android:layout_width="40dp"
@@ -684,6 +690,6 @@
 
 
     </RelativeLayout
->
+        >
 
 </android.support.constraint.ConstraintLayout>

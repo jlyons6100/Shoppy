@@ -400,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView bottomBar_icon = new ImageView(getApplicationContext());
         ImageView bottomBar_icon_temp = findViewById(R.id.bottom_bar_img);
         bottomBar_icon.setLayoutParams(bottomBar_icon_temp.getLayoutParams());
-        bottomBar_icon.setImageResource(R.drawable.ic_recommend);
+        bottomBar_icon.setImageResource(R.drawable.ic_arrow_forward_black_24dp);
         bottomBar.addView(bottomBar_icon);
 
         TextView bottomBar_text = new TextView(getApplicationContext());
@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView topBar_icon = new ImageView(getApplicationContext());
         ImageView topBar_icon_temp = findViewById(R.id.top_bar_icon);
         topBar_icon.setLayoutParams(topBar_icon_temp.getLayoutParams());
-        topBar_icon.setImageResource(R.drawable.ic_recommend);
+        topBar_icon.setImageResource(R.drawable.ic_routine_24dp);
         topBar.addView(topBar_icon);
 
 
@@ -595,7 +595,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView bottomBar_icon = new ImageView(getApplicationContext());
         ImageView bottomBar_icon_temp = findViewById(R.id.bottom_bar_img);
         bottomBar_icon.setLayoutParams(bottomBar_icon_temp.getLayoutParams());
-        bottomBar_icon.setImageResource(R.drawable.ic_recommend);
+        bottomBar_icon.setImageResource(R.drawable.ic_arrow_forward_black_24dp);
         bottomBar.addView(bottomBar_icon);
 
         TextView bottomBar_text = new TextView(getApplicationContext());

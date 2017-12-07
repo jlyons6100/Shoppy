@@ -1,5 +1,6 @@
 package com.shoppy.shoppy;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -637,66 +639,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleMyOrders(LinearLayout ll) {
-        if (orders.size() == 0){
-            LinearLayout card = new LinearLayout(getApplicationContext());
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = (int) convertDpToPixel(10, getApplicationContext());
-            layoutParams.setMargins(margin, margin, 0, 0);
-            card.setLayoutParams(layoutParams);
-            card.setOrientation(LinearLayout.HORIZONTAL);
-            int width = (int) convertDpToPixel(50, getApplicationContext());
-            int height = (int) convertDpToPixel(50, getApplicationContext());
+        TextView tv = new TextView(getApplicationContext());
+        textTemplate(tv, (TextView)findViewById(R.id.text_template));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        // params.weight = 1.0f;
+        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+        params.setMargins(0,0, margin1, 0);
+        params.gravity = Gravity.LEFT;
+        tv.setText("Opening Orders!");
+        ll.addView(tv);
+        scrollDownAutomatically();
+        Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
 
-            TextView text1 = new TextView(getApplicationContext());
-            LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
-            parmsText.setMargins(margin, 0, 0, 0);
-            text1.setLayoutParams(parmsText);
-            text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
-            text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
-            text1.setText("No Recent Orders");
-            card.addView(text1);
-            ll.addView(card);
-            scrollDownAutomatically();
-        }
-        for (int i = 0; i < orders.size(); i++) {
-            for (int j = 0; j < orders.get(i).size(); j++)
-            {
-                LinearLayout card = new LinearLayout(getApplicationContext());
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                int margin = (int) convertDpToPixel(10, getApplicationContext());
-                layoutParams.setMargins(margin, margin, 0, 0);
-                card.setLayoutParams(layoutParams);
-                card.setOrientation(LinearLayout.HORIZONTAL);
+        startActivityForResult(intent, 0);
 
 
-                ImageView image = new ImageView(getApplicationContext());
-                int width = (int) convertDpToPixel(50, getApplicationContext());
-                int height = (int) convertDpToPixel(50, getApplicationContext());
-                LinearLayout.LayoutParams parmsImage = new LinearLayout.LayoutParams(width, height);
-                image.setLayoutParams(parmsImage);
-
-                Context c = getApplicationContext();
-                int id = c.getResources().getIdentifier("drawable/" + orders.get(i).get(j).getImage(), null, c.getPackageName());
-                image.setImageResource(id);
-                card.addView(image);
-
-                TextView text1 = new TextView(getApplicationContext());
-                LinearLayout.LayoutParams parmsText = new LinearLayout.LayoutParams(width * 4, height * 2);
-                parmsText.setMargins(margin, 0, 0, 0);
-                text1.setLayoutParams(parmsText);
-                text1.setWidth((int) convertDpToPixel(175, getApplicationContext()));
-                text1.setHeight((int) convertDpToPixel(75, getApplicationContext()));
-                text1.setText(orders.get(i).get(j).getName() + "-" + orders.get(i).get(j).getDescription() + "\n$" + orders.get(i).get(j).getPrice()
-                        + "\n" + "Last bought " + (orders.get(i).get(j).getDaysSinceLastBought() + " days ago"));
-                card.addView(text1);
-                ll.addView(card);
-                scrollDownAutomatically();
-            }
-        }
     }
 
+    public void handleUndo(LinearLayout ll){
+        TextView tv = new TextView(getApplicationContext());
+        textTemplate(tv, (TextView)findViewById(R.id.text_template));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        // params.weight = 1.0f;
+        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+        params.setMargins(0,0, margin1, 0);
+        params.gravity = Gravity.LEFT;
+        if (cart.size() > 0) {
+            tv.setText("Moved " + cart.get(cart.size() - 1).getName() + " out of cart!");
+            cart.remove(cart.size() - 1);
+        }
+        else{
+            tv.setText("You can't remove nothing");
+        }
+        ll.addView(tv);
+        scrollDownAutomatically();
+
+    }
+
+    public void handleModifyNumber(LinearLayout ll){
+        TextView tv = new TextView(getApplicationContext());
+        textTemplate(tv, (TextView)findViewById(R.id.text_template));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        // params.weight = 1.0f;
+        int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+        params.setMargins(0,0, margin1, 0);
+        params.gravity = Gravity.LEFT;
+        //tv.setText("Enter number of: "+cart.get(cart.size()-1).getName());
+        tv.setText("Modify numbers in the shopping cart");
+        ll.addView(tv);
+        openCart(null);
+        scrollDownAutomatically();
+    }
     public void handleEditReturn(View v) {
         EditText edit = (EditText) findViewById(R.id.edit_text);
 
@@ -716,7 +709,7 @@ public class MainActivity extends AppCompatActivity {
         ll.addView(tv);
         scrollDownAutomatically();
 
-        String[] keywords = {"buy", "recommend", "my Orders", "view Cart"};
+        String[] keywords = {"buy", "recommend", "my orders", "view cart", "undo", "modify number"};
         String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
@@ -750,12 +743,8 @@ public class MainActivity extends AppCompatActivity {
             String bought_item = "";
 
             if (index > 0) {
-                if (index != 1) {
-                    tv1.setText(keywords[index] + ":");
-                }
-                else {
+
                     tv1.setText("Here you go" + ":");
-                }
             }
             else{
                 String[] strings  = text.split(" ", 2);
@@ -777,8 +766,11 @@ public class MainActivity extends AppCompatActivity {
             else if(index == 1)
                 handleRecommend(ll);
             else if(index == 2)
-                handleMyOrders(ll);
-
+                handleMyOrders(ll); //3 is above all this : if (index == 3) openCart(null);
+            else if(index == 4)
+                    handleUndo(ll);
+            else if(index == 5)
+                handleModifyNumber(ll);
             text_edit.setText("");
         }
         else {

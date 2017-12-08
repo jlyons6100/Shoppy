@@ -24,7 +24,7 @@
             <TextView
                 android:id="@+id/manage_addresses_text"
                 android:textColor="#FFFF"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

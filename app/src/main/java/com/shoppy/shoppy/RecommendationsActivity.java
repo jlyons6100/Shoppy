@@ -55,7 +55,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         recommended = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("recommended");
-        drawCart(recommended);
+        drawCart(database);
     }
 
     public void textTemplate(TextView tx, TextView tx_temp){
@@ -202,18 +202,20 @@ public class RecommendationsActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    int added = 0;
+                    Context context = getApplicationContext();
+                    CharSequence text = recommend.get(v.getId()).getName()+ " added to cart!";
                     if (!containsItem( recommend.get(v.getId()).getItemID(), cart)) {
                         cart.add(recommend.get(v.getId()));
                         cart.get(cart.size() - 1).setAmount(1);
-                        added = 1;
+                    } else {
+                        String name = recommend.get(v.getId()).getName();
+                        for (int i=0; i<cart.size(); i++) {
+                            if (cart.get(i).getName().equals(name)) {
+                                cart.get(i).setAmount(cart.get(i).getAmount()+1);
+                            }
+                            text = "One more " + name.toString().toLowerCase() + " added to cart!";
+                        }
                     }
-
-                    Context context = getApplicationContext();
-
-                    CharSequence text = recommend.get(v.getId()).getName()+ " added to cart!";
-                    if (added != 1)
-                        text = recommend.get(v.getId()).getName()+ " already in cart!";
 
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);

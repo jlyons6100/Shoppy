@@ -227,7 +227,8 @@ public class CartActivity extends AppCompatActivity {
 
             // Item text -- name
             TextView item_name = new TextView(getApplicationContext());
-            item_name.setLayoutParams(name_temp.getLayoutParams());
+            RelativeLayout.LayoutParams copy = new RelativeLayout.LayoutParams((ViewGroup.LayoutParams)name_temp.getLayoutParams());
+            item_name.setLayoutParams(copy);
             item_name.setTextAppearance(getApplicationContext(),R.style.item_name);
             item_name.setText(cart.get(i).getName());
             item_text_box.addView(item_name);

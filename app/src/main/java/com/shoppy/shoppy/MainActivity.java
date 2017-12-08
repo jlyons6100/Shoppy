@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import android.graphics.drawable.Drawable;
+import android.view.Window;
 
 public class MainActivity extends AppCompatActivity {
     public static float convertDpToPixel(float dp, Context context){
@@ -69,22 +70,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-//                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
-//                .setFontAttrId(R.attr.fontPath)
-//                .build()
-//        );
-
-
-        //Log.d("CART", "Cart errors printing");
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        this.getWindow().setStatusBarColor(Color.parseColor("#f27348"));
-
-
-
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        final Window window = this.getWindow();
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.parseColor("#f27348"));
 
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -94,11 +84,14 @@ public class MainActivity extends AppCompatActivity {
         createDatabase();
 
         text_edit = (EditText) findViewById(R.id.edit_text);
+
         text_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                     handleEditReturn(text_edit);
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
                     return true;
                 }
                 return false;
@@ -428,12 +421,21 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    int added = 0;
+                    TextView tv = new TextView(getApplicationContext());
+                    textTemplate(tv, (TextView)findViewById(R.id.text_template));
                     if (!containsItem( recommended.get(v.getId()).getItemID(), cart)) {
                         cart.add(recommended.get(v.getId()));
                         cart.get(cart.size() - 1).setAmount(1);
-                        added = 1;
+                        tv.setText(name + " added to cart!");
+                    } else {
+                        for (int i=0; i<cart.size(); i++) {
+                            if (cart.get(i).getName().equals(name)) {
+                                cart.get(i).setAmount(cart.get(i).getAmount()+1);
+                            }
+                            tv.setText("One more " + name.toString().toLowerCase() + " added to cart!");
+                        }
                     }
+
                     TextView recommendations = findViewById(R.id.recommendations_bt);
                     recommendations.setVisibility(View.GONE);
                     TextView my_orders = findViewById(R.id.my_orders_bt);
@@ -447,18 +449,11 @@ public class MainActivity extends AppCompatActivity {
                     view_cart_bt.setVisibility(View.VISIBLE);
 
                     LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-                    TextView tv = new TextView(getApplicationContext());
-                    textTemplate(tv, (TextView)findViewById(R.id.text_template));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     // params.weight = 1.0f;
                     int margin1 = (int) convertDpToPixel(10, getApplicationContext());
                     params.setMargins(0,0, margin1, 0);
                     params.gravity = Gravity.LEFT;
-
-                    if (added ==1)
-                        tv.setText(name + " added to cart!");
-                    else
-                        tv.setText(name + " already in cart!");
 
                     ll.addView(tv);
                     scrollDownAutomatically();
@@ -523,7 +518,7 @@ public class MainActivity extends AppCompatActivity {
         if (buy_item.isEmpty()) {
             TextView tv1 = new TextView(this);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
-            tv1.setText("Please specify what you want to buy, for example, \"buy milk\".");
+            tv1.setText("Please specify what you want to buy by typing, for\n example, \"buy milk\".");
             ll.addView(tv1);
             scrollDownAutomatically();
             return ;
@@ -537,7 +532,7 @@ public class MainActivity extends AppCompatActivity {
         if (index == -1) {
             TextView tv1 = new TextView(this);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
-            tv1.setText("Sorry we cannot find "+buy_item+" for you. We will add more products into our dataset. Right now we only have milk, cookies, pencil, notebook, toothpaste.");
+            tv1.setText("Sorry we cannot find "+buy_item+" for you. We will add more products\n into our dataset. Right now we only have milk, cookies,\n pencil, notebook, toothpaste.");
             ll.addView(tv1);
             scrollDownAutomatically();
             return ;
@@ -549,7 +544,7 @@ public class MainActivity extends AppCompatActivity {
         ll.addView(tv1);
 
         // add the card
-        LinearLayout card = new LinearLayout(getApplicationContext());
+        final LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
         card.setLayoutParams(card_temp.getLayoutParams());
         card.setOrientation(card_temp.getOrientation());
@@ -582,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
 
         // add the item row
         int i = index;
-        LinearLayout one_item = new LinearLayout(getApplicationContext());
+        final LinearLayout one_item = new LinearLayout(getApplicationContext());
         RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
 
         final CharSequence name =  database.get(i).getName();
@@ -591,12 +586,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Perform action on click
-                int added = 0;
+                TextView tv = new TextView(getApplicationContext());
+                textTemplate(tv, (TextView)findViewById(R.id.text_template));
                 if (!containsItem( database.get(v.getId()).getItemID(), cart)) {
                     cart.add(database.get(v.getId()));
                     cart.get(cart.size() - 1).setAmount(1);
-                    added = 1;
+                    tv.setText(name + " added to cart!");
+                } else {
+                    for (int i=0; i<cart.size(); i++) {
+                        if (cart.get(i).getName().equals(name)) {
+                            cart.get(i).setAmount(cart.get(i).getAmount()+1);
+                        }
+                        tv.setText("One more " + name.toString().toLowerCase() + " added to cart!");
+                    }
                 }
+
                 TextView recommendations = findViewById(R.id.recommendations_bt);
                 recommendations.setVisibility(View.GONE);
                 TextView my_orders = findViewById(R.id.my_orders_bt);
@@ -610,17 +614,13 @@ public class MainActivity extends AppCompatActivity {
                 view_cart_bt.setVisibility(View.VISIBLE);
 
                 LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-                TextView tv = new TextView(getApplicationContext());
-                textTemplate(tv, (TextView)findViewById(R.id.text_template));
+
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 // params.weight = 1.0f;
                 int margin1 = (int) convertDpToPixel(10, getApplicationContext());
                 params.setMargins(0,0, margin1, 0);
                 params.gravity = Gravity.LEFT;
-                if (added == 1)
-                    tv.setText(name + " added to cart!");
-                else
-                    tv.setText(name + " already in cart!");
+
                 ll.addView(tv);
                 scrollDownAutomatically();
             }
@@ -746,8 +746,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
 
         startActivityForResult(intent, 0);
-
-
     }
 
     public void handleUndo(LinearLayout ll){
@@ -785,13 +783,14 @@ public class MainActivity extends AppCompatActivity {
         scrollDownAutomatically();
     }
     public void handleEditReturn(View v) {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         EditText edit = (EditText) findViewById(R.id.edit_text);
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+        String text = edit.getText().toString();
+        if (text.isEmpty()) {
+            return;
+        }
 
         String[] keywords = {"buy", "recommend", "my orders", "view cart", "undo", "modify number"};
-        String text = edit.getText().toString();
         int matches = 0;
         int index = 0;
         for (int i = 0; i < keywords.length; i++){
@@ -829,7 +828,7 @@ public class MainActivity extends AppCompatActivity {
             //tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
-            tv1.setText("What are you trying to ask me?");
+            tv1.setText("Sorry, I could not understand you. \nWhat are you trying to ask me?");
             ll.addView(tv1);
             scrollDownAutomatically();
             text_edit.setText("");

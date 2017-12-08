@@ -177,6 +177,14 @@ public class RecommendationsActivity extends AppCompatActivity {
         return buttonAdd;
     }
 
+    public boolean containsItem(int input_id, ArrayList<Shopping_Item> list){
+        for (int i = 0 ;i < list.size();i++) {
+            if (list.get(i).getItemID() == input_id)
+                return true;
+        }
+        return false;
+    }
+
     public void drawCart(final ArrayList<Shopping_Item> recommend)
     {
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
@@ -189,14 +197,19 @@ public class RecommendationsActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    // Perform action on click
-                    cart.add(recommend.get(v.getId()));
-                    //Log.d("CART", "CART: " );
-                    //Log.d("CART", cart.get(0).getDescription());
-                    cart.get(cart.size()-1).setAmount(1);
+                    int added = 0;
+                    if (!containsItem( recommend.get(v.getId()).getItemID(), cart)) {
+                        cart.add(recommend.get(v.getId()));
+                        cart.get(cart.size() - 1).setAmount(1);
+                        added = 1;
+                    }
 
                     Context context = getApplicationContext();
+
                     CharSequence text = recommend.get(v.getId()).getName()+ " added to cart!";
+                    if (added != 1)
+                        text = recommend.get(v.getId()).getName()+ " already in cart!";
+
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.setGravity(Gravity.CENTER, 0, 0);

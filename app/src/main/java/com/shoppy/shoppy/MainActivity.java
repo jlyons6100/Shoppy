@@ -452,9 +452,9 @@ public class MainActivity extends AppCompatActivity {
                     params.gravity = Gravity.LEFT;
 
                     if (added ==1)
-                        tv.setText(name + " added to Cart!");
+                        tv.setText(name + " added to cart!");
                     else
-                        tv.setText("Already in cart!");
+                        tv.setText(name + " already in cart!");
 
                     ll.addView(tv);
                     scrollDownAutomatically();
@@ -556,6 +556,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
             RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
 
+            final CharSequence name =  database.get(i).getName();
             buttonAdd.setId(i);
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -588,9 +589,9 @@ public class MainActivity extends AppCompatActivity {
                     params.setMargins(0,0, margin1, 0);
                     params.gravity = Gravity.LEFT;
                     if (added == 1)
-                    tv.setText("Added to Cart!");
+                        tv.setText(name + " added to cart!");
                     else
-                        tv.setText("Already in cart!");
+                        tv.setText(name + " already in cart!");
                     ll.addView(tv);
                     scrollDownAutomatically();
 
@@ -804,7 +805,7 @@ public class MainActivity extends AppCompatActivity {
             params1.setMargins(margin, margin, 0, 0);
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
-            tv1.setForegroundGravity(Gravity.LEFT);
+//            tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             tv1.setText("What are you trying to ask me?");
@@ -820,7 +821,7 @@ public class MainActivity extends AppCompatActivity {
             // params.weight = 1.0f;
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
-            tv1.setForegroundGravity(Gravity.LEFT);
+//            tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
             scrollDownAutomatically();

@@ -38,14 +38,14 @@
         android:id="@+id/previous_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:fillViewport="true">
         <LinearLayout
             android:id="@+id/linear_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:orientation="vertical">
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

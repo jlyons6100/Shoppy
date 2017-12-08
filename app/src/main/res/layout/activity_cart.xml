@@ -38,7 +38,8 @@
                 android:layout_alignParentRight="true"
                 android:text="Edit"
                 android:textSize="20dp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:id="@+id/edit_button"/>
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
     <RelativeLayout
@@ -94,13 +95,21 @@
                         android:id="@+id/one_item"
                         >
                         <ImageView
+                            android:visibility="gone"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_check_circle"
+                            android:id="@+id/check"/>
+                        <ImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="11dp"
                             android:layout_marginBottom="6dp"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginLeft="16dp"
                             android:src="@drawable/item_1"
                             android:id="@+id/item_image"/>
                         <!-- item text -->
@@ -179,9 +188,7 @@
                                         android:id="@+id/amount_plus"/>
                                 </RelativeLayout>
                             </RelativeLayout>
-
                         </RelativeLayout>
-
                     </LinearLayout>
                     <View
                         android:layout_marginTop="3dp"
@@ -224,10 +231,6 @@
                     android:layout_marginLeft="100dp"
                     android:id="@+id/total_num"/>
             </RelativeLayout>
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1" />-->
             <Button
                 android:onClick="checkOut"
                 android:layout_alignParentRight="true"
@@ -241,6 +244,19 @@
                 android:id="@+id/total_checkout"/>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:background="#E0E0E0"
+            android:id="@+id/edit_bar">
+            <TextView
+                style="@style/edit_delete"
+                android:text="Delete"
+                android:id="@+id/edit_delete"/>
+        </RelativeLayout>
     </RelativeLayout>
 
 

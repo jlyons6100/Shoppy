@@ -34,6 +34,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import android.graphics.drawable.Drawable;
 
 public class MainActivity extends AppCompatActivity {
     public static float convertDpToPixel(float dp, Context context){
@@ -56,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
         tx.setBackground(tx_temp.getBackground());
+        if (tx_temp.getBackground() != null) {
+            Drawable drwNewCopy = tx_temp.getBackground().getConstantState().newDrawable().mutate();
+            tx.setBackground(drwNewCopy);
+        }
         tx.setTextColor(tx_temp.getTextColors());
         tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
         tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
@@ -331,12 +336,12 @@ public class MainActivity extends AppCompatActivity {
         TextView price_temp = findViewById(R.id.cart_price);
         carts_text2.setLayoutParams(price_temp.getLayoutParams());
         carts_text2.setTextAppearance(getApplicationContext(),R.style.item_price);
-        carts_text2.setText(""+item.getPrice());
+        carts_text2.setText(String.format("%.02f", item.getPrice()));
         TextView carts_text3 = new TextView(getApplicationContext());
         TextView wet_temp = findViewById(R.id.cart_wet);
         carts_text3.setLayoutParams(wet_temp.getLayoutParams());
         carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
-        carts_text3.setText(" / 1L");
+        carts_text3.setText(" / 1 item");
         cart_box.addView(carts_text1);
         cart_box.addView(carts_text2);
         cart_box.addView(carts_text3);
@@ -515,12 +520,36 @@ public class MainActivity extends AppCompatActivity {
         scrollDownAutomatically();
     }
 
-    public void handleBuying( LinearLayout ll, String buy_item ){
+    public void handleBuying( LinearLayout ll, String buy_item){
+        if (buy_item.isEmpty()) {
+            TextView tv1 = new TextView(this);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+            tv1.setText("Please specify what you want to buy, for example, \"buy milk\".");
+            ll.addView(tv1);
+            scrollDownAutomatically();
+            return ;
+        }
+        int index = -1;
+        for (int i = 0; i < database.size(); i++) {
+            if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
+                index = i;
+            }
+        }
+        if (index == -1) {
+            TextView tv1 = new TextView(this);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+            tv1.setText("Sorry we cannot find "+buy_item+" for you. We will add more products into our dataset. Right now we only have milk, cookies, pencil, notebook, toothpaste.");
+            ll.addView(tv1);
+            scrollDownAutomatically();
+            return ;
+        }
+
         TextView tv1 = new TextView(this);
         textTemplate(tv1, (TextView)findViewById(R.id.text_template));
         tv1.setText("According to your shopping history, I recommend this:");
         ll.addView(tv1);
 
+        // add the card
         LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
         card.setLayoutParams(card_temp.getLayoutParams());
@@ -551,61 +580,54 @@ public class MainActivity extends AppCompatActivity {
         v.setLayoutParams(v_temp.getLayoutParams());
         v.setBackground(v_temp.getBackground());
         card.addView(v);
-        int index = 0;
-        for (int i = 0; i < database.size(); i++) {
-            LinearLayout one_item = new LinearLayout(getApplicationContext());
-            RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
 
-            final CharSequence name =  database.get(i).getName();
-            buttonAdd.setId(i);
-            buttonAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Perform action on click
-                    int added = 0;
-                    if (!containsItem( database.get(v.getId()).getItemID(), cart)) {
-                        cart.add(database.get(v.getId()));
-                        cart.get(cart.size() - 1).setAmount(1);
-                        added = 1;
-                    }
-                    TextView recommendations = findViewById(R.id.recommendations_bt);
-                    recommendations.setVisibility(View.GONE);
-                    TextView my_orders = findViewById(R.id.my_orders_bt);
-                    my_orders.setVisibility(View.GONE);
+        // add the item row
+        int i = index;
+        LinearLayout one_item = new LinearLayout(getApplicationContext());
+        RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
 
-                    TextView undo_bt = findViewById(R.id.undo_bt);
-                    undo_bt.setVisibility(View.VISIBLE);
-                    TextView modify_number_bt = findViewById(R.id.modify_number_bt);
-                    modify_number_bt.setVisibility(View.VISIBLE);
-                    TextView view_cart_bt = findViewById(R.id.view_cart_bt);
-                    view_cart_bt.setVisibility(View.VISIBLE);
-
-                    LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-                    TextView tv = new TextView(getApplicationContext());
-                    textTemplate(tv, (TextView)findViewById(R.id.text_template));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    // params.weight = 1.0f;
-                    int margin1 = (int) convertDpToPixel(10, getApplicationContext());
-                    params.setMargins(0,0, margin1, 0);
-                    params.gravity = Gravity.LEFT;
-                    if (added == 1)
-                        tv.setText(name + " added to cart!");
-                    else
-                        tv.setText(name + " already in cart!");
-                    ll.addView(tv);
-                    scrollDownAutomatically();
-
-
+        final CharSequence name =  database.get(i).getName();
+        buttonAdd.setId(i);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform action on click
+                int added = 0;
+                if (!containsItem( database.get(v.getId()).getItemID(), cart)) {
+                    cart.add(database.get(v.getId()));
+                    cart.get(cart.size() - 1).setAmount(1);
+                    added = 1;
                 }
+                TextView recommendations = findViewById(R.id.recommendations_bt);
+                recommendations.setVisibility(View.GONE);
+                TextView my_orders = findViewById(R.id.my_orders_bt);
+                my_orders.setVisibility(View.GONE);
 
-            });
+                TextView undo_bt = findViewById(R.id.undo_bt);
+                undo_bt.setVisibility(View.VISIBLE);
+                TextView modify_number_bt = findViewById(R.id.modify_number_bt);
+                modify_number_bt.setVisibility(View.VISIBLE);
+                TextView view_cart_bt = findViewById(R.id.view_cart_bt);
+                view_cart_bt.setVisibility(View.VISIBLE);
 
-            if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
-                card.addView(one_item);
-                index = i;
+                LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
+                TextView tv = new TextView(getApplicationContext());
+                textTemplate(tv, (TextView)findViewById(R.id.text_template));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                // params.weight = 1.0f;
+                int margin1 = (int) convertDpToPixel(10, getApplicationContext());
+                params.setMargins(0,0, margin1, 0);
+                params.gravity = Gravity.LEFT;
+                if (added == 1)
+                    tv.setText(name + " added to cart!");
+                else
+                    tv.setText(name + " already in cart!");
+                ll.addView(tv);
+                scrollDownAutomatically();
             }
 
-        }
+        });
+        card.addView(one_item);
 
         View v2 = new View(getApplicationContext());
         View v2_temp = findViewById(R.id.card_line);

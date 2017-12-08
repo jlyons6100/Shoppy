@@ -98,7 +98,6 @@ public class ReminderActivity extends AppCompatActivity {
 
     public void drawCart(final ArrayList<Shopping_Item> cart)
     {
-
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 
         LinearLayout one_item_temp = findViewById(R.id.one_item);
@@ -157,11 +156,11 @@ public class ReminderActivity extends AppCompatActivity {
             TextView carts_text2 = new TextView(getApplicationContext());
             carts_text2.setLayoutParams(price_temp.getLayoutParams());
             carts_text2.setTextAppearance(getApplicationContext(),R.style.item_price);
-            carts_text2.setText(""+cart.get(i).getPrice());
+            carts_text2.setText(String.format("%.02f", cart.get(i).getPrice()));
             TextView carts_text3 = new TextView(getApplicationContext());
             carts_text3.setLayoutParams(wet_temp.getLayoutParams());
             carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
-            carts_text3.setText(" / 1L");
+            carts_text3.setText(" / 1 item");
             cart_box.addView(carts_text1);
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);
@@ -186,8 +185,6 @@ public class ReminderActivity extends AppCompatActivity {
                 }
 
             });
-
-
 
             View v2 = new View(getApplicationContext());
             View v2_temp = findViewById(R.id.card_line);

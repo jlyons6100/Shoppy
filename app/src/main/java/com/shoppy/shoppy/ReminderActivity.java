@@ -176,6 +176,7 @@ public class ReminderActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     handleOnClick(v);
                      v.setVisibility(View.GONE);
+
                 }
 
             });

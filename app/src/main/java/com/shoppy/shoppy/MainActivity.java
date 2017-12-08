@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         item4.setImage("item_4");
         item4.setPrice(5.95);
         item4.setDescription("Ticonderoga graphite #2 pencil");
-        item4.setItemID(1);
+        item4.setItemID(4);
         item4.setAmount(-1);
         item4.setDaysSinceLastBought(2);
         database.add(item4);
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         item5.setImage("item_5");
         item5.setPrice(2.67);
         item5.setDescription("Crest whitening toothpaste");
-        item5.setItemID(1);
+        item5.setItemID(5);
         item5.setAmount(-1);
         item5.setDaysSinceLastBought(2);
         database.add(item5);
@@ -345,6 +345,13 @@ public class MainActivity extends AppCompatActivity {
         return buttonAdd;
     }
 
+    public boolean containsItem(int input_id, ArrayList<Shopping_Item> list){
+            for (int i = 0 ;i < list.size();i++) {
+                if (list.get(i).getItemID() == input_id)
+                    return true;
+            }
+        return false;
+    }
     public void handleRecommend( LinearLayout ll ){
         LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
@@ -386,11 +393,16 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    // Perform action on click
-                    cart.add(recommended.get(v.getId()));
-                    //Log.d("CART", "CART: " );
-                    //Log.d("CART", cart.get(0).getDescription());
-                    cart.get(cart.size()-1).setAmount(1);
+                    int added = 0;
+                    if (!containsItem( recommended.get(v.getId()).getItemID(), cart)) {
+                        cart.add(recommended.get(v.getId()));
+                        cart.get(cart.size() - 1).setAmount(1);
+                        added = 1;
+                    }
+                    TextView recommendations = findViewById(R.id.recommendations_bt);
+                    recommendations.setVisibility(View.GONE);
+                    TextView my_orders = findViewById(R.id.my_orders_bt);
+                    my_orders.setVisibility(View.GONE);
 
                     TextView undo_bt = findViewById(R.id.undo_bt);
                     undo_bt.setVisibility(View.VISIBLE);
@@ -407,9 +419,16 @@ public class MainActivity extends AppCompatActivity {
                     int margin1 = (int) convertDpToPixel(10, getApplicationContext());
                     params.setMargins(0,0, margin1, 0);
                     params.gravity = Gravity.LEFT;
-                    tv.setText(name + " added to Cart!");
+
+                    if (added ==1)
+                        tv.setText(name + " added to Cart!");
+                    else
+                        tv.setText("Already in cart!");
+
                     ll.addView(tv);
                     scrollDownAutomatically();
+
+
                 }
 
             });
@@ -421,6 +440,8 @@ public class MainActivity extends AppCompatActivity {
             v2.setBackground(v2_temp.getBackground());
             card.addView(v2);
         }
+
+
 
         LinearLayout bottomBar = new LinearLayout(getApplicationContext());
         LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
@@ -504,8 +525,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Perform action on click
-                    cart.add(database.get(v.getId()));
-                    cart.get(cart.size()-1).setAmount(1);
+                    int added = 0;
+                    if (!containsItem( database.get(v.getId()).getItemID(), cart)) {
+                        cart.add(database.get(v.getId()));
+                        cart.get(cart.size() - 1).setAmount(1);
+                        added = 1;
+                    }
                     TextView recommendations = findViewById(R.id.recommendations_bt);
                     recommendations.setVisibility(View.GONE);
                     TextView my_orders = findViewById(R.id.my_orders_bt);
@@ -526,7 +551,10 @@ public class MainActivity extends AppCompatActivity {
                     int margin1 = (int) convertDpToPixel(10, getApplicationContext());
                     params.setMargins(0,0, margin1, 0);
                     params.gravity = Gravity.LEFT;
+                    if (added == 1)
                     tv.setText("Added to Cart!");
+                    else
+                        tv.setText("Already in cart!");
                     ll.addView(tv);
                     scrollDownAutomatically();
 

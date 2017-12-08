@@ -99,15 +99,16 @@ public class RecommendationsActivity extends AppCompatActivity {
         item_reason.setLayoutParams(item_reason_temp.getLayoutParams());
         item_reason.setOrientation(LinearLayout.HORIZONTAL);
 
+
         ImageView item_icon = new ImageView(getApplicationContext());
         ImageView item_icon_temp = findViewById(R.id.item_icon);
         item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
-        item_icon.setImageResource(R.drawable.ic_reason_friend);
+        item_icon.setImageResource(item.getReason_resid());
         item_reason.addView(item_icon);
 
         TextView item_icon_text = new TextView(getApplicationContext());
-        item_icon_text.setTextAppearance(getApplicationContext(),R.style.item_reason);
-        item_icon_text.setText("Put the reason here");
+        item_icon_text.setTextAppearance(getApplicationContext(), R.style.item_reason);
+        item_icon_text.setText(item.getReason_text());
         item_reason.addView(item_icon_text);
 
         item_text_box.addView(item_reason);

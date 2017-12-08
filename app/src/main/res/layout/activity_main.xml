@@ -75,14 +75,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp">
+            </View>
 
             <TextView
                 style="@style/chat_text_style"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="13dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -97,8 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginRight="13dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -112,8 +114,7 @@
             <LinearLayout
                 android:visibility="gone"
                 android:background="@drawable/rounded_corner"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="13dp"
                 android:layout_gravity="left"
                 android:layout_width="333dp"
@@ -123,14 +124,14 @@
                 >
                 <!-- Top bar with icon -->
                 <LinearLayout
-                    android:layout_gravity="left"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
                     android:orientation="horizontal"
                     android:id="@+id/top_bar_temp"
                     >
                     <ImageView
-                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="15dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
@@ -139,6 +140,7 @@
                         />
                     <TextView
                         style="@style/default_text"
+                        android:layout_gravity="left|center"
                         android:layout_marginLeft="6dp"
                         android:text="Recommendations"
                         android:id="@+id/top_bar_text"/>
@@ -272,13 +274,13 @@
                     android:background="#f2f2f2"/>
                 <!-- Bottom bar with arrow -->
                 <LinearLayout
-                    android:layout_gravity="left"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:orientation="horizontal"
                     android:id="@+id/bottom_bar">
                     <ImageView
-                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="15dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
@@ -286,6 +288,7 @@
                         android:id="@+id/bottom_bar_img"
                         />
                     <TextView
+                        android:layout_gravity="left|center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -324,7 +327,6 @@
                 <TextView
                     style="@style/suggest_input"
                     android:text="Recommend for me"
-                    android:layout_marginBottom="8dp"
                     android:onClick="handleOnScreenButtons"
                     android:id="@+id/recommendations_bt"/>
                 <TextView

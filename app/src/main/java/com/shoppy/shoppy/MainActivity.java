@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         item2.setItemID(2);
         item2.setAmount(-1);
         item2.setDaysSinceLastBought(5);
-        item2.setReason_text("It is on sale");
+        item2.setReason_text("On sale");
         item2.setReason_resid(R.drawable.ic_reason_on_sale);
         database.add(item2);
         recommended.add(item2);
@@ -295,13 +295,12 @@ public class MainActivity extends AppCompatActivity {
         ImageView item_icon = new ImageView(getApplicationContext());
         ImageView item_icon_temp = findViewById(R.id.item_icon);
         item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
-        item_icon.setImageResource(R.drawable.ic_reason_friend);
-        item_icon.setImageResource()
+        item_icon.setImageResource(item.getReason_resid());
         item_reason.addView(item_icon);
 
         TextView item_icon_text = new TextView(getApplicationContext());
         item_icon_text.setTextAppearance(getApplicationContext(), R.style.item_reason);
-        item_icon_text.setText("Put the reason here");
+        item_icon_text.setText(item.getReason_text());
         item_reason.addView(item_icon_text);
 
         item_text_box.addView(item_reason);

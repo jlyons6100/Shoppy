@@ -95,6 +95,7 @@
 
             <Button
                 style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/AppTheme.Button"
                 android:id="@+id/submit_change_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

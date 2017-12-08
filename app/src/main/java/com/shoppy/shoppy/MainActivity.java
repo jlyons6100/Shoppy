@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         item1.setImage("item_1");
         item1.setPrice(4.73);
         item1.setDescription("Tucson Dairy Whole Vitman D Milk Gallon");
+        item1.setAmazonLink("https://www.amazon.com/Tuscan-Dairy-Whole-Vitamin-Gallon/dp/B00032G1S0");
         item1.setItemID(1);
         item1.setAmount(-1);
         item1.setDaysSinceLastBought(2);
@@ -159,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         item2.setName("Cookies");
         item2.setImage("item_2");
         item2.setPrice(3.50);
+        item2.setAmazonLink("https://www.amazon.com/Peek-Freans-Assorted-Cookies-300g/dp/B00BPXQ7U8/ref=sr_1_2_s_it?s=grocery&ie=UTF8&qid=1512692110&sr=1-2&keywords=Assorted+Cream+Sandwich+Cookies");
         item2.setDescription("Family size Assorted Cream Sandwich Cookies");
         item2.setItemID(2);
         item2.setAmount(-1);
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         item3.setPrice(5.00);
         item3.setDescription("Five star Mead Notebook");
         item3.setItemID(3);
+        item3.setAmazonLink("https://www.amazon.com/Mead-Spiral-Notebook-Subject-Assorted/dp/B00MP2OJHG/ref=sr_1_1?s=grocery&ie=UTF8&qid=1512692152&sr=8-1&keywords=five+star+mead+notebook");
         item3.setAmount(-1);
         item3.setDaysSinceLastBought(10);
         database.add(item3);
@@ -183,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
         item4.setPrice(5.95);
         item4.setDescription("Ticonderoga graphite #2 pencil");
         item4.setItemID(4);
+        item4.setAmazonLink("https://www.amazon.com/Dixon-Ticonderoga-Wood-Cased-Pencils-13872/dp/B00125Q75Y/ref=sr_1_1?s=grocery&ie=UTF8&qid=1512692196&sr=8-1&keywords=Ticonderoga+graphite+%232+pencil");
         item4.setAmount(-1);
         item4.setDaysSinceLastBought(2);
         database.add(item4);
@@ -193,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         item5.setName("Toothpaste");
         item5.setImage("item_5");
         item5.setPrice(2.67);
+        item5.setAmazonLink("https://www.amazon.com/Crest-Complete-Multi-Benefit-Whitening-Toothpaste/dp/B0037LGIH8/ref=sr_1_3_s_it?s=grocery&ie=UTF8&qid=1512692227&sr=1-3&keywords=crest+whitening+toothpaste");
         item5.setDescription("Crest whitening toothpaste");
         item5.setItemID(5);
         item5.setAmount(-1);
@@ -515,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
         v.setLayoutParams(v_temp.getLayoutParams());
         v.setBackground(v_temp.getBackground());
         card.addView(v);
-
+        int index = 0;
         for (int i = 0; i < database.size(); i++) {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
             RelativeLayout buttonAdd = oneItem(database.get(i), one_item);
@@ -565,6 +570,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (database.get(i).getName().toLowerCase().contains(buy_item.toLowerCase() )) {
                 card.addView(one_item);
+                index = i;
             }
 
         }
@@ -592,6 +598,17 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.addView(bottomBar_text);
         card.addView(bottomBar);
 
+        bottomBar.setClickable(true );
+        bottomBar.setId(index);
+        bottomBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(database.get(v.getId()).getAmazonLink()); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+
+        });
 
         ll.addView(card);
         scrollDownAutomatically();

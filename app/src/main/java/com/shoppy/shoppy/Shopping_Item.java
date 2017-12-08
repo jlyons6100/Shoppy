@@ -14,6 +14,7 @@ public class Shopping_Item implements Serializable {
     private int itemID;
     private  int amount;
     private int daysSinceLastBought;
+    private String amazonLink;
 
     public String getName(){
         return name;
@@ -43,6 +44,8 @@ public class Shopping_Item implements Serializable {
         return itemID;
     }
 
+    public String getAmazonLink(){return amazonLink;}
+
     public void setImage(String image){
         this.image = image;
     }
@@ -63,6 +66,7 @@ public class Shopping_Item implements Serializable {
 
     public void setDaysSinceLastBought(int daysSinceLastBought){this.daysSinceLastBought = daysSinceLastBought;}
 
+    public void setAmazonLink(String amazonLink){this.amazonLink = amazonLink;}
 
     public String toString() {
         return "["+name+" , "+amount+ "]";

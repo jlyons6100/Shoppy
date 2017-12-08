@@ -12,9 +12,11 @@ public class Shopping_Item implements Serializable {
     private double price;
     private String description;
     private int itemID;
-    private  int amount;
+    private int amount;
     private int daysSinceLastBought;
     private String amazonLink;
+    private int reason_resid;
+    private String reason_text;
 
     public String getName(){
         return name;
@@ -33,6 +35,10 @@ public class Shopping_Item implements Serializable {
     }
 
     public int getAmount(){return amount;}
+
+    public String getReason_text() {return reason_text; }
+
+    public int getReason_resid() {return reason_resid; }
 
     public int getDaysSinceLastBought(){return daysSinceLastBought;}
 
@@ -63,6 +69,10 @@ public class Shopping_Item implements Serializable {
     }
 
     public void setAmount(int amount){this.amount = amount;}
+
+    public void setReason_text(String reason_text) {this.reason_text = reason_text;}
+
+    public void setReason_resid(int reason_resid) {this.reason_resid = reason_resid; }
 
     public void setDaysSinceLastBought(int daysSinceLastBought){this.daysSinceLastBought = daysSinceLastBought;}
 

@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView item_icon_temp = findViewById(R.id.item_icon);
         item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
         item_icon.setImageResource(R.drawable.ic_reason_friend);
+        item_icon.setImageResource()
         item_reason.addView(item_icon);
 
         TextView item_icon_text = new TextView(getApplicationContext());

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -91,6 +92,10 @@ public class CartActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
         tx.setBackground(tx_temp.getBackground());
+        if (tx_temp.getBackground() != null) {
+            Drawable drwNewCopy = tx_temp.getBackground().getConstantState().newDrawable().mutate();
+            tx.setBackground(drwNewCopy);
+        }
         tx.setTextColor(tx_temp.getTextColors());
         tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
         tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
@@ -243,14 +248,20 @@ public class CartActivity extends AppCompatActivity {
             carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
             carts_text1.setTextAppearance(getApplicationContext(),R.style.item_dollar);
             carts_text1.setText("$");
-            TextView carts_text2 = new TextView(getApplicationContext());
+            final TextView carts_text2 = new TextView(getApplicationContext());
             carts_text2.setLayoutParams(price_temp.getLayoutParams());
             carts_text2.setTextAppearance(getApplicationContext(),R.style.item_price);
-            carts_text2.setText(""+cart.get(i).getPrice());
-            TextView carts_text3 = new TextView(getApplicationContext());
+            double price = cart.get(i).getPrice();
+            int amount = cart.get(i).getAmount();
+            carts_text2.setText(String.format("%.02f", price*amount));
+            final TextView carts_text3 = new TextView(getApplicationContext());
             carts_text3.setLayoutParams(wet_temp.getLayoutParams());
             carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
-            carts_text3.setText(" / 1 item");
+            if (amount>1) {
+                carts_text3.setText(" / "+amount+" items");
+            } else {
+                carts_text3.setText(" / 1 item");
+            }
             cart_box.addView(carts_text1);
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);
@@ -300,6 +311,16 @@ public class CartActivity extends AppCompatActivity {
                         }
                         total_text2.setText(String.format("%.02f", total_price));
                         total_text3.setText(" / "+amount_of_items + " items");
+
+                        int i = v.getId();
+                        double price = cart.get(i).getPrice();
+                        int amount = cart.get(i).getAmount();
+                        carts_text2.setText(String.format("%.02f", price*amount));
+                        if (amount>1) {
+                            carts_text3.setText(" / "+amount+" items");
+                        } else {
+                            carts_text3.setText(" / 1 item");
+                        }
                     }
                     else {
                         Context context = getApplicationContext();
@@ -324,8 +345,19 @@ public class CartActivity extends AppCompatActivity {
                         amount_of_items += cart.get(i).getAmount();
                         total_price += (cart.get(i).getAmount()*cart.get(i).getPrice());
                     }
+
                     total_text2.setText(String.format("%.02f", total_price));
                     total_text3.setText(" / "+amount_of_items + " items");
+
+                    int i = v.getId();
+                    double price = cart.get(i).getPrice();
+                    int amount = cart.get(i).getAmount();
+                    carts_text2.setText(String.format("%.02f", price*amount));
+                    if (amount>1) {
+                        carts_text3.setText(" / "+amount+" items");
+                    } else {
+                        carts_text3.setText(" / 1 item");
+                    }
                 }
             });
             cart_box.addView(amount_bar);

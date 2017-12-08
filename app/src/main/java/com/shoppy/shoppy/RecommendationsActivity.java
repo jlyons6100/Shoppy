@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -62,6 +63,10 @@ public class RecommendationsActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = tx_temp.getLayoutParams();
         tx.setLayoutParams(params);
         tx.setBackground(tx_temp.getBackground());
+        if (tx_temp.getBackground() != null) {
+            Drawable drwNewCopy = tx_temp.getBackground().getConstantState().newDrawable().mutate();
+            tx.setBackground(drwNewCopy);
+        }
         tx.setTextColor(tx_temp.getTextColors());
         tx.setTextSize(tx_temp.getTextSize() / getResources().getDisplayMetrics().scaledDensity);
         tx.setPadding(tx_temp.getPaddingLeft(), tx_temp.getPaddingTop() , tx_temp.getPaddingRight(),  tx_temp.getPaddingBottom());
@@ -137,12 +142,12 @@ public class RecommendationsActivity extends AppCompatActivity {
         TextView price_temp = findViewById(R.id.cart_price);
         carts_text2.setLayoutParams(price_temp.getLayoutParams());
         carts_text2.setTextAppearance(getApplicationContext(),R.style.item_price);
-        carts_text2.setText(""+item.getPrice());
+        carts_text2.setText(String.format("%.02f", item.getPrice()));
         TextView carts_text3 = new TextView(getApplicationContext());
         TextView wet_temp = findViewById(R.id.cart_wet);
         carts_text3.setLayoutParams(wet_temp.getLayoutParams());
         carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
-        carts_text3.setText(" / 1L");
+        carts_text3.setText(" / 1 item");
         cart_box.addView(carts_text1);
         cart_box.addView(carts_text2);
         cart_box.addView(carts_text3);

@@ -67,7 +67,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_marginTop="55dp"
-        android:paddingBottom="70dp">
+        android:paddingBottom="110dp">
         <!--android:layout_marginBottom="50dp">-->
         <LinearLayout
 
@@ -130,19 +130,19 @@
                     android:id="@+id/top_bar_temp"
                     >
                     <ImageView
-                        android:layout_gravity="left|center"
                         android:layout_marginLeft="15dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
-                        android:layout_width="11dp"
+                        android:layout_width="15dp"
                         android:src="@drawable/ic_recommend"
                         android:id="@+id/top_bar_icon"
+                        android:layout_gravity="center|left"
                         />
                     <TextView
                         style="@style/default_text"
-                        android:layout_gravity="left|center"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="10dp"
                         android:text="Recommendations"
+                        android:layout_gravity="center|left"
                         android:id="@+id/top_bar_text"/>
                 </LinearLayout>
                 <!-- line -->
@@ -279,16 +279,15 @@
                     android:orientation="horizontal"
                     android:id="@+id/bottom_bar">
                     <ImageView
-                        android:layout_gravity="left|center"
                         android:layout_marginLeft="15dp"
                         android:layout_centerVertical="true"
                         android:layout_height="15dp"
                         android:layout_width="11dp"
                         android:src="@drawable/ic_arrow_forward_black_24dp"
                         android:id="@+id/bottom_bar_img"
+                        android:layout_gravity="center|left"
                         />
                     <TextView
-                        android:layout_gravity="left|center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -297,6 +296,7 @@
                         android:textColor="#515151"
                         android:text="More recommendations"
                         android:id="@+id/bottom_bar_text"
+                        android:layout_gravity="center|left"
                         />
                 </LinearLayout>
             </LinearLayout>

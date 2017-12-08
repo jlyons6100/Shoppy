@@ -45,19 +45,18 @@
         android:layout_height="wrap_content">
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_marginTop="55dp"
-            android:layout_marginBottom="50dp"
             android:id="@+id/cartpage_cart_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="#FFFFFF">
             <LinearLayout
                 android:id="@+id/cartpage_linear_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:orientation="vertical">
                 <LinearLayout
                     android:visibility="gone"
                     android:layout_width="match_parent"

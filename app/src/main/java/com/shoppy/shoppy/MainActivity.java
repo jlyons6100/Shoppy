@@ -71,9 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Log.d("CART", "Cart errors printing");
+// clear FLAG_TRANSLUCENT_STATUS flag:
         this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         this.getWindow().setStatusBarColor(Color.parseColor("#f27348"));
+
+
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_main);

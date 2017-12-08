@@ -200,8 +200,6 @@
                                 android:id="@+id/item_icon"/>
                             <TextView
                                 style="@style/item_reason"
-                                android:layout_gravity="center|left"
-                                android:layout_marginLeft="5dp"
                                 android:text="Your friends are also buying"
                                 android:id="@+id/item_icon_text"/>
                         </LinearLayout>

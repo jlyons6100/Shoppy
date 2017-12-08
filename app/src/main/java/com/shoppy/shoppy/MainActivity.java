@@ -300,6 +300,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView item_icon_text = new TextView(getApplicationContext());
         item_icon_text.setTextAppearance(getApplicationContext(), R.style.item_reason);
+        textTemplate(item_icon_text, (TextView)findViewById(R.id.item_icon_text));
         item_icon_text.setText(item.getReason_text());
         item_reason.addView(item_icon_text);
 

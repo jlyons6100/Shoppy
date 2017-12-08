@@ -15,6 +15,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="item_reason" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_gravity">center|left</item>
         <item name="android:layout_marginTop">-2dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:textColor">#F4682A</item>

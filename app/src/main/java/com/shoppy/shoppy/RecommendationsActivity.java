@@ -108,6 +108,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         TextView item_icon_text = new TextView(getApplicationContext());
         item_icon_text.setTextAppearance(getApplicationContext(),R.style.item_reason);
         item_icon_text.setText("Put the reason here");
+        textTemplate(item_icon_text, (TextView)findViewById(R.id.item_icon_text));
         item_reason.addView(item_icon_text);
 
         item_text_box.addView(item_reason);

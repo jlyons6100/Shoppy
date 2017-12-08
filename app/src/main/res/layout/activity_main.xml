@@ -192,11 +192,13 @@
                             <ImageView
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
-                                android:layout_centerVertical="true"
+                                android:layout_gravity="center|left"
                                 android:src="@drawable/ic_reason_friend"
                                 android:id="@+id/item_icon"/>
                             <TextView
                                 style="@style/item_reason"
+                                android:layout_gravity="center|left"
+                                android:layout_marginLeft="5dp"
                                 android:text="Your friends are also buying"
                                 android:id="@+id/item_icon_text"/>
                         </LinearLayout>

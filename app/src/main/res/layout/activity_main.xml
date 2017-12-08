@@ -97,6 +97,7 @@
                 android:id="@+id/text_template"/>
 
             <TextView
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 android:textSize="12sp"
                 android:layout_height="wrap_content"

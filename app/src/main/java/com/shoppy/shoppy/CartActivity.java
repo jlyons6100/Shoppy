@@ -250,7 +250,7 @@ public class CartActivity extends AppCompatActivity {
             TextView carts_text3 = new TextView(getApplicationContext());
             carts_text3.setLayoutParams(wet_temp.getLayoutParams());
             carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
-            carts_text3.setText(" / 1L");
+            carts_text3.setText(" / 1 item");
             cart_box.addView(carts_text1);
             cart_box.addView(carts_text2);
             cart_box.addView(carts_text3);

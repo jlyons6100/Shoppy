@@ -472,6 +472,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
         ll.addView(card);
+
+        TextView recommendations = findViewById(R.id.recommendations_bt);
+        recommendations.setVisibility(View.GONE);
+        TextView my_orders = findViewById(R.id.my_orders_bt);
+        my_orders.setVisibility(View.GONE);
+
         scrollDownAutomatically();
     }
 

@@ -75,6 +75,7 @@ public class ReminderActivity extends AppCompatActivity {
         intent.putExtra("remind", remind);
         startActivityForResult(intent, 0);
     }
+
     public void handleOnClick(View v){
         cart.add(remind.get(v.getId()));
         cart.get(cart.size()-1).setAmount(1);

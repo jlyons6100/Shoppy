@@ -29,6 +29,14 @@
                 android:layout_height="wrap_content"
                 android:text="Recommendations" />
 
+            <ImageView
+                android:onClick="openCart"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                android:src="@mipmap/ic_cart_foreground" />
+
 
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>

@@ -75,13 +75,32 @@
 
             <TextView
                 style="@style/chat_text_style"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="13dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="18dp"
+                android:paddingLeft="18dp"
                 android:background="@drawable/rounded_corner"
                 android:text="Hi! I'm your shopping assistant, Shoppy."
                 android:id="@+id/text_template"/>
 
             <TextView
-                android:visibility="gone"
                 style="@style/chat_text_style_in"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="13dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="18dp"
+                android:paddingLeft="18dp"
                 android:background="@drawable/rounded_corner_in"
                 android:text="Great, nice to meet you."
                 android:id="@+id/text_template_in"/>

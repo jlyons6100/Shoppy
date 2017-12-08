@@ -778,8 +778,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (index == 3) { // view cart
             openCart(null);
+            text_edit.setText("");
             return ;
         } else if (index == 2) {// my orders
+            openOrder(null);
+            text_edit.setText("");
             return ;
         }
 
@@ -804,6 +807,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
             scrollDownAutomatically();
+            text_edit.setText("");
             return ;
         }
         if (matches >1 ) {
@@ -817,6 +821,7 @@ public class MainActivity extends AppCompatActivity {
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
             scrollDownAutomatically();
+            text_edit.setText("");
             return ;
         }
 
@@ -869,6 +874,11 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("cart", cart);
         intent.putExtra("remind", remind);
         intent.putExtra("recommended", recommended);
+        startActivityForResult(intent, 0);
+    }
+
+    public void openOrder(View v) {
+        Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
         startActivityForResult(intent, 0);
     }
 

@@ -197,6 +197,7 @@ public class RecommendationsActivity extends AppCompatActivity {
                     CharSequence text = recommend.get(v.getId()).getName()+ " added to cart!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
 

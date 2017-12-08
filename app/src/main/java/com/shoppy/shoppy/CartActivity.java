@@ -22,11 +22,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
     ArrayList<Shopping_Item> database = new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> cart= new ArrayList<Shopping_Item>();
     ArrayList<Shopping_Item> remind= new ArrayList<Shopping_Item>();
+    List<ImageView> item_checks = new ArrayList<ImageView>();
+    boolean show_edit = true;
+    TextView edit_button;
+    RelativeLayout total_bar;
+    RelativeLayout edit_bar;
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -103,9 +109,31 @@ public class CartActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
+    public void editCart(View v) {
+        if (show_edit) {
+            for (ImageView check: item_checks) {
+                check.setVisibility(View.VISIBLE);
+            }
+            edit_button.setText("Done");
+            edit_bar.setVisibility(View.VISIBLE);
+            total_bar.setVisibility(View.GONE);
+        } else {
+            for (ImageView check: item_checks) {
+                check.setImageResource(R.drawable.ic_check_circle);
+                check.setVisibility(View.GONE);
+            }
+            edit_button.setText("Edit");
+            edit_bar.setVisibility(View.GONE);
+            total_bar.setVisibility(View.VISIBLE);
+        }
+        show_edit = !show_edit;
+    }
+
     public void drawCart(final ArrayList<Shopping_Item> cart, final ArrayList<Shopping_Item> remind)
     {
         // Total bar
+        total_bar = findViewById(R.id.total_bar);
+        total_bar.setVisibility(View.VISIBLE);
         double total_price = 0;
         int amount_of_items = 0;
         for (int i = 0; i < cart.size(); i++){
@@ -144,11 +172,18 @@ public class CartActivity extends AppCompatActivity {
             }
 
         });
+
+        edit_button = findViewById(R.id.edit_button);
+        edit_button.setText("Edit");
+        edit_bar = findViewById(R.id.edit_bar);
+        edit_bar.setVisibility(View.GONE);
+
         // Item list
         LinearLayout linear_scrollview_horizontal = findViewById(R.id.cartpage_linear_scrollview);
 
         LinearLayout one_item_temp = findViewById(R.id.one_item);
         ImageView item_img_temp = findViewById(R.id.item_image);
+        ImageView item_check_temp = findViewById(R.id.check);
         RelativeLayout item_text_box_temp = findViewById(R.id.item_text_box);
         TextView name_temp = findViewById(R.id.item_name);
         TextView detail_temp = findViewById(R.id.item_detail);
@@ -165,6 +200,14 @@ public class CartActivity extends AppCompatActivity {
             card.setGravity(Gravity.BOTTOM);
 
             // Item image
+            ImageView item_check = new ImageView(getApplicationContext());
+            item_check.setLayoutParams(item_check_temp.getLayoutParams());
+            item_check.setImageResource(R.drawable.ic_check_circle);
+            item_check.setId(i);
+            item_check.setVisibility(View.GONE);
+            card.addView(item_check);
+            item_checks.add(item_check);
+
             ImageView item_img = new ImageView(getApplicationContext());
             item_img.setLayoutParams(item_img_temp.getLayoutParams());
             Context c = getApplicationContext();
@@ -246,7 +289,7 @@ public class CartActivity extends AppCompatActivity {
             minus.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     //v.getId() will give you the image id
-                    if (cart.get(v.getId()).getAmount() != 0) {
+                    if (cart.get(v.getId()).getAmount() > 1) {
                         cart.get(v.getId()).setAmount(cart.get(v.getId()).getAmount() - 1);
                         num.setText("" + cart.get(v.getId()).getAmount());
                         double total_price = 0;
@@ -263,6 +306,7 @@ public class CartActivity extends AppCompatActivity {
                         CharSequence text = "Click Edit to delete items.";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
                 }
@@ -285,8 +329,9 @@ public class CartActivity extends AppCompatActivity {
                 }
             });
             cart_box.addView(amount_bar);
-
             linear_scrollview_horizontal.addView(card);
+
+
             View v2 = new View(getApplicationContext());
             View v2_temp = findViewById(R.id.card_line);
             v2.setLayoutParams(v2_temp.getLayoutParams());

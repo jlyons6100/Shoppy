@@ -805,7 +805,7 @@ public class MainActivity extends AppCompatActivity {
             params1.setMargins(margin, margin, 0, 0);
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
-//            tv1.setForegroundGravity(Gravity.LEFT);
+            //tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             tv1.setText("What are you trying to ask me?");
@@ -821,7 +821,7 @@ public class MainActivity extends AppCompatActivity {
             // params.weight = 1.0f;
             params1.gravity = Gravity.LEFT;
             tv1.setLayoutParams(params1);
-//            tv1.setForegroundGravity(Gravity.LEFT);
+            //tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
             scrollDownAutomatically();

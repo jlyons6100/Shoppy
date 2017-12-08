@@ -19,7 +19,8 @@
         <RelativeLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -38,22 +39,25 @@
                 android:textColor="#FFFF"
                 android:shadowColor="#42000000"
                 android:shadowRadius="10"
+                android:paddingBottom="5dp"
                 />
 
             <ImageView
                 android:onClick="openAccount"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_height="40dp"
-                android:layout_width="40dp"
-                android:src="@mipmap/ic_account_foreground"/>
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_menu_black_24dp"/>
             <ImageView
                 android:onClick="openCart"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_height="40dp"
-                android:layout_width="40dp"
-                android:src="@mipmap/ic_cart_foreground" />
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_shopping_cart_black_24dp" />
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -63,9 +67,8 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_marginTop="55dp"
-        android:paddingBottom="30dp"
-        android:layout_marginBottom="50dp"
-        >
+        android:paddingBottom="70dp">
+        <!--android:layout_marginBottom="50dp">-->
         <LinearLayout
 
             android:id="@+id/linear_scrollview"
@@ -305,81 +308,88 @@
         android:orientation="horizontal"
         >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/camera"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal" >
-            <TextView
-                style="@style/suggest_input"
-                android:text="My Orders"
-                android:onClick="handleOnScreenButtons"
-                android:id="@+id/my_orders_bt"/>
-            <TextView
-                style="@style/suggest_input"
-                android:text="Recommend for me"
-                android:layout_marginBottom="8dp"
-                android:onClick="handleOnScreenButtons"
-                android:id="@+id/recommendations_bt"/>
-            <TextView
-                style="@style/suggest_input"
-                android:text="Undo"
-                android:onClick="handleOnScreenButtons"
-                android:visibility="gone"
-                android:id="@+id/undo_bt"/>
-            <TextView
-                style="@style/suggest_input"
-                android:text="Modify Number"
-                android:onClick="handleOnScreenButtons"
-                android:visibility="gone"
-                android:id="@+id/modify_number_bt"/>
-            <TextView
-                style="@style/suggest_input"
-                android:text="View Cart"
-                android:onClick="handleOnScreenButtons"
-                android:visibility="gone"
-                android:id="@+id/view_cart_bt"/>
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    style="@style/suggest_input"
+                    android:text="My Orders"
+                    android:onClick="handleOnScreenButtons"
+                    android:id="@+id/my_orders_bt"/>
+                <TextView
+                    style="@style/suggest_input"
+                    android:text="Recommend for me"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="handleOnScreenButtons"
+                    android:id="@+id/recommendations_bt"/>
+                <TextView
+                    style="@style/suggest_input"
+                    android:text="Undo"
+                    android:onClick="handleOnScreenButtons"
+                    android:visibility="gone"
+                    android:id="@+id/undo_bt"/>
+                <TextView
+                    style="@style/suggest_input"
+                    android:text="Modify Number"
+                    android:onClick="handleOnScreenButtons"
+                    android:visibility="gone"
+                    android:id="@+id/modify_number_bt"/>
+                <TextView
+                    style="@style/suggest_input"
+                    android:text="View Cart"
+                    android:onClick="handleOnScreenButtons"
+                    android:visibility="gone"
+                    android:id="@+id/view_cart_bt"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="#f8f8f8"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:onClick="openCamera"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_camera_foreground"
+                    android:layout_gravity="left|center"
+                    android:id="@+id/camera"
+                    android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="280dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:hint="What can I do for you?"
+                    android:inputType=""
+                    android:textSize="15dp"
+                    android:maxLines="1"
+                    android:privateImeOptions="nm"
+                    android:singleLine="true"
+                    android:background="@android:color/transparent"
+                    android:text="" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:onClick="openMicrophone"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="right|center"
+                    android:id="@+id/microphone"
+                    android:src="@mipmap/ic_microphone_foreground" />
+            </LinearLayout>
         </LinearLayout>
-
-        <ImageView
-            android:onClick="openCamera"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="Text"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:src="@mipmap/ic_camera_foreground"
-            android:id="@+id/camera"/>
-        <ImageView
-            android:onClick="openMicrophone"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text=""
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/microphone"
-            android:src="@mipmap/ic_microphone_foreground" />
-
-
-        <EditText
-            android:id="@+id/edit_text"
-            android:layout_width="240dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignTop="@+id/camera"
-            android:layout_toEndOf="@+id/camera"
-            android:layout_toStartOf="@+id/microphone"
-            android:hint="What can I do for you?"
-            android:inputType=""
-            android:maxLines="1"
-            android:privateImeOptions="nm"
-            android:singleLine="true"
-            android:text="" />
-
-
-
-
-    </RelativeLayout
-        >
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

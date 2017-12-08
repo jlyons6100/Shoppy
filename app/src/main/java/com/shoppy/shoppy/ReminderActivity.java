@@ -3,6 +3,7 @@ package com.shoppy.shoppy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +59,10 @@ public class ReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        this.getWindow().setStatusBarColor(Color.parseColor("#f27348"));
+
          database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");

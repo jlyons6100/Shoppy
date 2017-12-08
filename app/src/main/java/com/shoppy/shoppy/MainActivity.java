@@ -381,6 +381,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout one_item = new LinearLayout(getApplicationContext());
             RelativeLayout buttonAdd = oneItem(recommended.get(i), one_item);
             buttonAdd.setId(i);
+            final CharSequence name =  recommended.get(i).getName();
             buttonAdd.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -406,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
                     int margin1 = (int) convertDpToPixel(10, getApplicationContext());
                     params.setMargins(0,0, margin1, 0);
                     params.gravity = Gravity.LEFT;
-                    tv.setText("Added to Cart!");
+                    tv.setText(name + " added to Cart!");
                     ll.addView(tv);
                     scrollDownAutomatically();
                 }

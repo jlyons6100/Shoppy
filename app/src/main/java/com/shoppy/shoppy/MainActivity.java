@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         item1.setItemID(1);
         item1.setAmount(-1);
         item1.setDaysSinceLastBought(2);
+        item1.setReason_text("You bought this before");
+        item1.setReason_resid(R.drawable.ic_reason_time);
         database.add(item1);
 
         Shopping_Item item2 = new Shopping_Item();
@@ -173,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         item2.setItemID(2);
         item2.setAmount(-1);
         item2.setDaysSinceLastBought(5);
+        item2.setReason_text("It is on sale");
+        item2.setReason_resid(R.drawable.ic_reason_on_sale);
         database.add(item2);
         recommended.add(item2);
 
@@ -185,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
         item3.setAmazonLink("https://www.amazon.com/Mead-Spiral-Notebook-Subject-Assorted/dp/B00MP2OJHG/ref=sr_1_1?s=grocery&ie=UTF8&qid=1512692152&sr=8-1&keywords=five+star+mead+notebook");
         item3.setAmount(-1);
         item3.setDaysSinceLastBought(10);
+        item3.setReason_text("Your friends bought this");
+        item3.setReason_resid(R.drawable.ic_reason_friend);
         database.add(item3);
         remind.add(item3);
 
@@ -197,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
         item4.setAmazonLink("https://www.amazon.com/Dixon-Ticonderoga-Wood-Cased-Pencils-13872/dp/B00125Q75Y/ref=sr_1_1?s=grocery&ie=UTF8&qid=1512692196&sr=8-1&keywords=Ticonderoga+graphite+%232+pencil");
         item4.setAmount(-1);
         item4.setDaysSinceLastBought(2);
+        item4.setReason_text("Your friends bought this");
+        item4.setReason_resid(R.drawable.ic_reason_friend);
         database.add(item4);
         recommended.add(item4);
         remind.add(item4);
@@ -210,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
         item5.setItemID(5);
         item5.setAmount(-1);
         item5.setDaysSinceLastBought(2);
+        item5.setReason_text("You bought this before");
+        item5.setReason_resid(R.drawable.ic_reason_time);
         database.add(item5);
         recommended.add(item5);
     }

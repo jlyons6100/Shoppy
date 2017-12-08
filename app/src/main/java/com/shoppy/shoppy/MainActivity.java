@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Item text -- name
         TextView item_name = new TextView(getApplicationContext());
-        item_name.setTextAppearance(R.style.item_name);
+        item_name.setTextAppearance(getApplicationContext(), R.style.item_name);
         item_name.setText(item.getName());
         item_text_box.addView(item_name);
 
@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
         item_reason.addView(item_icon);
 
         TextView item_icon_text = new TextView(getApplicationContext());
-        item_icon_text.setTextAppearance(R.style.item_reason);
+        item_icon_text.setTextAppearance(getApplicationContext(), R.style.item_reason);
         item_icon_text.setText("Put the reason here");
         item_reason.addView(item_icon_text);
 
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
         TextView item_detail = new TextView(getApplicationContext());
         TextView detail_temp = findViewById(R.id.item_detail);
         item_detail.setLayoutParams(detail_temp.getLayoutParams());
-        item_detail.setTextAppearance(R.style.item_detail);
+        item_detail.setTextAppearance(getApplicationContext(),R.style.item_detail);
         item_detail.setText(item.getDescription());
         item_text_box.addView(item_detail);
 
@@ -309,17 +309,17 @@ public class MainActivity extends AppCompatActivity {
         TextView carts_text1 = new TextView(getApplicationContext());
         TextView dollar_temp = findViewById(R.id.cart_dollar);
         carts_text1.setLayoutParams(dollar_temp.getLayoutParams());
-        carts_text1.setTextAppearance(R.style.item_dollar);
+        carts_text1.setTextAppearance(getApplicationContext(),R.style.item_dollar);
         carts_text1.setText("$");
         TextView carts_text2 = new TextView(getApplicationContext());
         TextView price_temp = findViewById(R.id.cart_price);
         carts_text2.setLayoutParams(price_temp.getLayoutParams());
-        carts_text2.setTextAppearance(R.style.item_price);
+        carts_text2.setTextAppearance(getApplicationContext(),R.style.item_price);
         carts_text2.setText(""+item.getPrice());
         TextView carts_text3 = new TextView(getApplicationContext());
         TextView wet_temp = findViewById(R.id.cart_wet);
         carts_text3.setLayoutParams(wet_temp.getLayoutParams());
-        carts_text3.setTextAppearance(R.style.item_wet);
+        carts_text3.setTextAppearance(getApplicationContext(),R.style.item_wet);
         carts_text3.setText(" / 1L");
         cart_box.addView(carts_text1);
         cart_box.addView(carts_text2);

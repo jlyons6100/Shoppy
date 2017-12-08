@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         text_edit.setText(text.getText());
         text_edit.dispatchKeyEvent(new KeyEvent(0, 0, KeyEvent.ACTION_DOWN,
                 KeyEvent.KEYCODE_ENTER, 0));
-
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -851,8 +850,11 @@ public class MainActivity extends AppCompatActivity {
             handleModifyNumber(ll);
         text_edit.setText("");
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollDownAutomatically();
+
+//        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//        this.onBackPressed();
     }
 
     public void scrollDownAutomatically(){

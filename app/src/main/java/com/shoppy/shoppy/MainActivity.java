@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
         v2.setLayoutParams(v2_temp.getLayoutParams());
         v2.setBackground(v2_temp.getBackground());
         card.addView(v2);
-
+ 
         LinearLayout bottomBar = new LinearLayout(getApplicationContext());
         LinearLayout bottomBar_temp = findViewById(R.id.bottom_bar);
         bottomBar.setLayoutParams(bottomBar_temp.getLayoutParams());

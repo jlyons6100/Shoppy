@@ -286,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView item_icon_temp = findViewById(R.id.item_icon);
         item_icon.setLayoutParams(item_icon_temp.getLayoutParams());
         item_icon.setImageResource(R.drawable.ic_reason_friend);
-        item_icon.setImageResource()
         item_reason.addView(item_icon);
 
         TextView item_icon_text = new TextView(getApplicationContext());
@@ -367,6 +366,11 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
     public void handleRecommend( LinearLayout ll ){
+        TextView tv1 = new TextView(this);
+        textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+        tv1.setText("Here you go" + ":");
+        ll.addView(tv1);
+
         LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
         card.setLayoutParams(card_temp.getLayoutParams());
@@ -499,6 +503,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleBuying( LinearLayout ll, String buy_item ){
+        TextView tv1 = new TextView(this);
+        textTemplate(tv1, (TextView)findViewById(R.id.text_template));
+        tv1.setText("According to your shopping history, I recommend this:");
+        ll.addView(tv1);
+
         LinearLayout card = new LinearLayout(getApplicationContext());
         LinearLayout card_temp = findViewById(R.id.rec_temp);
         card.setLayoutParams(card_temp.getLayoutParams());
@@ -741,15 +750,10 @@ public class MainActivity extends AppCompatActivity {
         scrollDownAutomatically();
     }
     public void handleEditReturn(View v) {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         EditText edit = (EditText) findViewById(R.id.edit_text);
-
         LinearLayout ll = (LinearLayout) findViewById(R.id.linear_scrollview);
-        TextView tv = new TextView(this);
-        TextView tv_temp = findViewById(R.id.text_template_in);
-        textTemplate(tv, tv_temp);
-
-        tv.setText(edit.getText());
-        ll.addView(tv);
 
         String[] keywords = {"buy", "recommend", "my orders", "view cart", "undo", "modify number"};
         String text = edit.getText().toString();
@@ -762,7 +766,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (index == 3) openCart(null);
+        if (index == 3) { // view cart
+            openCart(null);
+            return ;
+        } else if (index == 2) {// my orders
+            return ;
+        }
+
+        TextView tv = new TextView(this);
+        TextView tv_temp = findViewById(R.id.text_template_in);
+        textTemplate(tv, tv_temp);
+        tv.setText(edit.getText());
+        ll.addView(tv);
 
         if (matches == 0 ){
             TextView tv1 = new TextView(this);
@@ -775,44 +790,13 @@ public class MainActivity extends AppCompatActivity {
             tv1.setLayoutParams(params1);
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setBackgroundResource(R.drawable.rounded_corner);
+            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             tv1.setText("What are you trying to ask me?");
             ll.addView(tv1);
+            scrollDownAutomatically();
+            return ;
         }
-        else if (matches == 1){
-            TextView tv1 = new TextView(this);
-            textTemplate(tv1, (TextView)findViewById(R.id.text_template));
-            String bought_item = "";
-
-            if (index > 0) {
-
-                    tv1.setText("Here you go" + ":");
-            }
-            else{
-                String[] strings  = text.split(" ", 2);
-                for (int j = 1; j <strings.length; j++){
-                    if (j != strings.length-1) {
-                        bought_item = bought_item + strings[j] + " ";
-                    }else{
-                        bought_item = bought_item + strings[j];
-                    }
-                }
-                tv1.setText("According to your shopping history, I recommend this:");
-            }
-            ll.addView(tv1);
-
-            if(index == 0)
-                handleBuying(ll, bought_item);
-            else if(index == 1)
-                handleRecommend(ll);
-            else if(index == 2)
-                handleMyOrders(ll); //3 is above all this : if (index == 3) openCart(null);
-            else if(index == 4)
-                    handleUndo(ll);
-            else if(index == 5)
-                handleModifyNumber(ll);
-            text_edit.setText("");
-        }
-        else {
+        if (matches >1 ) {
             TextView tv1 = new TextView(this);
             textTemplate(tv1, (TextView)findViewById(R.id.text_template));
             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -822,7 +806,31 @@ public class MainActivity extends AppCompatActivity {
             tv1.setForegroundGravity(Gravity.LEFT);
             tv1.setText("Ask for recommendations, routine items, or reminders.");
             ll.addView(tv1);
+            scrollDownAutomatically();
+            return ;
         }
+
+        if(index == 0) {
+            String bought_item = "";
+            String[] strings  = text.split(" ", 2);
+            for (int j = 1; j <strings.length; j++){
+                if (j != strings.length-1) {
+                    bought_item = bought_item + strings[j] + " ";
+                }else{
+                    bought_item = bought_item + strings[j];
+                }
+            }
+            handleBuying(ll, bought_item);
+        }
+        else if(index == 1)
+            handleRecommend(ll);
+        else if(index == 2)
+            handleMyOrders(ll); //3 is above all this : if (index == 3) openCart(null);
+        else if(index == 4)
+                handleUndo(ll);
+        else if(index == 5)
+            handleModifyNumber(ll);
+        text_edit.setText("");
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollDownAutomatically();

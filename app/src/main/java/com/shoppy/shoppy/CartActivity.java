@@ -51,9 +51,9 @@ public class CartActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("CART", "Resuming in cart");
-        database = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("database");
-        cart = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("cart");
-        remind = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("remind");
+//        database = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("database");
+//        cart = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("cart");
+//        remind = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("remind");
         Log.d("CART", "Cart:");
         for (int i = 0; i < cart.size(); i++){
             Log.d("CART", "" + cart.get(i).toString());
@@ -68,6 +68,14 @@ public class CartActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    public boolean containsItem(int input_id, ArrayList<Shopping_Item> list){
+        for (int i = 0 ;i < list.size();i++) {
+            if (list.get(i).getItemID() == input_id)
+                return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +87,13 @@ public class CartActivity extends AppCompatActivity {
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
+        for (Shopping_Item item: remind) {
+            String name = item.getName();
+            if(containsItem( item.getItemID(), cart)) {
+                remind.remove(item);
+            }
+        }
+
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());
         Log.d("CART", "Cart:");
         for (int i = 0; i < cart.size(); i++){

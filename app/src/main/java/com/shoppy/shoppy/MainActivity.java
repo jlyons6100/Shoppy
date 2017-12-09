@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
             setIntent(intent);
     }
 
-
     protected void onResume() {
         super.onResume();
 
@@ -369,10 +368,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean containsItem(int input_id, ArrayList<Shopping_Item> list){
-            for (int i = 0 ;i < list.size();i++) {
-                if (list.get(i).getItemID() == input_id)
-                    return true;
-            }
+        for (int i = 0 ;i < list.size();i++) {
+            if (list.get(i).getItemID() == input_id)
+                return true;
+        }
         return false;
     }
     public void handleRecommend( LinearLayout ll ){

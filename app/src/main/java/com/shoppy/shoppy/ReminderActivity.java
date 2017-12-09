@@ -53,7 +53,6 @@ public class ReminderActivity extends AppCompatActivity {
         openMainActivity.putExtra("cart", cart);
         openMainActivity.putExtra("remind", remind);
         startActivityIfNeeded(openMainActivity, 0);
-
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ReminderActivity extends AppCompatActivity {
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         this.getWindow().setStatusBarColor(Color.parseColor("#f27348"));
 
-         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
+        database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         drawCart(remind);
@@ -84,6 +83,7 @@ public class ReminderActivity extends AppCompatActivity {
     }
 
     public void handleOnClick(View v){
+
         cart.add(remind.get(v.getId()));
         cart.get(cart.size()-1).setAmount(1);
         Context context = getApplicationContext();

@@ -51,9 +51,9 @@ public class CartActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("CART", "Resuming in cart");
-//        database = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("database");
-//        cart = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("cart");
-//        remind = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("remind");
+        database = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("database");
+        cart = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("cart");
+        remind = (ArrayList<Shopping_Item>) getIntent().getSerializableExtra("remind");
         Log.d("CART", "Cart:");
         for (int i = 0; i < cart.size(); i++){
             Log.d("CART", "" + cart.get(i).toString());

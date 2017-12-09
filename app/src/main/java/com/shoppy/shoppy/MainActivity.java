@@ -870,8 +870,11 @@ public class MainActivity extends AppCompatActivity {
             handleModifyNumber(ll);
         text_edit.setText("");
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollDownAutomatically();
+
+//        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//        this.onBackPressed();
     }
 
     public void scrollDownAutomatically(){

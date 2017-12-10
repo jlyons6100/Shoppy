@@ -87,11 +87,19 @@ public class CartActivity extends AppCompatActivity {
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
-        for (Shopping_Item item: remind) {
-            String name = item.getName();
-            if(containsItem( item.getItemID(), cart)) {
-                remind.remove(item);
+
+        while (true) {
+            int i = 0;
+            for (; i<remind.size(); i++) {
+                Shopping_Item item = remind.get(i);
+                String name = item.getName();
+                if (containsItem(item.getItemID(), cart)) {
+                    remind.remove(item);
+                    break;
+                }
             }
+            if (i == remind.size())
+                break;
         }
 
         //System.out.println("CART IN cartActivity:" + cart.get(0).getDescription());

@@ -55,6 +55,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         database = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("database");
         cart = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("cart");
         recommended = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("recommended");
+        remind = (ArrayList<Shopping_Item>)getIntent().getSerializableExtra("remind");
         drawCart(database);
     }
 
